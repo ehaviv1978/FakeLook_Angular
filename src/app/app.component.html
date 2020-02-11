@@ -1,15 +1,6 @@
-<h1>Welcome to FakeLook</h1>
-<h1></h1>
-<h2>By Eran Haviv inc</h2>
-<h1></h1>
-<button (click)="getUsers()">Show all Users</button>
-<input (input)="searchBox($event.target.value)"/>
-<button (click)="searchUsers()">Search User</button>
-<div *ngFor="let user of users">
-  <div>{{user.Id + " - " + user.FirstName + " " + user.LastName}}</div>
+<div style="display: flex;">
+    <app-title></app-title>
+    <div style="width: 50px;"></div>
+    <app-menu-bar></app-menu-bar>
 </div>
-<h1></h1>
-<button (click)="getPosts()">Show all Posts</button>
-<div *ngFor="let post of posts">
-  <div><a href="{{post.Image}}">{{post.Description}}</a></div>
-</div>
+<map-posts></map-posts>
