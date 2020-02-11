@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'map-posts',
@@ -9,8 +10,16 @@ export class MapPostsComponent  implements AfterViewInit {
   title = 'angular-gmap';
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
+  lat = 31.76519;
+  lng = 34.96168;
+  
+  if (navigator)
+    {
+      navigator.geolocation.getCurrentPosition( pos => {
+      this.lng = +pos.coords.longitude;
+      this.lat = +pos.coords.latitude;
+  });
+}
 
   coordinates = new google.maps.LatLng(this.lat, this.lng);
 
