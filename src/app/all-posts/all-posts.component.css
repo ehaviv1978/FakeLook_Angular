@@ -1,0 +1,22 @@
+.list{
+    position:absolute;
+    top:60px;
+    right: 5px;;
+    left: 250px;
+    bottom: 5px;
+  }
+
+  img{
+    position:absolute;
+    top: 5px;
+    right: 5px;;
+    left: 130px;
+    bottom: 5px;
+    width: 880px;
+    height: 540px;
+  }
+
+  a{
+    cursor: pointer;
+    color: blue;
+  }

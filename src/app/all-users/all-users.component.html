@@ -1,1 +1,8 @@
-<p>all-users works!</p>
+
+<div class="list">
+  <input (input)="searchBox($event.target.value)"/>
+<button (click)="searchUsers()">Search User</button>
+    <div *ngFor="let user of users">
+      <div>{{user.Id + " - " + user.FirstName + " " + user.LastName +"\n"}}</div>
+    </div>
+  </div>

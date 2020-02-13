@@ -29,7 +29,7 @@ marker:google.maps.Marker;
         this.marker = new google.maps.Marker({
           position: this.coordinates,
           map: this.map,
-          title: 'Hello World!'
+          title: 'I\'m Here!'
         });
         callback();
       });
