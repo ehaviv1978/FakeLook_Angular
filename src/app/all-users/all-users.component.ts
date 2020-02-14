@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AllUsersComponent implements OnInit {
   users: any = [];
+  user: any;
+  birthDate;
+  birthDateStr;
   search: string;
 
   constructor(private http: HttpClient) { }
@@ -31,6 +34,13 @@ export class AllUsersComponent implements OnInit {
     this.search = s;
   }
   
+  showUserDetail(event){
+    this.user = this.users[event.toElement.id];
+    this.birthDate = new Date(this.user.BirthDate);
+    this.birthDateStr = this.birthDate.getDate() + "/" + this.birthDate.getMonth() + "/"  + this.birthDate.getFullYear();
+    console.log(this.user);
+  }
+
   ngOnInit() {
     this.getUsers();
   }

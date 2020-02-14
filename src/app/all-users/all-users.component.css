@@ -1,7 +1,29 @@
   .list{
     position:absolute;
-    top:60px;
+    top:80px;
     right: 5px;;
     left: 250px;
     bottom: 5px;
   }
+/* body{padding-top:30px;}
+
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
+} */
+.container{
+  padding:5%;
+}
+.container .img{
+  text-align:center;
+}
+.container .details{
+  border-left:3px solid #ded4da;
+}
+.container .details p{
+  font-size:15px;
+  font-weight:bold;
+}
