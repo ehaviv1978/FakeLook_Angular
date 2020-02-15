@@ -11,8 +11,9 @@
   </div>
   <div *ngIf="user" class="container">
     <div class="row">
-      <div class="col-md-6 img">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
+      <div *ngIf="user.Picture" class="col-md-6 img">
+        <img src="{{imageurl}}">
+        <!-- <img [src]="'data:image/JPEG;base64,' + user.Picture" /> -->
       </div>
       <div class="col-md-6 details">
         <blockquote>
