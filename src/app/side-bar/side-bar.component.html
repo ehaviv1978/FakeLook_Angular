@@ -2,6 +2,7 @@
   <map-posts *ngSwitchCase="'map'"></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
+  <app-create-account *ngSwitchCase="'createAccount'"></app-create-account>
 </div>
 
   <div class="d-flex" id="wrapper">
@@ -13,6 +14,7 @@
         <a href="#" class="list-group-item list-group-item-action bg-light">Add Post</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">My Frinds</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">My Posts</a>
+        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='createAccount'">Create New Account</a> -->
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='allPosts'">All Posts</a>
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='allUsers'">All Users</a>
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='map'">Show Map</a>

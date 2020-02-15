@@ -10,6 +10,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { FormsModule } from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AllPostsComponent } from './all-posts/all-posts.component';
     SideBarComponent,
     AllUsersComponent,
     AllPostsComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
