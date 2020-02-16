@@ -46,7 +46,7 @@ marker:google.maps.Marker;
 
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
-    debugger
+    // debugger
     this.marker.setMap(this.map);
   }
 }

@@ -30,7 +30,7 @@
 }
 
 .container{
-    position: fixed;
-    left: 200px;
+    position: absolute;
+    left: 70px;
     top:60px;
 }

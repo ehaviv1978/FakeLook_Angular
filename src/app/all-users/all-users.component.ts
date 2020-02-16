@@ -42,13 +42,18 @@ export class AllUsersComponent implements OnInit {
     this.user = this.users[event.toElement.id];
     this.birthDate = new Date(this.user.BirthDate);
     this.birthDateStr = this.birthDate.getDate() + "/" + this.birthDate.getMonth() + "/"  + this.birthDate.getFullYear();
-    // let objectURL = 'data:image/jpeg;base64,' + this.user.Picture;
-    // this.img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-    const TYPED_ARRAY = await new Uint8Array(this.user.Picture);
-    const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);
-    let base64String = await btoa(STRING_CHAR);
-    this.imageurl = await this.sanitizer.bypassSecurityTrustUrl('data:image/JPEG;base64, ' + base64String);
     console.log(this.user);
+    await console.log(JSON.stringify(this.user.Picture))
+     this.img = await JSON.stringify(this.user.Picture);
+    const TYPED_ARRAY = new Uint8Array(this.user.Picture.data);
+    console.log(TYPED_ARRAY);
+
+    const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);
+    await console.log(STRING_CHAR);
+
+    let base64String = await btoa(STRING_CHAR);
+    await console.log(base64String);
+    this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
   }
 
   ngOnInit() {

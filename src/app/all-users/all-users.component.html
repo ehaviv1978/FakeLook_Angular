@@ -11,9 +11,8 @@
   </div>
   <div *ngIf="user" class="container">
     <div class="row">
-      <div *ngIf="user.Picture" class="col-md-6 img">
-        <img src="{{imageurl}}">
-        <!-- <img [src]="'data:image/JPEG;base64,' + user.Picture" /> -->
+      <div *ngIf="user.Picture" class="col-md-3 img">
+        <img [src]="imageurl" style="width: 100%"/>
       </div>
       <div class="col-md-6 details">
         <blockquote>
