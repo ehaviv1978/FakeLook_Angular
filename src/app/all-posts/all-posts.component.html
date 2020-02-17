@@ -1,6 +1,6 @@
 <div class="list">
-    <div *ngFor="let post of posts">
-      <a title = {{post.Image}} (click)="showPic($event)">{{post.Description}} </a> 
+    <div *ngFor="let post of posts; index as i">
+      <a id = {{i}} (click)="showPic($event)">{{post.Description + " - " + post.FirstName}}</a> 
     </div>
-    <img *ngIf="picUrl" src={{picUrl}}>
+    <img *ngIf="imageurl" [src]="imageurl">
   </div>

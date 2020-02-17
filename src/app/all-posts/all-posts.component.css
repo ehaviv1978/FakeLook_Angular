@@ -8,12 +8,8 @@
 
   img{
     position:absolute;
-    top: 5px;
-    right: 5px;;
-    left: 130px;
-    bottom: 5px;
-    width: 880px;
-    height: 540px;
+    top:60px;
+    left: 200px;
   }
 
   a{
