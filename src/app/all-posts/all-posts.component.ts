@@ -23,7 +23,7 @@ export class AllPostsComponent implements OnInit {
 
   async showPic(event){
     this.post = this.posts[event.toElement.id];
-    const TYPED_ARRAY = new Uint8Array(this.post.Image.data);
+    const TYPED_ARRAY = new Uint8Array(this.post.image.data);
     console.log(TYPED_ARRAY);
 
     const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);

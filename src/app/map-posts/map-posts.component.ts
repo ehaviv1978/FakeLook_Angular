@@ -28,14 +28,14 @@ export class MapPostsComponent implements AfterViewInit {
       this.posts = await res;
       console.log(this.posts[0]);
       for (var post of this.posts) {
-        this.lng = await post.Long;
+        this.lng = await post.long;
         console.log(this.lng);
-        this.lat = await post.Lat;
+        this.lat = await post.lat;
         this.coordinates = await new google.maps.LatLng(this.lat, this.lng);
         this.marker = await new google.maps.Marker({
           position: this.coordinates,
             map: this.map,
-            title: post.Description
+            title: post.description
           });
           await this.marker.setMap(this.map);
       }

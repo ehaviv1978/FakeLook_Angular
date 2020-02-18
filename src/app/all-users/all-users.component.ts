@@ -40,12 +40,12 @@ export class AllUsersComponent implements OnInit {
   
   async showUserDetail(event){
     this.user = this.users[event.toElement.id];
-    this.birthDate = new Date(this.user.BirthDate);
+    this.birthDate = new Date(this.user.birthDate);
     this.birthDateStr = this.birthDate.getDate() + "/" + this.birthDate.getMonth() + "/"  + this.birthDate.getFullYear();
     console.log(this.user);
-    await console.log(JSON.stringify(this.user.Picture))
-     this.img = await JSON.stringify(this.user.Picture);
-    const TYPED_ARRAY = new Uint8Array(this.user.Picture.data);
+    await console.log(JSON.stringify(this.user.picture))
+     this.img = await JSON.stringify(this.user.picture);
+    const TYPED_ARRAY = new Uint8Array(this.user.picture.data);
     console.log(TYPED_ARRAY);
 
     const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);
