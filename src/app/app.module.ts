@@ -11,6 +11,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { FormsModule } from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
