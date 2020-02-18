@@ -26,7 +26,7 @@ export class MapPostsComponent implements AfterViewInit {
   async showPosts() {
     this.http.get('http://localhost:8888/api/Posts').subscribe(async res => {
       this.posts = await res;
-      console.log(this.posts[0]);
+      console.log(this.posts[1]);
       for (var post of this.posts) {
         this.lng = await post.long;
         console.log(this.lng);
