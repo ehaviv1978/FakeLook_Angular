@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
+import {Post} from'../models/post';
 
 
 @Component({
@@ -12,32 +13,25 @@ export class MapPostsComponent implements AfterViewInit {
   title = 'angular-gmap';
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
-  lat: any;
-  lng: any;
   coordinates:google.maps.LatLng;
   mapOptions:google.maps.MapOptions;
   marker:google.maps.Marker;
-  posts: any =[];
-  post: any;
-  img:any;
+  posts: Post[];
+  post: Post;
   imageurl:SafeUrl;
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   async showPosts() {
-    this.http.get('http://localhost:8888/api/Posts').subscribe(async res => {
-      this.posts = await res;
-      console.log(this.posts[1]);
+    this.http.get<Post[]>('http://localhost:8888/api/Posts').subscribe( res => {
+      this.posts =  res;
       for (var post of this.posts) {
-        this.lng = await post.long;
-        console.log(this.lng);
-        this.lat = await post.lat;
-        this.coordinates = await new google.maps.LatLng(this.lat, this.lng);
-        this.marker = await new google.maps.Marker({
+        this.coordinates =  new google.maps.LatLng(post.lat, post.long);
+        this.marker =  new google.maps.Marker({
           position: this.coordinates,
             map: this.map,
             title: post.description
           });
-          await this.marker.setMap(this.map);
+           this.marker.setMap(this.map);
       }
     });
   }
@@ -45,9 +39,7 @@ export class MapPostsComponent implements AfterViewInit {
   getCurrentLocation(callback) {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
-        this.lng = pos.coords.longitude;
-        this.lat = pos.coords.latitude;
-        this.coordinates = new google.maps.LatLng(this.lat, this.lng);
+        this.coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.mapOptions = {
           center: this.coordinates,
           zoom: 8

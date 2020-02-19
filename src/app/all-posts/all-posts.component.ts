@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
+import {Post} from '../models/post';
 
 @Component({
   selector: 'app-all-posts',
@@ -8,31 +9,25 @@ import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./all-posts.component.css']
 })
 export class AllPostsComponent implements OnInit {
-  posts: any =[];
-  post: any;
-  img:any;
+  posts: Post[];
+  post: Post;
   imageurl:SafeUrl;
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getPosts() {
-    this.http.get('http://localhost:8888/api/Posts').subscribe(res => {
+    this.http.get<Post[]>('http://localhost:8888/api/Posts').subscribe(res => {
       this.posts = res;
       console.log(this.posts);
     });
   }
 
-  async showPic(event){
-    this.post = this.posts[event.toElement.id];
-    const TYPED_ARRAY = new Uint8Array(this.post.image.data);
-    console.log(TYPED_ARRAY);
+  async showPic(post){
+    this.post = post;
 
-    const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);
-    await console.log(STRING_CHAR);
+    const STRING_CHAR = await String.fromCharCode.apply(null, post.picture.data);
 
     let base64String = await btoa(STRING_CHAR);
-    await console.log(base64String);
     this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
-  //  console.log(event.toElement.title)
   }
 
   ngOnInit() {
