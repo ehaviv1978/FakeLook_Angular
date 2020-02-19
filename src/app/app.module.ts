@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     CreateAccountComponent,
     UserLoginComponent,
     NewPostComponent,
+    ChangeUserPictureComponent,
   ],
   imports: [
     BrowserModule,
