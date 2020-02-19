@@ -10,6 +10,7 @@ import { faPhone, faUserMd, faLock  } from '@fortawesome/free-solid-svg-icons';
 })
 export class CreateAccountComponent implements OnInit {
 
+  newUser =false;
   faBirthDate= faCalendar;
   faPassword =faLock;
   faJob=faUserMd;
@@ -18,6 +19,7 @@ export class CreateAccountComponent implements OnInit {
   faUser=faUser;
   faTwitter = faTwitter;
   faFacebook = faFacebook;
+
   constructor() { }
 
   ngOnInit() {

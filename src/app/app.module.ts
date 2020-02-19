@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,13 +26,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AllUsersComponent,
     AllPostsComponent,
     CreateAccountComponent,
+    UserLoginComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
