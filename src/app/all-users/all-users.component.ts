@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Sanitizer } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
+import { User } from '../models/user';
 
 
 @Component({
@@ -9,26 +10,23 @@ import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./all-users.component.css']
 })
 export class AllUsersComponent implements OnInit {
-  users: any = [];
-  user: any;
-  birthDate;
-  birthDateStr;
+  users: User[];
+  user: User;
   search: string;
-  img:any;
   imageurl:SafeUrl;
 
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getUsers() {
-    this.http.get('http://localhost:8888/api/users').subscribe(res => {
+    this.http.get<User[]>('http://localhost:8888/api/users').subscribe(res => {
       this.users = res;
       console.log(this.users)
     });
   }
 
   searchUsers() {
-    this.http.get(`http://localhost:8888/api/users/${this.search}`).subscribe(res => {
+    this.http.get<User[]>(`http://localhost:8888/api/users/${this.search}`).subscribe(res => {
       this.users = res;
       console.log(this.users)
     });
@@ -38,23 +36,14 @@ export class AllUsersComponent implements OnInit {
     this.search = s;
   }
   
-  async showUserDetail(event){
-    this.user = this.users[event.toElement.id];
-    this.birthDate = new Date(this.user.birthDate);
-    this.birthDateStr = this.birthDate.getDate() + "/" + this.birthDate.getMonth() + "/"  + this.birthDate.getFullYear();
-    console.log(this.user);
-    await console.log(JSON.stringify(this.user.picture))
-     this.img = await JSON.stringify(this.user.picture);
-    const TYPED_ARRAY = new Uint8Array(this.user.picture.data);
-    console.log(TYPED_ARRAY);
+  async showUserDetail(user){
+    this.user = user;
 
-    const STRING_CHAR = await String.fromCharCode.apply(null, TYPED_ARRAY);
-    await console.log(STRING_CHAR);
-
+    const STRING_CHAR = await String.fromCharCode.apply(null, user.picture.data);
     let base64String = await btoa(STRING_CHAR);
-    await console.log(base64String);
     this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
   }
+
 
   ngOnInit() {
     this.getUsers();

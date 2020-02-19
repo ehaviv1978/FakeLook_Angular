@@ -7,7 +7,7 @@
   <input (input)="searchBox($event.target.value)"/>
   <button (click)="searchUsers()">Search User</button>
   <div *ngFor="let user of users; index as i">
-      <a href="#" id = {{i}} (click)="showUserDetail($event)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
+      <a href="#" id = {{i}} (click)="showUserDetail(user)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
   </div>
   <div *ngIf="user" class="container">
     <div class="row">
@@ -22,7 +22,7 @@
         <p>
           {{user.job}}
           <br>
-          {{birthDateStr}}
+          {{user.birthDate}}
         </p>
       </div>
     </div>
