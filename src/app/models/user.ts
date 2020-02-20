@@ -9,5 +9,5 @@ export interface User{
     address:string;
     job:string;
     datejoined:Date;
-    picture:picture;
+    picture:any;
 }

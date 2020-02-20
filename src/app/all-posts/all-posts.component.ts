@@ -15,11 +15,7 @@ export class AllPostsComponent implements OnInit {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getPosts() {
-<<<<<<< HEAD
-    this.http.get('http://localhost:8888/api/posts').subscribe(res => {
-=======
     this.http.get<Post[]>('http://localhost:8888/api/Posts').subscribe(res => {
->>>>>>> 4034c22ff5df2c665cd309788b913fcf08e9b041
       this.posts = res;
       console.log(this.posts);
     });

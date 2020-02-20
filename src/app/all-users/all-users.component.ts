@@ -36,12 +36,12 @@ export class AllUsersComponent implements OnInit {
     this.search = s;
   }
   
-  async showUserDetail(user){
+  async showUserDetail(user :User){
     this.user = user;
-
-    const STRING_CHAR = await String.fromCharCode.apply(null, user.picture.data);
-    let base64String = await btoa(STRING_CHAR);
-    this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
+    this.imageurl=user.picture;
+  //   const STRING_CHAR = await String.fromCharCode.apply(null, user.picture.data);
+  //   let base64String = await btoa(STRING_CHAR);
+  //   this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
   }
 
 

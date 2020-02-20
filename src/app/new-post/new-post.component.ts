@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { faUser, faEnvelope,faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import { faPhone, faUserMd, faLock,faCamera  } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -13,16 +12,7 @@ export class NewPostComponent implements OnInit {
 
   faCamera= faCamera;
   faFile = faFolderOpen;
-  post = 
-  {
-    userId : 2,
-    description: "test",
-    latGPS: 32.11,
-    longGPS: 32.14
-  }
   
-
-
   public imagePath;
   imgURL: any;
   public message: string;
@@ -47,16 +37,25 @@ export class NewPostComponent implements OnInit {
 
   }
 
-  newPosts() {
-    this.http.post('http://localhost:8888/api/posts',  {
-      userId : 2,
-      description: "test",
-      latGPS: 32.11,
-      longGPS: 32.14
-  })
-  .subscribe(res =>
-  console.log(res));
-    // }JSON.stringify(this.post))
+  async newPosts() {
+    console.log(this.imgURL);
+    let blob = await fetch(this.imgURL).then(r => r.blob());    
+    console.log(blob);
+    let aray = await new Response(blob).arrayBuffer();
+    console.log(aray);
+
+    let post = 
+  {
+    picture : aray,
+    userId : 2,
+    description: "test 3",
+    latGPS: 32.11,
+    longGPS: 32.14
+  }
+  console.log(post.picture);
+  //   this.http.post('http://localhost:8888/api/posts',post)
+  // .subscribe(res =>
+  // console.log(res));
   }
 
   constructor(private http: HttpClient) { }
