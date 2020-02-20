@@ -2,6 +2,7 @@ import { Component, OnInit, Sanitizer } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -16,19 +17,18 @@ export class AllUsersComponent implements OnInit {
   imageurl:SafeUrl;
 
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
+  constructor(private userServ: UserService, private sanitizer: DomSanitizer) { }
 
   getUsers() {
-    this.http.get<User[]>('http://localhost:8888/api/users').subscribe(res => {
+    this.userServ.getUsers().subscribe(res => {
       this.users = res;
-      console.log(this.users)
+      console.log(res);
     });
   }
 
   searchUsers() {
-    this.http.get<User[]>(`http://localhost:8888/api/users/${this.search}`).subscribe(res => {
+    this.userServ.searchUsers(this.search).subscribe(res =>{
       this.users = res;
-      console.log(this.users)
     });
   }
 

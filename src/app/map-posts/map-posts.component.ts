@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import {Post} from'../models/post';
+import {PostService} from '../services/post.service';
 
 
 @Component({
@@ -19,12 +20,12 @@ export class MapPostsComponent implements AfterViewInit {
   posts: Post[];
   post: Post;
   imageurl:SafeUrl;
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
+  constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
 
   async showPosts() {
-    this.http.get<Post[]>('http://localhost:8888/api/Posts').subscribe( res => {
+    this.postServ.getPosts().subscribe( res => {
       this.posts =  res;
-      for (var post of this.posts) {
+      for (let post of this.posts) {
         this.coordinates =  new google.maps.LatLng(post.lat, post.long);
         this.marker =  new google.maps.Marker({
           position: this.coordinates,
