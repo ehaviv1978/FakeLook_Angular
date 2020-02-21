@@ -12,7 +12,7 @@
                 </div>
                 <div class="custom-file">
                     
-                   <input #file type="file" class="custom-file-input" id="inputGroupFile01"
+                   <input #file type="file" class="custom-file-input" id="inputGroupFile01" placeholder="File Name"
                     aria-describedby="inputGroupFileAddon01" accept='image/*' (change)="preview(file.files)"/>
                     <label class="custom-file-label" for="inputGroupFile01" *ngIf="!imagePath">Choose picture</label>
                   <label class="custom-file-label" for="inputGroupFile01" *ngIf="imagePath">{{imagePath[0].name}}</label>
@@ -21,12 +21,15 @@
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block" (click)="onUpload()"> Update picture  </button>
+                <button id="btnUpdate" type="submit" class="btn btn-primary btn-block" (click)="onUpload()"> Update picture  </button>
+                <button id="btnCancel" type="submit" class="btn btn-primary btn-block" (click)="onCancel()"> Cancel  </button>
             </div> <!-- form-group// --> 
         </form>
     </article>
+
     </div> <!-- card.// -->
-    <img [src]="imgURL" height="200" *ngIf="imgURL">
+    <br>
+    <img id="previewImage" [src]="imgURL" height="200" *ngIf="imgURL">
 
     
     </div> 
