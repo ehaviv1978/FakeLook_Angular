@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./change-user-picture.component.css']
 })
 
-
 export class ChangeUserPictureComponent implements OnInit {
   faCamera= faCamera;
   selectedFile :File = null;
@@ -16,7 +15,6 @@ export class ChangeUserPictureComponent implements OnInit {
   imgURL: any;
   public message: string;
   constructor(private http: HttpClient,) { }
-
 
   onUpload(){
     // const fd = new FormData();
@@ -52,18 +50,15 @@ export class ChangeUserPictureComponent implements OnInit {
     }
   }
 
+  @ViewChild('file', {static: true}) file:ElementRef;
   
-  @ViewChild('file', {static: true}) fileUploader:ElementRef;
-  
-
   onCancel(){
-    // document.getElementById("btnUpdate").style.visibility = "hidden";
-    //   document.getElementById("btnCancel").style.visibility = "hidden";
-    //   this.imagePath = null;
-    //   this.imgURL=null;
-    //   this.message =null;
-      this.fileUploader.nativeElement.value ="";
-      console.log(this.fileUploader.nativeElement);
+    document.getElementById("btnUpdate").style.visibility = "hidden";
+      document.getElementById("btnCancel").style.visibility = "hidden";
+      this.imagePath = null;
+      this.imgURL=null;
+      this.message =null;
+      this.file.nativeElement.value ="";  
   }
 
   ngOnInit() {

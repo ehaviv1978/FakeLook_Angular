@@ -1,6 +1,6 @@
 import { Component, OnInit, Sanitizer } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
+//import { HttpClient } from '@angular/common/http';
+import {SafeUrl } from '@angular/platform-browser';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
@@ -17,7 +17,7 @@ export class AllUsersComponent implements OnInit {
   imageurl:SafeUrl;
 
 
-  constructor(private userServ: UserService, private sanitizer: DomSanitizer) { }
+  constructor(private userServ: UserService) { }
 
   getUsers() {
     this.userServ.getUsers().subscribe(res => {

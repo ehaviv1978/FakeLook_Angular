@@ -8,16 +8,13 @@
             <div class="input-group">
                 <div class="form-group">
                   <span class="input-group-text" id="inputGroupFileAddon01"><fa-icon [icon]="faCamera"></fa-icon></span>
-
                 </div>
-                <div class="custom-file">
-                    
+                <div class="custom-file">  
                    <input #file type="file" class="custom-file-input" id="inputGroupFile01" placeholder="File Name"
                     aria-describedby="inputGroupFileAddon01" accept='image/*' (change)="preview(file.files)"/>
                     <label class="custom-file-label" for="inputGroupFile01" *ngIf="!imagePath">Choose picture</label>
                   <label class="custom-file-label" for="inputGroupFile01" *ngIf="imagePath">{{imagePath[0].name}}</label>
                   <label class="custom-file-label" style="color:red" for="inputGroupFile01" *ngIf="message">{{message}}</label>
-                  
                 </div>
               </div>
               <div class="form-group">
@@ -28,8 +25,8 @@
     </article>
 
     </div> <!-- card.// -->
-    <br>
-    <img id="previewImage" [src]="imgURL" height="200" *ngIf="imgURL">
+      <h4 *ngIf="imgURL">Image upload preview:</h4>
+      <img id="previewImage" [src]="imgURL" height="200" *ngIf="imgURL">
 
     
     </div> 
