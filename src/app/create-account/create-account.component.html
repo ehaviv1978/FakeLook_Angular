@@ -1,102 +1,123 @@
 <div class="container">
 
-<div class="card bg-light">
-<article class="card-body mx-auto" style="max-width: 400px;">
-	<h4 class="card-title mt-3 text-center" *ngIf="newUser">Create Account</h4>
-	<h4 class="card-title mt-3 text-center" *ngIf="!newUser">Log In</h4>
-	<p class="text-center" *ngIf="newUser">Get started with your free account</p>
-	<p>
-		<a href="" class="btn btn-block btn-twitter"> <fa-icon [icon]="faTwitter"></fa-icon>   Login via Twitter</a>
-		<a href="" class="btn btn-block btn-facebook"> <fa-icon [icon]="faFacebook"></fa-icon>   Login via facebook</a>
-	</p>
-	<p class="divider-text">
-        <span class="bg-light">OR</span>
-    </p>
-	<form>
-	<div class="form-group input-group" *ngIf="newUser">
-		<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faUser"></fa-icon> </span>
-		 </div>
-		<input name="" class="form-control" placeholder="First name" type="text">
-		<input name="" class="form-control" placeholder="Last name" type="text">
-	</div> <!-- form-group// -->
-	<div class="form-group input-group" *ngIf="newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faEmail"></fa-icon> </span>
-		 </div>
-		 <!-- <input type="date" id="birthday" name="birthday"> -->
-        <input name="" class="form-control" placeholder="Email address" type="email">
-	</div> 
-	<div class="form-group input-group" *ngIf="!newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faEmail"></fa-icon> </span>
-		 </div>
-		 <!-- <input type="date" id="birthday" name="birthday"> -->
-        <input name="" class="form-control" placeholder="Enter your Email" type="email">
-    </div> 
-    <div class="form-group input-group" *ngIf="newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"><fa-icon [icon]="faBirthDate"></fa-icon>-  Birth date: </span>
-		 </div>
-		 <!-- <input type="date" id="birthday" name="birthday"> -->
-        <input name="" class="form-control" type="date">
-    </div> 
-    <!-- <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faPhone"></fa-icon> </span>
-		</div>
-		<select class="custom-select" style="max-width: 120px;">
-		    <option selected="">+971</option>
-		    <option value="1">+972</option>
-		    <option value="2">+198</option>
-		    <option value="3">+701</option>
-		</select>
-    	<input name="" class="form-control" placeholder="Phone number" type="text">
-    </div> form-group// -->
-    <div class="form-group input-group" *ngIf="newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faJob"></fa-icon> </span>
-		</div>
-		<select class="form-control">
-			<option selected=""> Select job type</option>
-			<option>Designer</option>
-			<option>Manager</option>
-			<option>Accaunting</option>
-			<option>Unemployed</option>
-			<option>Engenier</option>
-			<option>Doctor</option>
-			<option>Programmer</option>
-		</select>
-	</div> <!-- form-group end.// -->
-    <div class="form-group input-group" *ngIf="newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faPassword"></fa-icon> </span>
-		</div>
-        <input class="form-control" placeholder="Create password" type="password">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group" *ngIf="newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faPassword"></fa-icon> </span>
-		</div>
-        <input class="form-control" placeholder="Repeat password" type="password">
-	</div> <!-- form-group// -->  
-	<div class="form-group input-group" *ngIf="!newUser">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <fa-icon [icon]="faPassword"></fa-icon> </span>
-		</div>
-        <input class="form-control" placeholder="Enter your password" type="password">
-    </div> <!-- form-group// -->                                      
-    <div class="form-group" *ngIf="newUser">
-        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-	</div> <!-- form-group// --> 
-	<div class="form-group" *ngIf="!newUser">
-        <button type="submit" class="btn btn-primary btn-block"> Log in  </button>
-    </div> <!-- form-group// -->      
-	<p class="text-center" *ngIf="!newUser">New User? <a href=# (click)="newUser=true">Create new account</a> </p>                                                                 
-	<p class="text-center" *ngIf="newUser">Have an account? <a href=# (click)="newUser=false">Log In</a> </p>
-</form>
-</article>
-</div> <!-- card.// -->
+	<div class="card bg-light">
+		<article class="card-body mx-auto" style="max-width: 400px;">
+			<h4 class="card-title mt-3 text-center" *ngIf="newUser">Create Account</h4>
+			<h4 class="card-title mt-3 text-center" *ngIf="!newUser">Log In</h4>
+			<p class="text-center" *ngIf="newUser">Get started with your free account</p>
+			<p>
+				<a href="" class="btn btn-block btn-twitter">
+					<fa-icon [icon]="faTwitter"></fa-icon>   Login via Twitter
+				</a>
+				<a href="" class="btn btn-block btn-facebook">
+					<fa-icon [icon]="faFacebook"></fa-icon>   Login via facebook
+				</a>
+			</p>
+			<p class="divider-text">
+				<span class="bg-light">OR</span>
+			</p>
+			<!-- <form ngNoForm action="http://localhost:8888/api/users/addUser" method="post"> -->
+			<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faUser"></fa-icon>
+						</span>
+					</div>
+					<input id="firstName" class="form-control" placeholder="First name" type="text"> <!--[(ngModel)]="name"-->
+					<input id="lastName" class="form-control" placeholder="Last name" type="text">
+				</div> <!-- form-group// -->
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faEmail"></fa-icon>
+						</span>
+					</div>
+					<input id="email" class="form-control" aria-describedby="emailHelp" placeholder="Email address"
+						type="email">
+				</div>
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faHome"></fa-icon>
+						</span>
+					</div>
+					<input id="address" class="form-control" placeholder="Home address"
+						type="text">
+				</div>
+				<!-- <div class="form-group input-group" *ngIf="!newUser">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faEmail"></fa-icon>
+						</span>
+					</div>
+					<input name="" class="form-control" aria-describedby="emailHelp" placeholder="Enter your Email"
+						type="email">
+				</div> -->
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faBirthDate"></fa-icon>- Birth date:
+						</span>
+					</div>
+					<!-- <input type="date" id="birthday" name="birthday"> -->
+					<input id="birthDate" class="form-control" type="date">
+				</div>
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faJob"></fa-icon>
+						</span>
+					</div>
+					<select id="job" class="form-control">
+						<option selected=""> Select job type</option>
+						<option>Designer</option>
+						<option>Manager</option>
+						<option>Accaunting</option>
+						<option>Unemployed</option>
+						<option>Engenier</option>
+						<option>Doctor</option>
+						<option>Programmer</option>
+					</select>
+				</div> <!-- form-group end.// -->
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faPassword"></fa-icon>
+						</span>
+					</div>
+					<input id="password1" class="form-control" placeholder="Create password" type="password">
+				</div> <!-- form-group// -->
+				<div class="form-group input-group"><!-- *ngIf="newUser"> -->
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faPassword"></fa-icon>
+						</span>
+					</div>
+					<input id="password2" class="form-control" placeholder="Repeat password" type="password">
+				</div> <!-- form-group// -->
+				<!-- <div class="form-group input-group" *ngIf="!newUser">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<fa-icon [icon]="faPassword"></fa-icon>
+						</span>
+					</div>
+					<input class="form-control" placeholder="Enter your password" type="password">
+				</div> -->
+				<div class="form-group"><!-- *ngIf="newUser"> -->
+					<button type="submit" class="btn btn-primary btn-block"> Create Account
+					</button>
+				</div> <!-- form-group// -->
+				<!-- <div class="form-group" *ngIf="!newUser">
+					<button class="btn btn-primary btn-block"> Log in </button>
+				</div>  -->
+			</form>
+			<!-- <p class="text-center" *ngIf="!newUser">
+				New User? <a href=# (click)="newUser=true">Create new account</a>
+			</p> -->
+			<p class="text-center"><!-- *ngIf="newUser"> -->
+				Have an account? <a href=# (click)="newUser=false">Log In</a> </p>
+		</article>
+	</div> <!-- card.// -->
 
-</div> 
-
+</div>

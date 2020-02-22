@@ -21,7 +21,13 @@ export class ChangeUserPictureComponent implements OnInit {
     // fd.append('image', this.selectedFile, this.selectedFile.name);
     console.log(this.imgURL);
     this.http.post('http://localhost:8888/api/users/picture', {"file": this.imgURL ,"userId": 2}).subscribe(res => {
-      console.log(res)
+      console.log(res[0])
+      if (res[0] ==1){
+        console.log("Picture Updated");
+        document.getElementById("uploadMassage").innerText = "Profile picture updated!";
+        document.getElementById("btnUpdate").style.visibility = "hidden";
+        document.getElementById("btnCancel").style.visibility = "hidden";
+      }
     });
   }
 
@@ -40,6 +46,9 @@ export class ChangeUserPictureComponent implements OnInit {
     this.message =null;
     document.getElementById("btnUpdate").style.visibility = "visible";
     document.getElementById("btnCancel").style.visibility = "visible";
+    if ( document.getElementById("uploadMassage")){
+      document.getElementById("uploadMassage").innerText = "Image upload preview:";
+    }
 
     var reader = new FileReader();
     this.imagePath = files;

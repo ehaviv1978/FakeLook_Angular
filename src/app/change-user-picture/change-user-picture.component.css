@@ -32,3 +32,8 @@
     margin-top: 20px;
     margin-left: 20px;
 }
+
+#uploadMassage{
+    font-style: italic;
+    color: hotpink;
+}

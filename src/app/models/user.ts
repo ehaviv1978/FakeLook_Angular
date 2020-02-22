@@ -10,4 +10,5 @@ export interface User{
     job:string;
     datejoined:Date;
     picture:any;
+    email:string;
 }
