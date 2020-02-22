@@ -1,36 +1,43 @@
 <div class="container">
 
   <div class="card bg-light">
-  <article class="card-body mx-auto" style="max-width: 400px;">
+    <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Create new Post</h4>
       <hr>
       <form>
-          <div class="input-group">
-              <div class="form-group">
-                <span class="input-group-text" id="inputGroupFileAddon01"><fa-icon [icon]="faCamera"></fa-icon></span>
+        <div class="input-group">
+          <div class="form-group">
+            <span class="input-group-text" id="inputGroupFileAddon01">
+              <fa-icon [icon]="faCamera"></fa-icon>
+            </span>
 
-              </div>
-              <div class="custom-file">        
-                 <input #file type="file" class="custom-file-input" id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01" accept='image/*' (change)="preview(file.files)"/>
-                  <label class="custom-file-label" for="inputGroupFile01" *ngIf="!imagePath">Choose picture</label>
-                <label class="custom-file-label" for="inputGroupFile01" *ngIf="imagePath">{{imagePath[0].name}}</label>
-                <label class="custom-file-label" style="color:red" for="inputGroupFile01" *ngIf="message">{{message}}</label>
-              </div>
+          </div>
+          <div class="custom-file">
+            <input #file type="file" class="custom-file-input" id="inputGroupFile01"
+              aria-describedby="inputGroupFileAddon01" accept='image/*' (change)="preview(file.files)" />
+            <label class="custom-file-label" for="inputGroupFile01" *ngIf="!imagePath">Choose picture</label>
+            <label class="custom-file-label" for="inputGroupFile01" *ngIf="imagePath">{{imagePath[0].name}}</label>
+            <label class="custom-file-label" style="color:red" for="inputGroupFile01"
+              *ngIf="message">{{message}}</label>
+          </div>
 
-              <div class="form-group input-group">
-                <textarea matInput placeholder="Enter post description..." style="width: 350px;"></textarea>
-              </div> 
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block" (click)="newPosts()"> Publish post  </button>
-          </div> <!-- form-group// --> 
+          <div class="form-group input-group">
+            <textarea id="description" matInput placeholder="Enter post description..." style="width: 350px;"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <button id="btnPublish" type="submit" class="btn btn-primary btn-block" (click)="onUpload()"> Publish post
+          </button>
+        </div>
+        <div class="form-group">
+          <button id="btnCancel" type="button" class="btn btn-primary btn-block" (click)="onCancel()"> Cancel
+          </button>
+        </div>
       </form>
-  </article>
+    </article>
   </div> <!-- card.// -->
+  <h4 *ngIf="imgURL" id="uploadMassage">Image upload preview:</h4>
   <img [src]="imgURL" height="200" *ngIf="imgURL">
 
-  
-  </div> 
-  
-  
+
+</div>
