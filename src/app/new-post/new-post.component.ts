@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { faUser, faEnvelope,faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import { faPhone, faUserMd, faLock,faCamera  } from '@fortawesome/free-solid-svg-icons';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-new-post',
@@ -9,7 +10,8 @@ import { faPhone, faUserMd, faLock,faCamera  } from '@fortawesome/free-solid-svg
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit {
-
+  @Input() public parentData;
+  user:User;
   faCamera= faCamera;
   faFile = faFolderOpen;
   
@@ -61,6 +63,9 @@ export class NewPostComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.user= this.parentData;
+    console.log("hello");
+    console.log(this.user);
   }
 
 }

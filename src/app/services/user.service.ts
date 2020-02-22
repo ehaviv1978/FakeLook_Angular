@@ -8,6 +8,7 @@ import {User} from '../models/user';
 })
 export class UserService {
   private userUrl = 'http://localhost:8888/api/users'
+  public logedUserId =0;
 
   constructor( private http: HttpClient ) { }
   getUsers():Observable<User[]>{

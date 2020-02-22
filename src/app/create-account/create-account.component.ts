@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { faFacebook, faTwitter  } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faEnvelope,faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faPhone, faUserMd, faLock,faHome  } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faUserMd, faLock,faHome,faKey  } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -11,8 +12,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.css']
 })
-export class CreateAccountComponent implements OnInit {
 
+export class CreateAccountComponent implements OnInit {
+  @Input() public parentData;
   user: User={
     userId:0,
     firstName:"",
@@ -26,6 +28,7 @@ export class CreateAccountComponent implements OnInit {
     email:""
   };
 
+
   newUser =false;
   faHome= faHome;
   faBirthDate= faCalendar;
@@ -36,9 +39,10 @@ export class CreateAccountComponent implements OnInit {
   faUser=faUser;
   faTwitter = faTwitter;
   faFacebook = faFacebook;
+  faKey= faKey;
 
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,private userServ: UserService) { }
 
   onSubmit() {
     this.user.firstName= (<HTMLInputElement> document.getElementById("firstName")).value;
@@ -55,7 +59,48 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  inputCheck(){
+    //console.log('hi');
+    document.getElementById("passwordAllert").style.visibility = "hidden";
+    document.getElementById("emailAllert").style.visibility = "hidden";
+    console.log((<HTMLInputElement>document.getElementById("inputPassword")).value);
+    console.log ((<HTMLInputElement> document.getElementById("emailLogIn")).value);
+    if ((<HTMLInputElement>document.getElementById("inputPassword")).value &&
+    ((<HTMLInputElement> document.getElementById("emailLogIn")).value)){
+      document.getElementById("btnLogIn").style.visibility = "visible";
+    }else{
+      document.getElementById("btnLogIn").style.visibility = "hidden";
+    }
+  }
+
+  logIn(){
+    let email = ((<HTMLInputElement> document.getElementById("emailLogIn")).value);
+    this.http.get('http://localhost:8888/api/users/logIn'+"/"+email).subscribe(res => {
+     // console.log(res[0]);
+      if (res[0]==undefined){
+        (<HTMLInputElement>document.getElementById("emailAllert")).textContent = "Email is incorect"
+        document.getElementById("emailAllert").style.visibility = "visible";
+      }else{
+        if (res[0].password == (<HTMLInputElement>document.getElementById("inputPassword")).value){
+          console.log("loged in");
+          this.logInEvent.emit(res[0]);
+        }else{
+          console.log("incorect password");
+        }
+        
+      }
+    });
+  }
+
+  @Output() public logInEvent = new EventEmitter();
+
+  ngOnInit(){
+  }
+
+  ngAfterViewInit() {
+    document.getElementById("btnLogIn").style.visibility = "hidden";
+    document.getElementById("passwordAllert").style.visibility = "hidden";
+    document.getElementById("emailAllert").style.visibility = "hidden";
   }
 
 }

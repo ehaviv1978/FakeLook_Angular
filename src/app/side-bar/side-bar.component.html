@@ -2,9 +2,8 @@
   <map-posts *ngSwitchCase="'map'"></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
-  <app-create-account *ngSwitchCase="'createAccount'"></app-create-account>
-  <app-new-post *ngSwitchCase="'addPost'"></app-new-post>
-  <app-change-user-picture *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
+  <app-new-post [parentData]="user" *ngSwitchCase="'addPost'"></app-new-post>
+  <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
 
 </div>
 

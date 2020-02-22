@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-side-bar',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
+  @Input() public parentData;
+  user:User;
+  
+
   viewShow = "map";
 
   constructor() { }
 
   ngOnInit() {   
+    this.user= this.parentData;
+    console.log("hello");
+    console.log(this.user);
   }
 }

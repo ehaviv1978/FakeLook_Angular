@@ -1,6 +1,7 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,Input } from '@angular/core';
 import { faPhone, faUserMd, faLock,faCamera  } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-change-user-picture',
@@ -9,18 +10,20 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class ChangeUserPictureComponent implements OnInit {
+  @Input() public parentData;
   faCamera= faCamera;
   selectedFile :File = null;
   public imagePath;
   imgURL: any;
   public message: string;
+  user:User;
   constructor(private http: HttpClient,) { }
 
   onUpload(){
     // const fd = new FormData();
     // fd.append('image', this.selectedFile, this.selectedFile.name);
     console.log(this.imgURL);
-    this.http.post('http://localhost:8888/api/users/picture', {"file": this.imgURL ,"userId": 2}).subscribe(res => {
+    this.http.post('http://localhost:8888/api/users/picture', {"file": this.imgURL ,"userId": this.user.userId}).subscribe(res => {
       console.log(res[0])
       if (res[0] ==1){
         console.log("Picture Updated");
@@ -71,6 +74,9 @@ export class ChangeUserPictureComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user= this.parentData;
+    console.log("hello");
+    console.log(this.user);
     document.getElementById("btnUpdate").style.visibility = "hidden";
     document.getElementById("btnCancel").style.visibility = "hidden";
   }
