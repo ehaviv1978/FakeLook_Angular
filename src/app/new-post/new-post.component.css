@@ -1,6 +1,6 @@
 .divider-text {
     position: relative;
-    text-align: center;
+    text-align: left;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -12,7 +12,7 @@
 }
 .divider-text {
     position: relative;
-    text-align: center;
+    text-align: left;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -32,10 +32,13 @@
     z-index: 1;
 }
 
-
 .container{
-    position: absolute;
+    /* position: absolute;
     left: 400px;
-    top:80px;
-    width:auto;
+    top:80px; */
+    width:480px;
 }
+
+/* img{
+    align-content: center;
+} */

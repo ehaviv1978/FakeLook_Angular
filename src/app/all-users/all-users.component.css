@@ -1,9 +1,7 @@
   .list{
-    position:absolute;
+    position:fixed;
     top:80px;
     right: 5px;;
-    left: 250px;
-    bottom: 5px;
   }
 /* body{padding-top:30px;}
 
