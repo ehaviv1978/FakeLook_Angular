@@ -1,9 +1,10 @@
 <div class="d-flex" id="wrapper">
-  <div [ngSwitch]="viewShow">
+  <div id="mainView" [ngSwitch]="viewShow">
     <app-side-bar *ngSwitchCase="'sideBar'" [parentData]="user"></app-side-bar>
     <app-create-account *ngSwitchCase="'createAccount'" [parentData]="user" (logInEvent)="newLogIn($event)"></app-create-account>
+    <app-change-user-picture [parentData]="user" *ngSwitchCase="'updateProfilePicture'"></app-change-user-picture>
   </div>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary border-bottom" style="position:fixed ; width: 100%">
+<nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-secondary border-bottom" style="position:fixed ; width: 100%">
   <!--button class="btn btn-primary" id="menu-toggle">Toggle Menu</button-->
   <span class="navbar-brand mb-0 h1">FakeLook</span>
   <form class="form-inline my-2 my-lg-0">
@@ -27,7 +28,7 @@
           User Options
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Edit User info</a>
+          <a class="dropdown-item" href="#" (click)="viewShow='updateProfilePicture'">Update profile Picture</a>
           <a class="dropdown-item" href="#">Edit Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" (click)="logOut()">Log Out</a>
