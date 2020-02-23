@@ -4,7 +4,7 @@
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
   <app-post-feed *ngSwitchCase ="'postFeed'" ></app-post-feed>
   <app-new-post [parentData]="user" *ngSwitchCase="'addPost'"></app-new-post>
-  <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
+  <!-- <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture> -->
   <app-post-details *ngSwitchCase = "'postDetails'" ></app-post-details>
 </div>
 
@@ -20,8 +20,7 @@
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='allUsers'">All Users</a>
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='map'">Show Map</a>
         <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='addPost'">Add Post</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='changeProfilePicture'">Change profile picture</a>
-
+        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='changeProfilePicture'">Change profile picture</a> -->
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
