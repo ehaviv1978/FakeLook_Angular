@@ -1,7 +1,10 @@
 <div class="container">
         <div class="post-container" *ngFor="let post of posts">
+          <div>
             <img class="user-image"[src]="post.userPic  ">
-          <div >{{post.description + " - " + post.firstName}}</div> 
-          <img class="post-image"[src]="post.picture">
+            <a class="link" href="#">{{"posted by: " + post.firstName + " " + post.lastName}}</a>
+          </div>
+            <img class="post-image"[src]="post.picture" >
+          <div> posted at : {{  post.timePosted | date:'medium' }}</div>
         </div>
     </div>
