@@ -3,18 +3,18 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<div class="list">
-  <input (input)="searchBox($event.target.value)"/>
+<input (input)="searchBox($event.target.value)"/>
   <button (click)="searchUsers()">Search User</button>
   <div *ngFor="let user of users; index as i">
       <a href="#" id = {{i}} (click)="showUserDetail(user)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
   </div>
+<div class="list">
   <div *ngIf="user" class="container">
     <div class="row">
-      <div *ngIf="user.picture" class="col-md-3 img">
-        <img [src]="imageurl" style="width: 100%"/>
+      <div *ngIf="user.picture">
+        <img [src]="imageurl" style="height: 300px;"/>
       </div>
-      <div class="col-md-6 details">
+      <div>
         <blockquote>
           <h5>{{user.firstName}} {{user.lastName}}</h5>
           <small><cite title="Source Title">{{user.address}}<i class="icon-map-marker"></i></cite></small>

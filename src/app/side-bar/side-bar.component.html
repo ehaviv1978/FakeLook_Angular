@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 <div [ngSwitch]="viewShow">
   <map-posts *ngSwitchCase= "'map'" ></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'" ></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'" ></app-all-posts>
   <app-post-feed *ngSwitchCase ="'postFeed'" ></app-post-feed>
+=======
+<div id="activeComponent" [ngSwitch]="viewShow">
+  <map-posts *ngSwitchCase="'map'"></map-posts>
+  <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
+  <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
+>>>>>>> bee499915aed32bb5a9f515b65e6a332978b6239
   <app-new-post [parentData]="user" *ngSwitchCase="'addPost'"></app-new-post>
   <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
 </div>
