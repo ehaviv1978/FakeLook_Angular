@@ -1,0 +1,7 @@
+<div class="container">
+        <div class="post-container" *ngFor="let post of posts">
+            <img class="user-image"[src]="post.userPic  ">
+          <div >{{post.description + " - " + post.firstName}}</div> 
+          <img class="post-image"[src]="post.picture">
+        </div>
+    </div>

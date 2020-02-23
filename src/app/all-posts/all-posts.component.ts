@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
@@ -25,6 +24,7 @@ export class AllPostsComponent implements OnInit {
 
   async showPic(post){
     this.post = post;
+    console.log(post.picture)
     this.imageurl=post.picture;
 
     // const STRING_CHAR = await String.fromCharCode.apply(null , post.picture.data);
