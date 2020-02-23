@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { User } from '../models/user';
+import { Post } from '../models/post';
 
 @Component({
   selector: 'app-side-bar',

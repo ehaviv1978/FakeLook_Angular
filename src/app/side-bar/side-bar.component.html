@@ -5,6 +5,7 @@
   <app-post-feed *ngSwitchCase ="'postFeed'" ></app-post-feed>
   <app-new-post [parentData]="user" *ngSwitchCase="'addPost'"></app-new-post>
   <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
+  <app-post-details *ngSwitchCase = "'postDetails'" ></app-post-details>
 </div>
 
   <div class="d-flex" id="wrapper">
