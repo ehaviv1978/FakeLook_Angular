@@ -1,9 +1,9 @@
+<div id="mainView" [ngSwitch]="viewShow" style="top:60px; position:absolute; width: 100%;">
+  <app-side-bar *ngSwitchCase="'sideBar'" [parentData]="user"></app-side-bar>
+  <app-create-account *ngSwitchCase="'createAccount'" [parentData]="user" (logInEvent)="newLogIn($event)"></app-create-account>
+  <app-change-user-picture [parentData]="user" *ngSwitchCase="'updateProfilePicture'"></app-change-user-picture>
+</div>
 <div class="d-flex" id="wrapper">
-  <div id="mainView" [ngSwitch]="viewShow">
-    <app-side-bar *ngSwitchCase="'sideBar'" [parentData]="user"></app-side-bar>
-    <app-create-account *ngSwitchCase="'createAccount'" [parentData]="user" (logInEvent)="newLogIn($event)"></app-create-account>
-    <app-change-user-picture [parentData]="user" *ngSwitchCase="'updateProfilePicture'"></app-change-user-picture>
-  </div>
 <nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-secondary border-bottom" style="position:fixed ; width: 100%">
   <!--button class="btn btn-primary" id="menu-toggle">Toggle Menu</button-->
   <span class="navbar-brand mb-0 h1">FakeLook</span>

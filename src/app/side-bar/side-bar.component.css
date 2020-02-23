@@ -35,7 +35,6 @@ body {
 
     #activeComponent{
       position: absolute;
-      top:60px;
       left: 5px;
       right: 5px;     
     }
@@ -52,7 +51,6 @@ body {
 
   #activeComponent{
     position: absolute;
-    top:60px;
     left: 250px;
     right: 5px;
     
@@ -62,7 +60,6 @@ body {
 
     #activeComponent{
       position: absolute;
-      top:70px;
       left: 5px;
       right: 5px;     
     }

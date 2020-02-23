@@ -77,7 +77,8 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password1" class="form-control" placeholder="Create password" type="password">
+					<input id="password1" class="form-control" (keyup)="createAcountInputCheck()"
+					placeholder="Create password" type="password">
 				</div> <!-- form-group// -->
 				<div class="form-group input-group"*ngIf="newUser">
 					<div class="input-group-prepend">
@@ -85,7 +86,8 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password2" class="form-control" placeholder="Repeat password" type="password">
+					<input id="password2" class="form-control" (keyup)="createAcountInputCheck()" 
+					placeholder="Repeat password" type="password">
 				</div> <!-- form-group// -->
 				<small id="emailAllert">allert massage</small>
 				<div class="form-group input-group" *ngIf="!newUser">
@@ -95,7 +97,7 @@
 						</span>
 					</div>
 					<input id="emailLogIn" class="form-control" aria-describedby="emailHelp" 
-					placeholder="Enter your Email" (keyup)="inputCheck()" type="email">
+					placeholder="Enter your Email" (keyup)="logInInputCheck()" type="email">
 				</div>
 				<small id="passwordAllert">allert massage</small>
 				<div class="form-group input-group" *ngIf="!newUser">
@@ -105,7 +107,7 @@
 						</span>
 					</div>
 					<input id ="inputPassword" class="form-control" placeholder="Enter your password" 
-					type="password" (keyup)="inputCheck()">
+					type="password" (keyup)="logInInputCheck()">
 				</div>
 				<div class="form-group" *ngIf="newUser">
 					<button type="submit" class="btn btn-primary btn-block"> Create Account

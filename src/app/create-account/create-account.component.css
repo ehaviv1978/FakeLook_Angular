@@ -30,9 +30,7 @@
 }
 
 .container{
-    position: absolute;
-    left: 70px;
-    top:60px;
+    margin: auto;
 }
 
 small{
