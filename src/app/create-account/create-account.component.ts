@@ -56,6 +56,7 @@ export class CreateAccountComponent implements OnInit {
     console.log(this.user);
     this.http.post('http://localhost:8888/api/users/addUser', this.user).subscribe(res => {
       console.log(res)
+      this.newUser =false;
     });
   }
 

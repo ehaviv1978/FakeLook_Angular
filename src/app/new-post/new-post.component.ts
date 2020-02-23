@@ -45,12 +45,14 @@ export class NewPostComponent implements OnInit {
   async onUpload(){
     // const fd = new FormData();
     // fd.append('image', this.selectedFile, this.selectedFile.name);
-    await this.getPosition().then(pos=>
-      {
-        this.lat = pos.lat;
-        this.lng = pos.lng;
-         //console.log(`Positon: ${pos.lng} ${pos.lat}`);
-      });
+    // await this.getPosition().then(pos=>
+    //   {
+    //     this.lat = pos.lat;
+    //     this.lng = pos.lng;
+    //      //console.log(`Positon: ${pos.lng} ${pos.lat}`);
+    //   });
+      this.lat = Math.random()*89*(Math.round(Math.random()) * 2 - 1);
+      this.lng = Math.random()*179*(Math.round(Math.random()) * 2 - 1);
     console.log(this.imgURL);
     this.http.post('http://localhost:8888/api/posts', 
     {"picture": this.imgURL ,

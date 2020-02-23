@@ -12,7 +12,7 @@ import {PostService} from '../services/post.service';
 })
 export class MapPostsComponent implements AfterViewInit {
   title = 'angular-gmap';
-  @ViewChild('mapContainer') gmap: ElementRef;
+  @ViewChild('mapContainer',{static: true}) gmap: ElementRef;
   map: google.maps.Map;
   coordinates:google.maps.LatLng;
   mapOptions:google.maps.MapOptions;
