@@ -9,6 +9,7 @@ import { Post } from '../models/post';
 })
 export class SideBarComponent implements OnInit {
   @Input() public parentData;
+  currentPost:Post;
   user:User;
   
 
@@ -20,5 +21,10 @@ export class SideBarComponent implements OnInit {
     this.user= this.parentData;
     console.log("hello");
     console.log(this.user);
+  }
+
+  showPost($event){
+    this.viewShow = "postDetails";
+    this.currentPost = $event;
   }
 }

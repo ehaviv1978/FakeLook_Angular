@@ -4,7 +4,7 @@
             <img class="user-image"[src]="post.userPic  ">
             <a class="link" href="#">{{"posted by: " + post.firstName + " " + post.lastName}}</a>
           </div>
-            <img class="post-image"[src]="post.picture" >
+            <img class="post-image"[src]="post.picture" (click) = "clickOnPost(post)" >
           <div> posted at : {{  post.timePosted | date:'medium' }}</div>
         </div>
     </div>

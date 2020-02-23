@@ -1,1 +1,7 @@
-<p>post-details works!</p>
+<div>
+    <img class="user-image"[src]="currentPost.userPic  ">
+    <a class="link" href="#">{{"posted by: " + currentPost.firstName + " " + currentPost.lastName}}</a>
+  </div>
+    <img class="post-image"[src]="currentPost.picture" >
+    <div>{{currentPost.description}}</div>
+  <div> posted at : {{  currentPost.timePosted | date:'medium' }}</div>
