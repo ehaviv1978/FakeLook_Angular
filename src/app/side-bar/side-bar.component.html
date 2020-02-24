@@ -1,5 +1,5 @@
 <div id="activeComponent" [ngSwitch]="viewShow">
-  <map-posts [parentData]="user" *ngSwitchCase="'map'"></map-posts>
+  <map-posts [parentData]="user" *ngSwitchCase="'map'" (clickPostEvent) = "showPost($event)"></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
   <app-post-feed *ngSwitchCase ="'postFeed'" (clickPostEvent) = "showPost($event)" ></app-post-feed>
