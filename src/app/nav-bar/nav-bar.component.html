@@ -20,7 +20,7 @@
       <li class="nav-item" *ngIf="user!=null">
         <a class="nav-link" (click)="viewShow='sideBar'" style="color:deepskyblue">{{user.firstName}} {{user.lastName}} <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="user!=null">
         <a class="nav-link" href=# (click)="viewShow='sideBar'">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown" *ngIf="user!=null">

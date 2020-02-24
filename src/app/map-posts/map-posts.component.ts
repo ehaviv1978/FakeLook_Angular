@@ -1,8 +1,9 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef,Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import {Post} from'../models/post';
 import {PostService} from '../services/post.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -11,10 +12,11 @@ import {PostService} from '../services/post.service';
   styleUrls: ['./map-posts.component.css']
 })
 export class MapPostsComponent implements AfterViewInit {
+  @Input() public parentData;
+  user:User;
   title = 'angular-gmap';
   @ViewChild('mapContainer',{static: true}) gmap: ElementRef;
   map: google.maps.Map;
-  coordinates:google.maps.LatLng;
   mapOptions:google.maps.MapOptions;
   marker:google.maps.Marker;
   posts: Post[];
@@ -22,17 +24,32 @@ export class MapPostsComponent implements AfterViewInit {
   imageurl:SafeUrl;
   constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
 
+  markers = [];
   async showPosts() {
     this.postServ.getPosts().subscribe( res => {
       this.posts =  res;
       for (let post of this.posts) {
-        this.coordinates =  new google.maps.LatLng(post.lat, post.long);
-        this.marker =  new google.maps.Marker({
-          position: this.coordinates,
-            map: this.map,
-            title: post.description
-          });
-           this.marker.setMap(this.map);
+        let marker =  new google.maps.Marker({
+          position: new google.maps.LatLng(post.lat, post.long),
+          map: this.map,
+          title: post.description,
+          icon: {
+            url: post.userPic,
+            scaledSize: new google.maps.Size(40,40)
+          }
+         });
+         //let pic = post.picture
+         let  imageurl:SafeUrl = post.picture;
+
+        let infowindow = new google.maps.InfoWindow({
+          content:'<div><img width="200" src="' + post.picture + '"/><br>' +post.description + '</div>'
+        });
+
+        marker.addListener('click', () =>{
+          infowindow.open(this.map, marker);
+        });
+
+         marker.setMap(this.map);
       }
     });
   }
@@ -40,15 +57,19 @@ export class MapPostsComponent implements AfterViewInit {
   getCurrentLocation(callback) {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
-        this.coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+        let coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.mapOptions = {
-          center: this.coordinates,
+          center: coordinates,
           zoom: 8
         };
         this.marker = new google.maps.Marker({
-          position: this.coordinates,
+          position: coordinates,
           map: this.map,
-          title: 'I\'m Here!'
+          title: 'I\'m Here!',
+          icon: {
+            url: this.user.picture,
+            scaledSize: new google.maps.Size(40,40)
+          }
         });
         callback();
       });
@@ -65,5 +86,9 @@ export class MapPostsComponent implements AfterViewInit {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
     this.marker.setMap(this.map);
     this.showPosts();
+  }
+
+  ngOnInit(){
+    this.user= this.parentData;
   }
 }
