@@ -1,6 +1,6 @@
-import { Component, OnInit , Output, EventEmitter  } from '@angular/core';
-import {Post} from '../models/post';
-import {PostService} from '../services/post.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Post } from '../models/post';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-post-feed',
@@ -13,14 +13,13 @@ export class PostFeedComponent implements OnInit {
   constructor(private postServ: PostService) { }
   @Output() clickPostEvent = new EventEmitter<Post>();
 
-  clickOnPost(post:Post) {
+  clickOnPost(post: Post) {
     this.clickPostEvent.emit(post);
   }
 
   getPosts() {
-    this.postServ.getPosts().subscribe( data=>{
-      this.posts =  data;
-      console.log(data);
+    this.postServ.getPosts().subscribe(data => {
+      this.posts = data;
     });
   }
 

@@ -1,9 +1,8 @@
-import { picture } from './picture';
 
-export interface Post{
+export class Post{
     postId:number;
     description:string;
-    picture:string
+    picture:any;
     lat:number;
     long:number;
     timePosted:Date;

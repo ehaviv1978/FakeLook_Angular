@@ -1,7 +1,23 @@
-<div>
-    <img class="user-image"[src]="currentPost.userPic  ">
+<div class = "post-container">
+  <div>
+    <img class="user-image" [src]="currentPost.userPic  ">
     <a class="link" href="#">{{"posted by: " + currentPost.firstName + " " + currentPost.lastName}}</a>
   </div>
-    <img class="post-image"[src]="currentPost.picture" >
-    <div>{{currentPost.description}}</div>
+  <img class="post-image" [src]="currentPost.picture">
+  <div>{{currentPost.description}}</div>
   <div> posted at : {{  currentPost.timePosted | date:'medium' }}</div>
+</div>
+<div class="comment-container">
+  <textarea id="comment-input" [(ngModel)] = "tempComment.commentContent"></textarea>
+  <div>
+    <button (click) = "addComment()">Comment</button>
+  </div>
+</div>
+<div class="comment-container" *ngFor="let comment of comments">
+  <div>
+    <img class="user-image" [src]="comment.picture  ">
+    <a class="link" href="#">{{comment.firstName + " " + comment.lastName }}</a>
+    <div>{{comment.commentContent}}</div>
+  </div>
+  <div class="date-field"> posted at : {{  comment.timeCommented | date:'medium' }}</div>
+</div>

@@ -8,14 +8,29 @@
     }
       .user-image{
     width: 50px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: blue;
+    border: 5px inset rgba(255,0,0,0.77);
+    border-radius: 40px;
     margin: 5px;
   }
   .link{
     margin: 5px;
   }
   .post-container{
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    border: 30px double rgba(28,110,164,0.3);
+    border-radius: 40px;
+    background-color: beige;
+    padding: 10px;
+  }
+  .comment-container{
+    border: 20px groove rgba(124,255,59,0.77);
+border-radius: 40px;
+padding: 10px;
+margin: 5px;
+  }
+  .date-field{
+    color: gray;
+  }
+  #comment-input{
+    width: 900px;
   }
