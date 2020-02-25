@@ -32,6 +32,7 @@ export class ChangeUserPictureComponent implements OnInit {
         document.getElementById("btnCancel").style.visibility = "hidden";
       }
     });
+  this.user.picture=this.imgURL;
   }
 
   preview(files) {
