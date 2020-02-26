@@ -99,6 +99,8 @@ export class CreateAccountComponent implements OnInit {
           this.logInEvent.emit(res[0]);
         } else {
           console.log("incorect password");
+          (<HTMLInputElement>document.getElementById("passwordAllert")).textContent = "Wrong Password!";
+          document.getElementById("passwordAllert").style.visibility = "visible";
         }
 
       }
