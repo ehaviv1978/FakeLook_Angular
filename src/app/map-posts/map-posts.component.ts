@@ -35,6 +35,7 @@ export class MapPostsComponent implements AfterViewInit {
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(post.lat, post.long),
           map: this.map,
+          animation: google.maps.Animation.BOUNCE,
           icon: {
             url: post.userPic,
             scaledSize: new google.maps.Size(40, 40)
@@ -78,6 +79,7 @@ export class MapPostsComponent implements AfterViewInit {
         this.marker = new google.maps.Marker({
           position: coordinates,
           map: this.map,
+          animation: google.maps.Animation.DROP,
           title: 'I\'m Here!',
           icon: {
             url: this.user.picture,

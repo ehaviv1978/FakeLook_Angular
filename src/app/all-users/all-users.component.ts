@@ -1,4 +1,4 @@
-import { Component, OnInit, Sanitizer } from '@angular/core';
+import { Component, OnInit, Sanitizer,Input } from '@angular/core';
 //import { HttpClient } from '@angular/common/http';
 import {SafeUrl } from '@angular/platform-browser';
 import { User } from '../models/user';
@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./all-users.component.css']
 })
 export class AllUsersComponent implements OnInit {
+  @Input('parentData') searchString ;
   users: User[];
   user: User;
   search: string;
@@ -27,7 +28,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   searchUsers() {
-    this.userServ.searchUsers(this.search).subscribe(res =>{
+    this.userServ.searchUsers(this.searchString).subscribe(res =>{
       this.users = res;
     });
   }
@@ -44,9 +45,21 @@ export class AllUsersComponent implements OnInit {
   //   this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
   }
 
+  onSearch(){
+    if (this.searchString==null){
+      this.getUsers();
+    }else{
+      this.searchUsers()
+    }
+    this.user=null;
+  }
 
   ngOnInit() {
-    this.getUsers();
+    if (this.searchString==null){
+      this.getUsers();
+    }else{
+      this.searchUsers()
+    }
   }
 
 }

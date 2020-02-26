@@ -1,29 +1,24 @@
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<input (input)="searchBox($event.target.value)"/>
-  <button (click)="searchUsers()">Search User</button>
-  <div *ngFor="let user of users; index as i">
-      <a href="#" id = {{i}} (click)="showUserDetail(user)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
-  </div>
 <div class="list">
-  <div *ngIf="user" class="container">
-    <div class="row">
-      <div *ngIf="user.picture">
-        <img [src]="imageurl" style="height: 300px;"/>
-      </div>
-      <div>
-        <blockquote>
-          <h5>{{user.firstName}} {{user.lastName}}</h5>
-          <small><cite title="Source Title">{{user.address}}<i class="icon-map-marker"></i></cite></small>
-        </blockquote>
-        <p>
-          {{user.job}}
-          <br>
-          {{user.birthDate |date:'longDate'}}
-        </p>
-      </div>
+  <div *ngFor="let user of users; index as i">
+    <a href="#" id={{i}}
+      (click)="showUserDetail(user)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
+  </div>
+</div>
+
+<div *ngIf="user" class="container">
+  <div class="row">
+    <div *ngIf="user.picture">
+      <img [src]="imageurl" style="width: 300px;" />
+    </div>
+    <div style="margin-left: 30px;">
+      <blockquote>
+        <h5>{{user.firstName}} {{user.lastName}}</h5>
+        <small><cite title="Source Title">{{user.address}}<i class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <p>
+        {{user.job}}
+        <br>
+        {{user.birthDate |date:'longDate'}}
+      </p>
     </div>
   </div>
