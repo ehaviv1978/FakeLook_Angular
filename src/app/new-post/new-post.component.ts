@@ -83,27 +83,6 @@ export class NewPostComponent implements OnInit {
     this.file.nativeElement.value = "";
   }
 
-  async newPosts() {
-    console.log(this.imgURL);
-    let blob = await fetch(this.imgURL).then(r => r.blob());
-    console.log(blob);
-    let aray = await new Response(blob).arrayBuffer();
-    console.log(aray);
-
-    let post =
-    {
-      picture: aray,
-      userId: 2,
-      description: "test 3",
-      latGPS: 32.11,
-      longGPS: 32.14
-    }
-    console.log(post.picture);
-    //   this.http.post('http://localhost:8888/api/posts',post)
-    // .subscribe(res =>
-    // console.log(res));
-  }
-
   constructor(private http: HttpClient) { }
 
   ngOnInit() {

@@ -23,11 +23,13 @@ export class MapPostsComponent implements AfterViewInit {
   posts: Post[];
   post: Post;
   imageurl: SafeUrl;
+  iconSize = 40;
+  markers = [];
   constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
 
   @Output() clickPostEvent = new EventEmitter<Post>();
 
-  markers = [];
+  
   async showPosts() {
     this.postServ.getPosts().subscribe(res => {
       this.posts = res;
@@ -38,7 +40,7 @@ export class MapPostsComponent implements AfterViewInit {
           animation: google.maps.Animation.BOUNCE,
           icon: {
             url: post.userPic,
-            scaledSize: new google.maps.Size(40, 40)
+            scaledSize: new google.maps.Size(this.iconSize, this.iconSize)
           }
         });
         let infowindow = new google.maps.InfoWindow({

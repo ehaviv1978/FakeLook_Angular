@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Log In</h4>
+            <p>
+                <a href="" class="btn btn-block btn-twitter">
+                    <fa-icon [icon]="faTwitter"></fa-icon>   Login via Twitter
+                </a>
+                <a href="" class="btn btn-block btn-facebook">
+                    <fa-icon [icon]="faFacebook"></fa-icon>   Login via facebook
+                </a>
+            </p>
+            <p class="divider-text">
+                <span class="bg-light">OR</span>
+            </p>
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+                <small id="emailAllert">allert massage</small>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <fa-icon [icon]="faEmail"></fa-icon>
+                        </span>
+                    </div>
+                    <input id="emailLogIn" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Enter your Email" (keyup)="logInInputCheck()" type="email">
+                </div>
+                <small id="passwordAllert">allert massage</small>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <fa-icon [icon]="faKey"></fa-icon>
+                        </span>
+                    </div>
+                    <input id="inputPassword" class="form-control" placeholder="Enter your password" type="password"
+                        (keyup)="logInInputCheck()">
+                </div>
+                <div class="form-group">
+                    <button id="btnLogIn" type="submit" class="btn btn-primary btn-block"> Log in
+                    </button>
+                </div> <!-- form-group// -->
+            </form>
+            <p class="text-center">
+                New User? <a href=# (click)="create_Acount()">Create new account</a>       
+        </article>
+    </div> <!-- card.// -->
+
+</div>

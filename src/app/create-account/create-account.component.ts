@@ -29,7 +29,7 @@ export class CreateAccountComponent implements OnInit {
   };
 
 
-  newUser = false;
+ // newUser = true;
   faHome = faHome;
   faBirthDate = faCalendar;
   faPassword = faLock;
@@ -58,7 +58,8 @@ export class CreateAccountComponent implements OnInit {
       console.log(this.user);
       this.http.post('http://localhost:8888/api/users/addUser', this.user).subscribe(res => {
         console.log(res)
-        this.newUser = false;
+        this.logInEvent.emit(this.user);
+       // this.newUser = false;
       });
     }else{
       console.log("password are not the same");
@@ -72,50 +73,57 @@ export class CreateAccountComponent implements OnInit {
 
   }
 
-  logInInputCheck() {
-    //console.log('hi');
-    document.getElementById("passwordAllert").style.visibility = "hidden";
-    document.getElementById("emailAllert").style.visibility = "hidden";
-    console.log((<HTMLInputElement>document.getElementById("inputPassword")).value);
-    console.log((<HTMLInputElement>document.getElementById("emailLogIn")).value);
-    if ((<HTMLInputElement>document.getElementById("inputPassword")).value &&
-      ((<HTMLInputElement>document.getElementById("emailLogIn")).value)) {
-      document.getElementById("btnLogIn").style.visibility = "visible";
-    } else {
-      document.getElementById("btnLogIn").style.visibility = "hidden";
-    }
-  }
+  // logInInputCheck() {
+  //   //console.log('hi');
+  //   document.getElementById("passwordAllert").style.visibility = "hidden";
+  //   document.getElementById("emailAllert").style.visibility = "hidden";
+  //   console.log((<HTMLInputElement>document.getElementById("inputPassword")).value);
+  //   console.log((<HTMLInputElement>document.getElementById("emailLogIn")).value);
+  //   if ((<HTMLInputElement>document.getElementById("inputPassword")).value &&
+  //     ((<HTMLInputElement>document.getElementById("emailLogIn")).value)) {
+  //     document.getElementById("btnLogIn").style.visibility = "visible";
+  //   } else {
+  //     document.getElementById("btnLogIn").style.visibility = "hidden";
+  //   }
+  // }
 
-  logIn() {
-    let email = ((<HTMLInputElement>document.getElementById("emailLogIn")).value);
-    this.http.get('http://localhost:8888/api/users/logIn' + "/" + email).subscribe(res => {
-      // console.log(res[0]);
-      if (res[0] == undefined) {
-        (<HTMLInputElement>document.getElementById("emailAllert")).textContent = "Email is incorect";
-        document.getElementById("emailAllert").style.visibility = "visible";
-      } else {
-        if (res[0].password == (<HTMLInputElement>document.getElementById("inputPassword")).value) {
-          console.log("loged in");
-          this.logInEvent.emit(res[0]);
-        } else {
-          console.log("incorect password");
-          (<HTMLInputElement>document.getElementById("passwordAllert")).textContent = "Wrong Password!";
-          document.getElementById("passwordAllert").style.visibility = "visible";
-        }
+  // logIn() {
+  //   let email = ((<HTMLInputElement>document.getElementById("emailLogIn")).value);
+  //   this.http.get('http://localhost:8888/api/users/logIn' + "/" + email).subscribe(res => {
+  //     // console.log(res[0]);
+  //     if (res[0] == undefined) {
+  //       (<HTMLInputElement>document.getElementById("emailAllert")).textContent = "Email is incorect";
+  //       document.getElementById("emailAllert").style.visibility = "visible";
+  //     } else {
+  //       if (res[0].password == (<HTMLInputElement>document.getElementById("inputPassword")).value) {
+  //         console.log("loged in");
+  //         this.logInEvent.emit(res[0]);
+  //       } else {
+  //         console.log("incorect password");
+  //         (<HTMLInputElement>document.getElementById("passwordAllert")).textContent = "Wrong Password!";
+  //         document.getElementById("passwordAllert").style.visibility = "visible";
+  //       }
 
-      }
-    });
-  }
+  //     }
+  //   });
+  // }
 
   @Output() public logInEvent = new EventEmitter();
+  @Output() public userLogIn = new EventEmitter();
+
+  user_LogIn(){
+    this.userLogIn.emit();
+  }
 
   ngOnInit() {
+    document.getElementById("passwordAllert").style.visibility = "hidden";
+
   }
 
   ngAfterViewInit() {
-    document.getElementById("btnLogIn").style.visibility = "hidden";
     document.getElementById("passwordAllert").style.visibility = "hidden";
-    document.getElementById("emailAllert").style.visibility = "hidden";
+    //document.getElementById("btnCreate").style.visibility = "hidden";
+
   }
 
 }

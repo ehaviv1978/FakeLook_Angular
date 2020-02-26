@@ -13,7 +13,7 @@ import { AllUsersComponent }  from '../all-users/all-users.component';
 export class NavBarComponent implements OnInit {
   public user:User;
   public userSearch: string;
-  viewShow = "createAccount";
+  viewShow = "logIn";
   constructor(userServ: UserService) { }
 
   @ViewChild(AllUsersComponent) allUsers: AllUsersComponent;
@@ -25,7 +25,7 @@ export class NavBarComponent implements OnInit {
   }
 
   logOut(){
-    this.viewShow="createAccount";
+    this.viewShow="logIn";
     this.user=null;
   }
 
