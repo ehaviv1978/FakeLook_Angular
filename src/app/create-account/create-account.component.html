@@ -16,24 +16,29 @@
 				<span class="bg-light">OR</span>
 			</p>
 			<!-- <form ngNoForm action="http://localhost:8888/api/users/addUser" method="post"> -->
-			<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+			<form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faUser"></fa-icon>
 						</span>
 					</div>
-					<input id="firstName" class="form-control" placeholder="First name" type="text">
-					<input id="lastName" class="form-control" placeholder="Last name" type="text">
+					<input id ="firstName" name="firstName" [(ngModel)]="user.firstName" class="form-control" placeholder="First name"
+						type="text" #firstName="ngModel" required>
+					<input name="lastName" [(ngModel)]="user.lastName" class="form-control" placeholder="Last name"
+						type="text" #lastName="ngModel" required>
 				</div> <!-- form-group// -->
+				<div [hidden]="(firstName.valid || firstName.pristine) && (lastName.valid || lastName.pristine)" class="alert alert-danger">
+					First and Last names are required
+				</div>
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faEmail"></fa-icon>
 						</span>
 					</div>
-					<input id="email" class="form-control" aria-describedby="emailHelp" placeholder="Email address"
-						type="email">
+					<input name="email" [(ngModel)]="user.email" class="form-control" aria-describedby="emailHelp"
+						placeholder="Email address" type="email" required>
 				</div>
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -41,7 +46,7 @@
 							<fa-icon [icon]="faHome"></fa-icon>
 						</span>
 					</div>
-					<input id="address" class="form-control" placeholder="Home address"
+					<input name="address" [(ngModel)]="user.address" class="form-control" placeholder="Home address"
 						type="text">
 				</div>
 				<div class="form-group input-group">
@@ -50,8 +55,7 @@
 							<fa-icon [icon]="faBirthDate"></fa-icon>- Birth date:
 						</span>
 					</div>
-					<!-- <input type="date" id="birthday" name="birthday"> -->
-					<input id="birthDate" class="form-control" type="date">
+					<input name="birthDate" [(ngModel)]="user.birthDate" class="form-control" type="date">
 				</div>
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -59,22 +63,8 @@
 							<fa-icon [icon]="faJob"></fa-icon>
 						</span>
 					</div>
-					<select id="job" class="form-control">
-						<option selected=""> Select job type</option>
-						<option>Designer</option>
-						<option>Manager</option>
-						<option>Accaunting</option>
-						<option>Unemployed</option>
-						<option>Engenier</option>
-						<option>Doctor</option>
-						<option>Programmer</option>
-						<option>Model</option>
-						<option>Actor</option>
-						<option>Pilot</option>
-						<option>Sports</option>
-						<option>Simple Wroker</option>
-						<option>King of Israel</option>
-
+					<select name="job" [(ngModel)]="user.job" class="form-control" placeholder="Create password">
+						\ <option *ngFor="let job of jobs" [value]="job">{{job}}</option>
 					</select>
 				</div> <!-- form-group end.// -->
 				<div class="form-group input-group">
@@ -83,8 +73,9 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password1" class="form-control" (keyup)="createAcountInputCheck()"
-					placeholder="Create password" type="password">
+					<input name="password1" [(ngModel)]="user.password" class="form-control"
+						(keyup)="createAcountInputCheck()" placeholder="Create password" type="password" required
+						(keyup)="passwordTyped()">
 				</div> <!-- form-group// -->
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -92,23 +83,21 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password2" class="form-control" (keyup)="createAcountInputCheck()" 
-					placeholder="Repeat password" type="password">
+					<input name="password2" [(ngModel)]="password2" class="form-control"
+						(keyup)="createAcountInputCheck()" placeholder="Repeat password" type="password" required
+						(keyup)="passwordTyped()" #spy>
 				</div> <!-- form-group// -->
-				<small id="passwordAllert">allert massage</small>
-				
-				
-				
+				<small id="passwordA">Password are not the same</small>
+
 				<div class="form-group">
-					<button id="btnCreate" type="submit" class="btn btn-primary btn-block"> Create Account
+					<button id="btnCreate" type="submit" class="btn btn-primary btn-block" [disabled]="!newUserForm.form.valid"> 
+						Create Account
 					</button>
 				</div> <!-- form-group// -->
-				
 			</form>
-			
+
 			<p class="text-center">
 				Have an account? <a href=# (click)="user_LogIn()">Log In</a> </p>
 		</article>
 	</div> <!-- card.// -->
-	
 </div>

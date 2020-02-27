@@ -7,7 +7,7 @@ import { MapPostsComponent } from './map-posts/map-posts.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { AllUsersComponent } from './all-users/all-users.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -40,6 +40,7 @@ import { LogInComponent } from './log-in/log-in.component';
     FormsModule,
     FontAwesomeModule,
     NoopAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
