@@ -1,7 +1,7 @@
 <div class="list">
   <div *ngFor="let user of users; index as i">
     <a href="#" id={{i}}
-      (click)="showUserDetail(user)">{{user.userId + " - " + user.firstName + " " + user.lastName +"\n"}}</a>
+      (click)="showUserDetail(user)">{{user.firstName + " " + user.lastName +"\n"}}</a>
   </div>
 </div>
 

@@ -14,9 +14,11 @@ import { UserService } from '../services/user.service';
 })
 
 export class CreateAccountComponent implements OnInit {
+
   @Input() public parentData;
-  jobs = ['Designer','Manager','Accaunting','Unemployed','Engenier','Doctor'];
-  submitted = false;
+  @Output() public logInEvent = new EventEmitter();
+  @Output() public userLogIn = new EventEmitter();
+
   user: User ={
     userId: null,
     birthDate: null,
@@ -29,8 +31,11 @@ export class CreateAccountComponent implements OnInit {
     password: "",
     job: "",
   };
-
-  password2="";
+  
+  jobs = ['Designer','Manager','Accaunting','Unemployed','Engenier','Doctor'];
+  submitted = false;
+  public joblDefaultValue: string = "Choose your job";
+  passwordConfirm:string;
 
   faHome = faHome;
   faBirthDate = faCalendar;
@@ -43,34 +48,13 @@ export class CreateAccountComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.user); }
-
-
-  @Output() public logInEvent = new EventEmitter();
-  @Output() public userLogIn = new EventEmitter();
-
   constructor(private http: HttpClient, private userServ: UserService) { }
 
   onSubmit() {
     this.submitted = true;
-    if (this.user.password == this.password2) {
-      console.log(this.user);
-      // this.http.post('http://localhost:8888/api/users/addUser', this.user).subscribe(res => {
-      //   console.log(res)
-      //   this.logInEvent.emit(this.user);
-      // });
-    }else{
-        document.getElementById("passwordA").style.visibility = "visible";
-    }
-  }
-
-  passwordTyped(){
-    document.getElementById("passwordA").style.visibility = "hidden";
-  }
-  createAcountInputCheck(){
-  //  document.getElementById("passwordA").style.visibility = "hidden";
+      this.http.post('http://localhost:8888/api/users/addUser', this.user).subscribe(res => {
+        this.logInEvent.emit(this.user);
+      });
   }
 
   user_LogIn(){
@@ -78,12 +62,6 @@ export class CreateAccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById("passwordA").style.visibility = "hidden";
-  }
-
-  ngAfterViewInit() {
-    document.getElementById("passwordA").style.visibility = "hidden";
-        //document.getElementById("btnCreate").style.visibility = "hidden";
   }
 
 }

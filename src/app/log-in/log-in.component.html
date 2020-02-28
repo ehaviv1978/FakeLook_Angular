@@ -14,26 +14,26 @@
             <p class="divider-text">
                 <span class="bg-light">OR</span>
             </p>
-            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-                <small id="emailAllert">allert massage</small>
+            <form (ngSubmit)="onSubmit()" #logInForm="ngForm">
+                <!-- <small id="emailAllert">allert massage</small> -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <fa-icon [icon]="faEmail"></fa-icon>
                         </span>
                     </div>
-                    <input id="emailLogIn" class="form-control" aria-describedby="emailHelp"
-                        placeholder="Enter your Email" (keyup)="logInInputCheck()" type="email">
+                    <input id="emailLogIn" name="emailLogIn" [(ngModel)]="emailInput" class="form-control" 
+                    aria-describedby="emailHelp" placeholder="Enter your Email" #emailLogIn="ngModel" type="email">
                 </div>
-                <small id="passwordAllert">allert massage</small>
+                <!-- <small id="passwordAllert">allert massage</small> -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <fa-icon [icon]="faKey"></fa-icon>
                         </span>
                     </div>
-                    <input id="inputPassword" class="form-control" placeholder="Enter your password" type="password"
-                        (keyup)="logInInputCheck()">
+                    <input id="passwordLogIn" name="passwordLogIn" [(ngModel)]="passwordInput" class="form-control" 
+                    placeholder="Enter your password"  #passwordLogIn="ngModel" type="password">
                 </div>
                 <div class="form-group">
                     <button id="btnLogIn" type="submit" class="btn btn-primary btn-block"> Log in

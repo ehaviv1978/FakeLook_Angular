@@ -15,7 +15,6 @@
 			<p class="divider-text">
 				<span class="bg-light">OR</span>
 			</p>
-			<!-- <form ngNoForm action="http://localhost:8888/api/users/addUser" method="post"> -->
 			<form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -37,8 +36,11 @@
 							<fa-icon [icon]="faEmail"></fa-icon>
 						</span>
 					</div>
-					<input name="email" [(ngModel)]="user.email" class="form-control" aria-describedby="emailHelp"
-						placeholder="Email address" type="email" required>
+					<input id ="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" aria-describedby="emailHelp"
+						placeholder="Email address" type="email" required email>
+				</div>
+				<div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+					Need a valid Email address
 				</div>
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -63,7 +65,8 @@
 							<fa-icon [icon]="faJob"></fa-icon>
 						</span>
 					</div>
-					<select name="job" [(ngModel)]="user.job" class="form-control" placeholder="Create password">
+					<select id="job" name="job" #job="ngModel" [(ngModel)]="user.job" class="form-control">
+						<option value="">Select a job</option>
 						\ <option *ngFor="let job of jobs" [value]="job">{{job}}</option>
 					</select>
 				</div> <!-- form-group end.// -->
@@ -73,9 +76,9 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input name="password1" [(ngModel)]="user.password" class="form-control"
-						(keyup)="createAcountInputCheck()" placeholder="Create password" type="password" required
-						(keyup)="passwordTyped()">
+					<input id="password1" name="password1" #password1="ngModel" [(ngModel)]="user.password" class="form-control"
+						placeholder="Create password" type="password" required>
+						<!-- (keyup)="passwordTyped()"> -->
 				</div> <!-- form-group// -->
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -83,14 +86,17 @@
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input name="password2" [(ngModel)]="password2" class="form-control"
-						(keyup)="createAcountInputCheck()" placeholder="Repeat password" type="password" required
-						(keyup)="passwordTyped()" #spy>
+					<input id="password2" name="password2" #password2="ngModel" [(ngModel)]="passwordConfirm" class="form-control"
+						placeholder="Repeat password" type="password" required>
+						<!-- (keyup)="passwordTyped()" #spy> -->
 				</div> <!-- form-group// -->
-				<small id="passwordA">Password are not the same</small>
+				<div [hidden]="password1.pristine || password2.pristine || (password1.value==password2.value)" class="alert alert-danger">
+					Password are not the same
+				</div>
+				<!-- <small id="passwordA">Password are not the same</small> -->
 
 				<div class="form-group">
-					<button id="btnCreate" type="submit" class="btn btn-primary btn-block" [disabled]="!newUserForm.form.valid"> 
+					<button id="btnCreate" type="submit" class="btn btn-primary btn-block" [disabled]="!newUserForm.form.valid || !(password1.value==password2.value)"> 
 						Create Account
 					</button>
 				</div> <!-- form-group// -->
