@@ -20,6 +20,8 @@ export class LogInComponent implements OnInit {
 
   emailInput = "";
   passwordInput ="";
+  validEmail=true;
+  validPassword=true;
 
   faEmail = faEnvelope;
   faTwitter = faTwitter;
@@ -28,54 +30,25 @@ export class LogInComponent implements OnInit {
 
   constructor(private http: HttpClient, private userServ: UserService) { }
 
-  // logInInputCheck() {
-  //   //console.log('hi');
-  //   document.getElementById("passwordAllert").style.visibility = "hidden";
-  //   document.getElementById("emailAllert").style.visibility = "hidden";
-  //   console.log((<HTMLInputElement>document.getElementById("inputPassword")).value);
-  //   console.log((<HTMLInputElement>document.getElementById("emailLogIn")).value);
-  //   if ((<HTMLInputElement>document.getElementById("inputPassword")).value &&
-  //     ((<HTMLInputElement>document.getElementById("emailLogIn")).value)) {
-  //     document.getElementById("btnLogIn").style.visibility = "visible";
-  //   } else {
-  //     document.getElementById("btnLogIn").style.visibility = "hidden";
-  //   }
-  // }
-
   onSubmit() {
-    // let email = ((<HTMLInputElement>document.getElementById("emailLogIn")).value);
-    this.http.get('http://localhost:8888/api/users/logIn' + "/" + this.emailInput).subscribe(res => {
-      // console.log(res[0]);
+    this.http.get('http://localhost:8888/api/users/logIn/' + this.emailInput).subscribe(res => {
       if (res[0] == undefined) {
-        // (<HTMLInputElement>document.getElementById("emailAllert")).textContent = "Email is incorect";
-        // document.getElementById("emailAllert").style.visibility = "visible";
+        this.validEmail=false;
       } else {
         if (res[0].password == this.passwordInput) {
-          console.log("loged in");
           this.logInEvent.emit(res[0]);
         } else {
-          console.log("incorect password");
-          // (<HTMLInputElement>document.getElementById("passwordAllert")).textContent = "Wrong Password!";
-          // document.getElementById("passwordAllert").style.visibility = "visible";
+          this.validPassword=false;
         }
-
       }
     });
   }
-
 
   ngOnInit() {
   }
 
   create_Acount(){
     this.createAcount.emit();
-  }
-
-  ngAfterViewInit() {
-    // document.getElementById("btnLogIn").style.visibility = "hidden";
-    // document.getElementById("passwordAllert").style.visibility = "hidden";
-    // document.getElementById("emailAllert").style.visibility = "hidden";
-    // document.getElementById("btnCreate").style.visibility = "hidden";
   }
 
 }

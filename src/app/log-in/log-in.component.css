@@ -33,6 +33,10 @@
     margin: auto;
 }
 
-small{
-    color: red;
-}
+.ng-valid[required], .ng-valid.required  {
+    border-left: 3px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 3px solid red; /* red */
+  }
