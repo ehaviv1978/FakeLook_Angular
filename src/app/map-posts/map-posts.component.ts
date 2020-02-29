@@ -1,6 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, Input, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 import { User } from '../models/user';
@@ -22,10 +20,10 @@ export class MapPostsComponent implements AfterViewInit {
   marker: google.maps.Marker;
   posts: Post[];
   post: Post;
-  imageurl: SafeUrl;
+  imageurl: string;
   iconSize = 40;
   markers = [];
-  constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
+  constructor(private postServ: PostService) { }
 
   @Output() clickPostEvent = new EventEmitter<Post>();
 

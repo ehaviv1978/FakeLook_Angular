@@ -19,8 +19,7 @@ export class LogInComponent implements OnInit {
 
   emailInput = "";
   passwordInput = "";
-  validEmail = true;
-  validPassword = true;
+  validEmailandPassword = true;
 
   faEmail = faEnvelope;
   faTwitter = faTwitter;
@@ -32,12 +31,12 @@ export class LogInComponent implements OnInit {
   onSubmit() {
     this.userServ.userLogIn(this.emailInput).subscribe(user => {
       if (user[0] == undefined) {
-        this.validEmail = false;
+        this.validEmailandPassword = false;
       } else {
         if (user[0].password == this.passwordInput) {
           this.logInEvent.emit(user[0]);
         } else {
-          this.validPassword = false;
+          this.validEmailandPassword = false;
         }
       }
     });
