@@ -3,7 +3,6 @@ import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faEnvelope, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faPhone, faUserMd, faLock, faHome, faKey } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
-import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 
 
@@ -19,7 +18,7 @@ export class CreateAccountComponent implements OnInit {
   @Output() public logInEvent = new EventEmitter();
   @Output() public userLogIn = new EventEmitter();
 
-  user: User ={
+  user: User = {
     userId: null,
     birthDate: null,
     picture: null,
@@ -31,11 +30,11 @@ export class CreateAccountComponent implements OnInit {
     password: "",
     job: "",
   };
-  
-  jobs = ['Designer','Manager','Accaunting','Unemployed','Engenier','Doctor'];
+
+  jobs = ['Designer', 'Manager', 'Accaunting', 'Unemployed', 'Engenier', 'Doctor', 'Mode','Politician','Banking','Other','Programer'];
   submitted = false;
   public joblDefaultValue: string = "Choose your job";
-  passwordConfirm:string;
+  passwordConfirm: string;
 
   faHome = faHome;
   faBirthDate = faCalendar;
@@ -48,16 +47,16 @@ export class CreateAccountComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private http: HttpClient, private userServ: UserService) { }
+  constructor(private userServ: UserService) { }
 
   onSubmit() {
     this.submitted = true;
-      this.http.post('http://localhost:8888/api/users/addUser', this.user).subscribe(res => {
-        this.logInEvent.emit(this.user);
-      });
+    this.userServ.createUser(this.user).subscribe(res => {
+      this.logInEvent.emit(this.user);
+    });
   }
 
-  user_LogIn(){
+  user_LogIn() {
     this.userLogIn.emit();
   }
 

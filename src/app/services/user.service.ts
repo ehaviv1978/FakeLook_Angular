@@ -8,7 +8,7 @@ import {User} from '../models/user';
 })
 export class UserService {
   private userUrl = 'http://localhost:8888/api/users'
-  public logedUserId =0;
+  //public logedUserId =0;
 
   constructor( private http: HttpClient ) { }
   getUsers():Observable<User[]>{
@@ -17,4 +17,11 @@ export class UserService {
   searchUsers(searchParam):Observable<User[]>{
     return this.http.get<User[]>(this.userUrl+"/"+searchParam)
   }
+  userLogIn(logInEmail):Observable<User[]>{
+     return this.http.get<User[]>(this.userUrl+"/logIn/" + logInEmail)
+  }
+  createUser(newUser):Observable<User[]>{
+    return this.http.post<User[]>(this.userUrl+"/addUser", newUser);
+    // need to add database addition verification!
+ }
 }
