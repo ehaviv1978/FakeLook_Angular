@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { PostLikes } from '../models/postLikes';
 
 @Component({
   selector: 'app-post-feed',

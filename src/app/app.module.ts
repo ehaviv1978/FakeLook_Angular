@@ -32,11 +32,8 @@ import { LogInComponent } from './log-in/log-in.component';
     ChangeUserPictureComponent,
     PostFeedComponent,
     PostDetailsComponent,
-<<<<<<< HEAD
     PostLikesComponent,
-=======
     LogInComponent,
->>>>>>> cc25cc1c0d2104a43c34ac6994c262f237606657
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 <div class="container">
         <div class="post-container" *ngFor="let post of posts">
           <div>
-            <img class="user-image"[src]="post.userPic  ">
+            <app-post-likes [postLikes]= post.postLikes ></app-post-likes>
+            <img class="user-image"[src]="post.userPic">
             <a class="link" href="#">{{"posted by: " + post.firstName + " " + post.lastName}}</a>
           </div>
             <img class="post-image"[src]="post.picture" (click) = "clickOnPost(post)" >

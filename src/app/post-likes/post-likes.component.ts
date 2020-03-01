@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {PostLikes} from '../models/postLikes'
 
 @Component({
@@ -7,7 +7,9 @@ import {PostLikes} from '../models/postLikes'
   styleUrls: ['./post-likes.component.css']
 })
 export class PostLikesComponent implements OnInit {
-postLikes : PostLikes;
+@Input() postLikes:PostLikes
+
+
 
   constructor() { }
 

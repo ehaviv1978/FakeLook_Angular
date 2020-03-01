@@ -9,6 +9,8 @@ export class Post{
     firstName:string;
     lastName:string;
     userPic:string;
+    postLikes:PostLikes;
+    
     postLikeAmount:number;
     liked:boolean;
 }
