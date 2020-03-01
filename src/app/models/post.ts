@@ -2,7 +2,7 @@ import { PostLikes } from './postLikes';
 export class Post{
     postId:number;
     description:string;
-    picture:any;
+    picture:string;
     lat:number;
     long:number;
     timePosted:Date;
@@ -11,4 +11,12 @@ export class Post{
     userPic:string;
     postLikeAmount:number;
     liked:boolean;
+}
+
+export class PostOutput{
+    userId:number;
+    description:string;
+    picture:string;
+    latGPS:number;
+    longGPS:number;
 }

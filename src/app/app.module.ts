@@ -7,7 +7,7 @@ import { MapPostsComponent } from './map-posts/map-posts.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { AllUsersComponent } from './all-users/all-users.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,6 +17,7 @@ import { ChangeUserPictureComponent } from './change-user-picture/change-user-pi
 import { PostFeedComponent } from './post-feed/post-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostLikesComponent } from './post-likes/post-likes.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { PostLikesComponent } from './post-likes/post-likes.component';
     ChangeUserPictureComponent,
     PostFeedComponent,
     PostDetailsComponent,
+<<<<<<< HEAD
     PostLikesComponent,
+=======
+    LogInComponent,
+>>>>>>> cc25cc1c0d2104a43c34ac6994c262f237606657
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,7 @@ import { PostLikesComponent } from './post-likes/post-likes.component';
     FormsModule,
     FontAwesomeModule,
     NoopAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

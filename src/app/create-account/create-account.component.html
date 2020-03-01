@@ -2,9 +2,8 @@
 
 	<div class="card bg-light">
 		<article class="card-body mx-auto" style="max-width: 400px;">
-			<h4 class="card-title mt-3 text-center" *ngIf="newUser">Create Account</h4>
-			<h4 class="card-title mt-3 text-center" *ngIf="!newUser">Log In</h4>
-			<p class="text-center" *ngIf="newUser">Get started with your free account</p>
+			<h4 class="card-title mt-3 text-center">Create Account</h4>
+			<p class="text-center">Get started with your free account</p>
 			<p>
 				<a href="" class="btn btn-block btn-twitter">
 					<fa-icon [icon]="faTwitter"></fa-icon>   Login via Twitter
@@ -16,118 +15,92 @@
 			<p class="divider-text">
 				<span class="bg-light">OR</span>
 			</p>
-			<!-- <form ngNoForm action="http://localhost:8888/api/users/addUser" method="post"> -->
-			<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-				<div class="form-group input-group" *ngIf="newUser">
+			<form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faUser"></fa-icon>
 						</span>
 					</div>
-					<input id="firstName" class="form-control" placeholder="First name" type="text">
-					<input id="lastName" class="form-control" placeholder="Last name" type="text">
+					<input id ="firstName" name="firstName" [(ngModel)]="user.firstName" class="form-control" placeholder="First name"
+						type="text" #firstName="ngModel" required>
+					<input name="lastName" [(ngModel)]="user.lastName" class="form-control" placeholder="Last name"
+						type="text" #lastName="ngModel" required>
 				</div> <!-- form-group// -->
-				<div class="form-group input-group"*ngIf="newUser">
+				<div [hidden]="(firstName.valid || firstName.pristine) && (lastName.valid || lastName.pristine)" class="alert alert-danger">
+					First and Last names are required
+				</div>
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faEmail"></fa-icon>
 						</span>
 					</div>
-					<input id="email" class="form-control" aria-describedby="emailHelp" placeholder="Email address"
-						type="email">
+					<input id ="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" aria-describedby="emailHelp"
+						placeholder="Email address" type="email" required email>
 				</div>
-				<div class="form-group input-group"*ngIf="newUser">
+				<div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+					Need a valid Email address
+				</div>
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faHome"></fa-icon>
 						</span>
 					</div>
-					<input id="address" class="form-control" placeholder="Home address"
+					<input name="address" [(ngModel)]="user.address" class="form-control" placeholder="Home address"
 						type="text">
 				</div>
-				<div class="form-group input-group"*ngIf="newUser">
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faBirthDate"></fa-icon>- Birth date:
 						</span>
 					</div>
-					<!-- <input type="date" id="birthday" name="birthday"> -->
-					<input id="birthDate" class="form-control" type="date">
+					<input name="birthDate" [(ngModel)]="user.birthDate" class="form-control" type="date">
 				</div>
-				<div class="form-group input-group"*ngIf="newUser">
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faJob"></fa-icon>
 						</span>
 					</div>
-					<select id="job" class="form-control">
-						<option selected=""> Select job type</option>
-						<option>Designer</option>
-						<option>Manager</option>
-						<option>Accaunting</option>
-						<option>Unemployed</option>
-						<option>Engenier</option>
-						<option>Doctor</option>
-						<option>Programmer</option>
-						<option>Model</option>
-						<option>Actor</option>
-						<option>Pilot</option>
-						<option>Sports</option>
-						<option>Simple Wroker</option>
+					<select id="job" name="job" #job="ngModel" [(ngModel)]="user.job" class="form-control">
+						<option value="">Select a job</option>
+						\ <option *ngFor="let job of jobs" [value]="job">{{job}}</option>
 					</select>
 				</div> <!-- form-group end.// -->
-				<div class="form-group input-group"*ngIf="newUser">
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password1" class="form-control" (keyup)="createAcountInputCheck()"
-					placeholder="Create password" type="password">
+					<input id="password1" name="password1" #password1="ngModel" [(ngModel)]="user.password" class="form-control"
+						placeholder="Create password" type="password" required>
 				</div> <!-- form-group// -->
-				<div class="form-group input-group"*ngIf="newUser">
+				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<fa-icon [icon]="faPassword"></fa-icon>
 						</span>
 					</div>
-					<input id="password2" class="form-control" (keyup)="createAcountInputCheck()" 
-					placeholder="Repeat password" type="password">
+					<input id="password2" name="password2" #password2="ngModel" [(ngModel)]="passwordConfirm" class="form-control"
+						placeholder="Repeat password" type="password" required>
 				</div> <!-- form-group// -->
-				<small id="emailAllert">allert massage</small>
-				<div class="form-group input-group" *ngIf="!newUser">
-					<div class="input-group-prepend">
-						<span class="input-group-text">
-							<fa-icon [icon]="faEmail"></fa-icon>
-						</span>
-					</div>
-					<input id="emailLogIn" class="form-control" aria-describedby="emailHelp" 
-					placeholder="Enter your Email" (keyup)="logInInputCheck()" type="email">
+				<div [hidden]="password1.pristine || password2.pristine || (password1.value==password2.value)" class="alert alert-danger">
+					Password are not the same
 				</div>
-				<small id="passwordAllert">allert massage</small>
-				<div class="form-group input-group" *ngIf="!newUser">
-					<div class="input-group-prepend">
-						<span class="input-group-text">
-							<fa-icon [icon]="faKey"></fa-icon>
-						</span>
-					</div>
-					<input id ="inputPassword" class="form-control" placeholder="Enter your password" 
-					type="password" (keyup)="logInInputCheck()">
-				</div>
-				<div class="form-group" *ngIf="newUser">
-					<button type="submit" class="btn btn-primary btn-block"> Create Account
+
+				<div class="form-group">
+					<button id="btnCreate" type="submit" class="btn btn-primary btn-block" [disabled]="!newUserForm.form.valid || !(password1.value==password2.value)"> 
+						Create Account
 					</button>
 				</div> <!-- form-group// -->
-				<div class="form-group" *ngIf="!newUser">
-					<button type="button" id="btnLogIn" class="btn btn-primary btn-block" (click)="logIn()" > Log in </button>
-				</div> 
 			</form>
-			<p class="text-center" *ngIf="!newUser">
-				New User? <a href=# (click)="newUser=true">Create new account</a>
-			</p>
-			<p class="text-center"*ngIf="newUser">
-				Have an account? <a href=# (click)="newUser=false">Log In</a> </p>
+
+			<p class="text-center">
+				Have an account? <a href=# (click)="user_LogIn()">Log In</a> </p>
 		</article>
 	</div> <!-- card.// -->
-	
 </div>

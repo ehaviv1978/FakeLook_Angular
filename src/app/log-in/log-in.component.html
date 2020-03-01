@@ -1,0 +1,55 @@
+<div class="container">
+
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Log In</h4>
+            <p>
+                <a href="" class="btn btn-block btn-twitter">
+                    <fa-icon [icon]="faTwitter"></fa-icon>   Login via Twitter
+                </a>
+                <a href="" class="btn btn-block btn-facebook">
+                    <fa-icon [icon]="faFacebook"></fa-icon>   Login via facebook
+                </a>
+            </p>
+            <p class="divider-text">
+                <span class="bg-light">OR</span>
+            </p>
+            <form (ngSubmit)="onSubmit()" #logInForm="ngForm">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <fa-icon [icon]="faEmail"></fa-icon>
+                        </span>
+                    </div>
+                    <input id="emailLogIn" name="emailLogIn" [(ngModel)]="emailInput" class="form-control" (keyup)="validEmailandPassword=true"
+                    aria-describedby="emailHelp" placeholder="Enter your Email" #emailLogIn="ngModel" type="email" required email>
+                </div>
+                <div id="emailAllert" [hidden]="emailLogIn.valid || emailLogIn.pristine" class="alert alert-danger">
+					Need a valid Email address
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <fa-icon [icon]="faKey"></fa-icon>
+                        </span>
+                    </div>
+                    <input id="passwordLogIn" name="passwordLogIn" [(ngModel)]="passwordInput" class="form-control" (keyup)="validEmailandPassword=true"
+                    placeholder="Enter your password"  #passwordLogIn="ngModel" type="password" required>
+                </div>
+                <div [hidden]="passwordLogIn.valid || passwordLogIn.pristine " class="alert alert-danger">
+					Must enter password
+                </div>
+                <div [hidden]="validEmailandPassword" class="alert alert-danger">
+					Email or password are incorredt
+				</div>
+                <div class="form-group">
+                    <button id="btnLogIn" type="submit" class="btn btn-primary btn-block" [disabled]="!logInForm.form.valid"> Log in
+                    </button>
+                </div>
+            </form>
+            <p class="text-center">
+                New User? <a href=# (click)="create_Acount()">Create new account</a>       
+        </article>
+    </div>
+
+</div>

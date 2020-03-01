@@ -1,6 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, Input, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 import { User } from '../models/user';
@@ -22,23 +20,25 @@ export class MapPostsComponent implements AfterViewInit {
   marker: google.maps.Marker;
   posts: Post[];
   post: Post;
-  imageurl: SafeUrl;
-  constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
+  imageurl: string;
+  iconSize = 40;
+  markers = [];
+  constructor(private postServ: PostService) { }
 
   @Output() clickPostEvent = new EventEmitter<Post>();
 
-  markers = [];
+  
   async showPosts() {
-    this.postServ.getPosts().subscribe(res => {
+    this.postServ.getPosts(this.parentData.userId).subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(post.lat, post.long),
           map: this.map,
-          animation: google.maps.Animation.BOUNCE,
+         // animation: google.maps.Animation.BOUNCE,
           icon: {
             url: post.userPic,
-            scaledSize: new google.maps.Size(40, 40)
+            scaledSize: new google.maps.Size(this.iconSize, this.iconSize)
           }
         });
         let infowindow = new google.maps.InfoWindow({

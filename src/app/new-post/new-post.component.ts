@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { faUser, faEnvelope, faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
-import { faPhone, faUserMd, faLock, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faFolderOpen } from '@fortawesome/free-regular-svg-icons';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
+import {PostOutput} from '../models/post';
+import { PostService } from '../services/post.service';
+
 
 @Component({
   selector: 'app-new-post',
@@ -12,14 +14,20 @@ import { User } from '../models/user';
 export class NewPostComponent implements OnInit {
   @Input() public parentData;
   user: User;
+  post: PostOutput={
+    userId: 0,
+    latGPS: 1,
+    longGPS:1,
+    picture: null,
+    description:"",
+  };
   faCamera = faCamera;
   faFile = faFolderOpen;
-  lat: number;
-  lng: number;
-
   public imagePath;
-  imgURL: any;
   public message: string;
+  uploadMassage = "Choose Image";
+  
+  constructor(private postServ: PostService) { }
 
   preview(files) {
     if (files.length === 0)
@@ -27,47 +35,33 @@ export class NewPostComponent implements OnInit {
     var mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       this.message = "Only images are supported.";
-      document.getElementById("btnPublish").style.visibility = "hidden";
-      document.getElementById("btnCancel").style.visibility = "hidden";
       return;
     }
     var reader = new FileReader();
     this.imagePath = files;
-    document.getElementById("btnPublish").style.visibility = "visible";
-    document.getElementById("btnCancel").style.visibility = "visible";
-    console.log(this.imagePath[0].name)
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-      this.imgURL = reader.result;
+      this.post.picture = <string>reader.result;
     }
+    this.uploadMassage = "Image preview:"
   }
 
   async onUpload() {
-    // const fd = new FormData();
-    // fd.append('image', this.selectedFile, this.selectedFile.name);
     // await this.getPosition().then(pos=>
     //   {
-    //     this.lat = pos.lat;
-    //     this.lng = pos.lng;
-    //      //console.log(`Positon: ${pos.lng} ${pos.lat}`);
+    //     this.post.latGPS = pos.lat;
+    //     this.post.longGPS = pos.lng;
     //   });
-    this.lat = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
-    this.lng = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
-    console.log(this.imgURL);
-    this.http.post('http://localhost:8888/api/posts',
-      {
-        "picture": this.imgURL,
-        "userId": this.user.userId,
-        "description": (<HTMLInputElement>document.getElementById("description")).value,
-        "latGPS": this.lat,
-        "longGPS": this.lng
-      }).subscribe(res => {
-        console.log(res[0])
-        if (res[0] == 1) {
-          console.log("Picture Updated");
-          document.getElementById("uploadMassage").innerText = "New post Add";
-          document.getElementById("btnUpdate").style.visibility = "hidden";
-          document.getElementById("btnCancel").style.visibility = "hidden";
+    this.post.latGPS = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
+    this.post.longGPS = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
+    this.postServ.addPost(this.post).subscribe(res => {
+        if (res.length == 1) {
+          this.uploadMassage = "New post uploaded";
+          this.imagePath = null;
+          this.post.picture = null;
+          this.message = null;
+          this.file.nativeElement.value = "";
+          this.post.description = "";
         }
       });
   }
@@ -75,47 +69,17 @@ export class NewPostComponent implements OnInit {
   @ViewChild('file', { static: true }) file: ElementRef;
 
   onCancel() {
-    document.getElementById("btnPublish").style.visibility = "hidden";
-    document.getElementById("btnCancel").style.visibility = "hidden";
     this.imagePath = null;
-    this.imgURL = null;
+    this.post.picture = null;
     this.message = null;
     this.file.nativeElement.value = "";
+    this.post.description = "";
+    this.uploadMassage = "Choose Image:"
   }
-
-  async newPosts() {
-    console.log(this.imgURL);
-    let blob = await fetch(this.imgURL).then(r => r.blob());
-    console.log(blob);
-    let aray = await new Response(blob).arrayBuffer();
-    console.log(aray);
-
-    let post =
-    {
-      picture: aray,
-      userId: 2,
-      description: "test 3",
-      latGPS: 32.11,
-      longGPS: 32.14
-    }
-    console.log(post.picture);
-    //   this.http.post('http://localhost:8888/api/posts',post)
-    // .subscribe(res =>
-    // console.log(res));
-  }
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    document.getElementById("btnPublish").style.visibility = "hidden";
-    document.getElementById("btnCancel").style.visibility = "hidden";
     this.user = this.parentData;
-    console.log("hello");
-    console.log(this.user);
-    // this.getPosition().then(pos=>
-    //   {
-    //      console.log(`Positon: ${pos.lng} ${pos.lat}`);
-    //   });
+    this.post.userId= this.user.userId;
   }
 
   getPosition(): Promise<any> {

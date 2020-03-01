@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { AllUsersComponent }  from '../all-users/all-users.component';
 
@@ -13,8 +12,9 @@ import { AllUsersComponent }  from '../all-users/all-users.component';
 export class NavBarComponent implements OnInit {
   public user:User;
   public userSearch: string;
-  viewShow = "createAccount";
-  constructor(userServ: UserService) { }
+  viewShow = "logIn";
+
+  constructor() { }
 
   @ViewChild(AllUsersComponent) allUsers: AllUsersComponent;
 
@@ -25,7 +25,7 @@ export class NavBarComponent implements OnInit {
   }
 
   logOut(){
-    this.viewShow="createAccount";
+    this.viewShow="logIn";
     this.user=null;
   }
 
@@ -34,9 +34,7 @@ export class NavBarComponent implements OnInit {
   }
 
   onSearch(){
-    this.viewShow ="updateProfilePicture";
     this.viewShow="allUsers";
-    console.log(this.userSearch)
     if (this.allUsers){
       this.allUsers.onSearch();
     }

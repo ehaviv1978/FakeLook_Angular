@@ -9,12 +9,15 @@ import { Post } from '../models/post';
 export class PostService {
   private postUrl;
 
-  constructor( private http: HttpClient ) { }
-   getPosts(userId:number):Observable<Post[]>{
-     this.setURL(userId);
-       return this.http.get<Post[]>(this.postUrl);   
-   }
-   setURL(userId:number){
-    this.postUrl = `http://localhost:8888/api/posts/${userId}`
+  constructor(private http: HttpClient) { }
+  getPosts(userId:number): Observable<Post[]> {
+    this.setURL(userId);
+    return this.http.get<Post[]>(this.postUrl);   
+}
+setURL(userId:number){
+ this.postUrl = `http://localhost:8888/api/posts/${userId}`
+  }
+  addPost(post): Observable<Post[]> {
+    return this.http.post<Post[]>(this.postUrl, post);
   }
 }
