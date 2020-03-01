@@ -78,7 +78,6 @@
 					</div>
 					<input id="password1" name="password1" #password1="ngModel" [(ngModel)]="user.password" class="form-control"
 						placeholder="Create password" type="password" required>
-						<!-- (keyup)="passwordTyped()"> -->
 				</div> <!-- form-group// -->
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -88,12 +87,10 @@
 					</div>
 					<input id="password2" name="password2" #password2="ngModel" [(ngModel)]="passwordConfirm" class="form-control"
 						placeholder="Repeat password" type="password" required>
-						<!-- (keyup)="passwordTyped()" #spy> -->
 				</div> <!-- form-group// -->
 				<div [hidden]="password1.pristine || password2.pristine || (password1.value==password2.value)" class="alert alert-danger">
 					Password are not the same
 				</div>
-				<!-- <small id="passwordA">Password are not the same</small> -->
 
 				<div class="form-group">
 					<button id="btnCreate" type="submit" class="btn btn-primary btn-block" [disabled]="!newUserForm.form.valid || !(password1.value==password2.value)"> 

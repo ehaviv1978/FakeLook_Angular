@@ -13,15 +13,22 @@ export class UserService {
   constructor( private http: HttpClient ) { }
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(this.userUrl);
-   }
+  }
+
   searchUsers(searchParam):Observable<User[]>{
     return this.http.get<User[]>(this.userUrl+"/"+searchParam)
   }
+
   userLogIn(logInEmail):Observable<User[]>{
      return this.http.get<User[]>(this.userUrl+"/logIn/" + logInEmail)
   }
+
   createUser(newUser):Observable<User[]>{
     return this.http.post<User[]>(this.userUrl+"/addUser", newUser);
     // need to add database addition verification!
+  }
+ 
+ changeUserPicture(imgUrl,userId):Observable<User[]>{
+    return this.http.post<User[]>(this.userUrl +"/picture", {"file": imgUrl ,"userId": userId});
  }
 }

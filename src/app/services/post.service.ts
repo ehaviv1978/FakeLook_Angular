@@ -9,8 +9,11 @@ import { Post } from '../models/post';
 export class PostService {
   private postUrl = 'http://localhost:8888/api/posts'
 
-  constructor( private http: HttpClient ) { }
-   getPosts():Observable<Post[]>{
-       return this.http.get<Post[]>(this.postUrl);
-   }
+  constructor(private http: HttpClient) { }
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.postUrl);
+  }
+  addPost(post): Observable<Post[]> {
+    return this.http.post<Post[]>(this.postUrl, post);
+  }
 }
