@@ -15,19 +15,12 @@ export class AllPostsComponent implements OnInit {
   imageurl:string;
   constructor(private postServ: PostService) { }
 
-  getPosts() {
-    this.postServ.getPosts().subscribe( data=>{
-      this.posts =  data;
-    });
-  }
-
   async showPic(post){
     this.post = post;
     this.imageurl=post.picture;
   }
 
   ngOnInit() {
-    this.getPosts();
   }
 
 }

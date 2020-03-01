@@ -29,7 +29,7 @@ export class MapPostsComponent implements AfterViewInit {
 
   
   async showPosts() {
-    this.postServ.getPosts().subscribe(res => {
+    this.postServ.getPosts(this.parentData.userId).subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({

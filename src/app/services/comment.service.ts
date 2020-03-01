@@ -7,13 +7,18 @@ import { Comment } from '../models/comment';
   providedIn: 'root'
 })
 export class CommentService {
-  private postUrl = 'http://localhost:8888/api/posts/'
+  private postUrl;
 
   constructor( private http: HttpClient ) { }
   getComments(postId:number):Observable<Comment[]>{
-    return this.http.get<Comment[]>(this.postUrl+postId);
+    this.setURL(postId);
+    return this.http.get<Comment[]>(this.postUrl);
 }
   createComment(comment:Comment,postId:number){
-    this.http.post<Comment>(this.postUrl+postId,comment).subscribe();
+    this.setURL(postId);
+    this.http.post<Comment>(this.postUrl,comment).subscribe();
+  }
+  setURL(postId:number){
+    this.postUrl = `http://localhost:8888/api/posts/${postId}/comments`
   }
 }

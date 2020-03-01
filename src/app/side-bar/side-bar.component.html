@@ -2,8 +2,8 @@
   <map-posts [parentData]="user" *ngSwitchCase="'map'" (clickPostEvent) = "showPost($event)"></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
-  <app-post-feed *ngSwitchCase ="'postFeed'" (clickPostEvent) = "showPost($event)" ></app-post-feed>
-  <app-new-post [parentData]="user" *ngSwitchCase="'addPost'"></app-new-post>
+  <app-post-feed *ngSwitchCase ="'postFeed'" [parentData]="user" (clickPostEvent) = "showPost($event)" ></app-post-feed>
+  <app-new-post *ngSwitchCase="'addPost'" [parentData]="user"></app-new-post>
   <!-- <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture> -->
   <app-post-details [currentPost]="currentPost" [parentData]="user" *ngSwitchCase = "'postDetails'" ></app-post-details>
 </div>

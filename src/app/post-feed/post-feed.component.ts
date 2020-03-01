@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { PostLikes } from '../models/postLikes';
 
 @Component({
   selector: 'app-post-feed',
@@ -8,6 +9,7 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./post-feed.component.css']
 })
 export class PostFeedComponent implements OnInit {
+  @Input() public parentData;
   posts: Post[];
 
   constructor(private postServ: PostService) { }
@@ -18,8 +20,9 @@ export class PostFeedComponent implements OnInit {
   }
 
   getPosts() {
-    this.postServ.getPosts().subscribe(data => {
+    this.postServ.getPosts(this.parentData.userId).subscribe(data => {
       this.posts = data;
+      console.log(data);
     });
   }
 

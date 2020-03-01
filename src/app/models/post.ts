@@ -1,4 +1,4 @@
-
+import { PostLikes } from './postLikes';
 export class Post{
     postId:number;
     description:string;
@@ -9,6 +9,10 @@ export class Post{
     firstName:string;
     lastName:string;
     userPic:string;
+    postLikes:PostLikes;
+    
+    postLikeAmount:number;
+    liked:boolean;
 }
 
 export class PostOutput{
