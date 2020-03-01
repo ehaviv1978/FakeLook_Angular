@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer,SafeUrl } from '@angular/platform-browser';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
 
@@ -13,8 +12,8 @@ import {PostService} from '../services/post.service';
 export class AllPostsComponent implements OnInit {
   posts: Post[];
   post: Post;
-  imageurl:SafeUrl;
-  constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
+  imageurl:string;
+  constructor(private postServ: PostService) { }
 
   getPosts() {
     this.postServ.getPosts().subscribe( data=>{
@@ -24,13 +23,7 @@ export class AllPostsComponent implements OnInit {
 
   async showPic(post){
     this.post = post;
-    console.log(post.picture)
     this.imageurl=post.picture;
-
-    // const STRING_CHAR = await String.fromCharCode.apply(null , post.picture.data);
-
-    // let base64String = await btoa(STRING_CHAR);
-    // this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);
   }
 
   ngOnInit() {

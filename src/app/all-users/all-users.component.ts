@@ -1,6 +1,4 @@
-import { Component, OnInit, Sanitizer,Input } from '@angular/core';
-//import { HttpClient } from '@angular/common/http';
-import {SafeUrl } from '@angular/platform-browser';
+import { Component, OnInit,Input } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
@@ -15,7 +13,7 @@ export class AllUsersComponent implements OnInit {
   users: User[];
   user: User;
   search: string;
-  imageurl:SafeUrl;
+  imageurl:string;
 
 
   constructor(private userServ: UserService) { }
@@ -23,7 +21,6 @@ export class AllUsersComponent implements OnInit {
   getUsers() {
     this.userServ.getUsers().subscribe(res => {
       this.users = res;
-      console.log(res);
     });
   }
 
