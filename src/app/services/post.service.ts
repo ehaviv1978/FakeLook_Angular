@@ -7,10 +7,14 @@ import { Post } from '../models/post';
   providedIn: 'root'
 })
 export class PostService {
-  private postUrl = 'http://localhost:8888/api/posts'
+  private postUrl;
 
   constructor( private http: HttpClient ) { }
-   getPosts():Observable<Post[]>{
-       return this.http.get<Post[]>(this.postUrl);
+   getPosts(userId:number):Observable<Post[]>{
+     this.setURL(userId);
+       return this.http.get<Post[]>(this.postUrl);   
    }
+   setURL(userId:number){
+    this.postUrl = `http://localhost:8888/api/posts/${userId}`
+  }
 }

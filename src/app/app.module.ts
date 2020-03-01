@@ -16,6 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
 import { PostFeedComponent } from './post-feed/post-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { PostLikesComponent } from './post-likes/post-likes.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     ChangeUserPictureComponent,
     PostFeedComponent,
     PostDetailsComponent,
+    PostLikesComponent,
   ],
   imports: [
     BrowserModule,

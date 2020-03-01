@@ -16,12 +16,6 @@ export class AllPostsComponent implements OnInit {
   imageurl:SafeUrl;
   constructor(private postServ: PostService, private sanitizer: DomSanitizer) { }
 
-  getPosts() {
-    this.postServ.getPosts().subscribe( data=>{
-      this.posts =  data;
-    });
-  }
-
   async showPic(post){
     this.post = post;
     console.log(post.picture)
@@ -34,7 +28,6 @@ export class AllPostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPosts();
   }
 
 }
