@@ -74,7 +74,8 @@ export class MapPostsComponent implements AfterViewInit {
         let coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.mapOptions = {
           center: coordinates,
-          zoom: 8
+          zoom: 8,
+          minZoom:1.7
         };
         this.marker = new google.maps.Marker({
           position: coordinates,

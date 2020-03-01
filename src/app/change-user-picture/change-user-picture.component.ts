@@ -18,7 +18,7 @@ export class ChangeUserPictureComponent implements OnInit {
   imgURL: any;
   public message: string;
   user: User;
-  uploadMassage = "Image upload preview:";
+  uploadMassage = "";
 
   constructor(private userServ: UserService) { }
 
@@ -29,6 +29,10 @@ export class ChangeUserPictureComponent implements OnInit {
       }
     });
     this.user.picture = this.imgURL;
+    this.imagePath = null;
+    this.imgURL = null;
+    this.message = null;
+    this.file.nativeElement.value = "";
   }
 
   preview(files) {
@@ -58,6 +62,7 @@ export class ChangeUserPictureComponent implements OnInit {
     this.imgURL = null;
     this.message = null;
     this.file.nativeElement.value = "";
+    this.uploadMassage = "";
   }
 
   ngOnInit() {

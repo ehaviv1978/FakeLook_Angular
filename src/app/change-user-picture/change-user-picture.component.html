@@ -27,7 +27,7 @@
             [disabled]="!imgURL"> Cancel </button>
         </div> <!-- form-group// -->
       </form>
-      <h4 *ngIf="imgURL" id="uploadMassage">{{uploadMassage}}</h4>
+      <h4 id="uploadMassage">{{uploadMassage}}</h4>
       <img *ngIf="imgURL" id="previewImage" [src]="imgURL" width="320">
     </article>
   </div> <!-- card.// -->

@@ -25,7 +25,7 @@ export class NewPostComponent implements OnInit {
   faFile = faFolderOpen;
   public imagePath;
   public message: string;
-  uploadMassage = "Choose Image";
+  uploadMassage = "";
   
   constructor(private postServ: PostService) { }
 
@@ -74,7 +74,7 @@ export class NewPostComponent implements OnInit {
     this.message = null;
     this.file.nativeElement.value = "";
     this.post.description = "";
-    this.uploadMassage = "Choose Image:"
+    this.uploadMassage = ""
   }
 
   ngOnInit() {
