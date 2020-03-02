@@ -4,6 +4,8 @@ import {MapPostsComponent} from './map-posts/map-posts.component'
 import { PostFeedComponent } from './post-feed/post-feed.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 
 const routes: Routes = [
@@ -11,7 +13,9 @@ const routes: Routes = [
   {path: 'map',component: MapPostsComponent},
   {path: 'postFeed', component: PostFeedComponent},
   {path: 'newPost', component: NewPostComponent },
-  {path: 'postDetails', component:PostDetailsComponent}
+  {path: 'postDetails', component:PostDetailsComponent},
+  {path: 'changeUserPicture', component:ChangeUserPictureComponent},
+  {path: 'search', component: AllUsersComponent}
 ];
 
 @NgModule({
@@ -23,5 +27,7 @@ export const routingComponents = [
   MapPostsComponent, 
   PostFeedComponent,
   NewPostComponent,
-  PostDetailsComponent
+  PostDetailsComponent,
+  ChangeUserPictureComponent,
+  AllUsersComponent
 ];

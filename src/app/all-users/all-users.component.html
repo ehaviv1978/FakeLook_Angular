@@ -1,24 +1,26 @@
-<div class="list">
-  <div *ngFor="let user of users; index as i">
-    <a id={{i}}
-      (click)="showUserDetail(user)">{{user.firstName + " " + user.lastName +"\n"}}</a>
+<div style="display: inline-flex;">
+  <div class="list">
+    <span *ngFor="let user of users; index as i">
+      <br>
+      <a id={{i}} (click)="showUserDetail(user)">{{user.firstName + " " + user.lastName +"\n"}}</a>
+    </span>
   </div>
-</div>
 
-<div *ngIf="user" class="container">
-  <div class="row">
-    <div *ngIf="user.picture">
-      <img [src]="imageurl" style="width: 300px;" />
-    </div>
-    <div style="margin-left: 30px;">
-      <blockquote>
-        <h5>{{user.firstName}} {{user.lastName}}</h5>
-        <small><cite title="Source Title">{{user.address}}<i class="icon-map-marker"></i></cite></small>
-      </blockquote>
-      <p>
-        {{user.job}}
-        <br>
-        {{user.birthDate |date:'longDate'}}
-      </p>
+  <div *ngIf="user" class="container">
+    <div class="row">
+      <div *ngIf="user.picture">
+        <img [src]="imageurl" style="width: 300px;" />
+      </div>
+      <div>
+        <blockquote>
+          <h5>{{user.firstName}} {{user.lastName}}</h5>
+          <small><cite title="Source Title">{{user.address}}<i class="icon-map-marker"></i></cite></small>
+        </blockquote>
+        <p>
+          {{user.job}}
+          <br>
+          {{user.birthDate |date:'longDate'}}
+        </p>
+      </div>
     </div>
   </div>

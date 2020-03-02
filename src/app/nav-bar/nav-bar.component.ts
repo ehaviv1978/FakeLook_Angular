@@ -17,8 +17,7 @@ export class NavBarComponent implements OnInit {
 
   @ViewChild(AllUsersComponent) allUsers: AllUsersComponent;
 
-  newLogIn(event){
-    //this.user=event;
+  newLogIn(){
     this.user=this.userServ.logedUser;
     this.viewShow = "sideBar";
     console.log(this.user)
@@ -33,12 +32,12 @@ export class NavBarComponent implements OnInit {
     this.viewShow = val;
   }
 
-  onSearch(){
-    this.viewShow="allUsers";
-    if (this.allUsers){
-      this.allUsers.onSearch();
-    }
-  }
+  // onSearch(){
+  //   this.viewShow="allUsers";
+  //   if (this.allUsers){
+  //     this.allUsers.onSearch();
+  //   }
+  // }
 
   ngOnInit() {
   }

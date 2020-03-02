@@ -2,17 +2,14 @@
 .list{
   width: 100%;
   margin-left: 30px;
-  margin-top: 20px;
   }
 small {
 display: block;
 line-height: 1.428571429;
 color: #999;
 } 
-.container{
-  position: fixed;
-  top:100px;
-  left: 300px;
+.container{ 
+  top:10px;
 }
 /* .container .img{
   text-align:center;
