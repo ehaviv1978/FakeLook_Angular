@@ -1,8 +1,10 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 import { User } from '../models/user';
 import  MarkerClusterer from "@google/markerclusterer"
+import { UserService } from '../services/user.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,7 +13,6 @@ import  MarkerClusterer from "@google/markerclusterer"
   styleUrls: ['./map-posts.component.css']
 })
 export class MapPostsComponent implements AfterViewInit {
-  @Input() public parentData;
   user: User;
   title = 'angular-gmap';
   @ViewChild('mapContainer', { static: true }) gmap: ElementRef;
@@ -23,13 +24,13 @@ export class MapPostsComponent implements AfterViewInit {
   imageurl: string;
   iconSize = 40;
   markers = [];
-  constructor(private postServ: PostService) { }
+  constructor(private postServ: PostService, private userServ: UserService,private router: Router) { }
 
-  @Output() clickPostEvent = new EventEmitter<Post>();
+ // @Output() clickPostEvent = new EventEmitter<Post>();
 
   
   async showPosts() {
-    this.postServ.getPosts(this.parentData.userId).subscribe(res => {
+    this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({
@@ -52,7 +53,9 @@ export class MapPostsComponent implements AfterViewInit {
           infowindow.close();
         });
         marker.addListener('click', () => {
-          this.clickPostEvent.emit(post);
+          this.postServ.currentPost=post;
+          this.router.navigateByUrl('/postDetails');
+          //this.clickPostEvent.emit(post);
         });
 
         this.markers.push(marker);
@@ -105,6 +108,6 @@ export class MapPostsComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.user = this.parentData;
+    this.user = this.userServ.logedUser;
   }
 }

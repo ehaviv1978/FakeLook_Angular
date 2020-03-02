@@ -3,6 +3,8 @@ import { Post } from '../models/post';
 import { Comment } from '../models/comment';
 import { CommentService } from '../services/comment.service';
 import { User } from '../models/user';
+import { PostService } from '../services/post.service';
+
 
 @Component({
   selector: 'app-post-details',
@@ -11,14 +13,16 @@ import { User } from '../models/user';
 })
 export class PostDetailsComponent implements OnInit {
   @Input() public parentData :User;
-  @Input() public currentPost: Post;
+ // @Input() public currentPost: Post;
   comments: Comment[];
   tempComment:Comment;
+  currentPost: Post;
 
-  constructor(private commentServ: CommentService) {
+  constructor(private commentServ: CommentService,private postServ: PostService) {
    }
 
   ngOnInit() {
+    this.currentPost=this.postServ.currentPost;
     this.getComments();
     this.createEmptyComment();
   }

@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
 
+
 @Component({
   selector: 'app-change-user-picture',
   templateUrl: './change-user-picture.component.html',
@@ -11,7 +12,6 @@ import { UserService } from '../services/user.service';
 })
 
 export class ChangeUserPictureComponent implements OnInit {
-  @Input() public parentData;
   faCamera = faCamera;
   selectedFile: File = null;
   public imagePath;
@@ -66,7 +66,7 @@ export class ChangeUserPictureComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.parentData;
+    this.user = this.userServ.logedUser;
   }
 
 }

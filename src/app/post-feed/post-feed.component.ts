@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 import { PostLikes } from '../models/postLikes';
+import { UserService } from '../services/user.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-post-feed',
@@ -9,18 +12,19 @@ import { PostLikes } from '../models/postLikes';
   styleUrls: ['./post-feed.component.css']
 })
 export class PostFeedComponent implements OnInit {
-  @Input() public parentData;
   posts: Post[];
 
-  constructor(private postServ: PostService) { }
-  @Output() clickPostEvent = new EventEmitter<Post>();
+  constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
+  //@Output() clickPostEvent = new EventEmitter<Post>();
 
   clickOnPost(post: Post) {
-    this.clickPostEvent.emit(post);
+    this.postServ.currentPost=post;
+    this.router.navigateByUrl('/postDetails');
+    // this.clickPostEvent.emit(post);
   }
 
   getPosts() {
-    this.postServ.getPosts(this.parentData.userId).subscribe(data => {
+    this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(data => {
       this.posts = data;
       console.log(data);
     });

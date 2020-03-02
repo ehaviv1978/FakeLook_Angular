@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class LogInComponent implements OnInit {
 
-  @Input() public parentData;
+ // @Input() public parentData;
   @Output() public logInEvent = new EventEmitter();
   @Output() public createAcount = new EventEmitter();
 
@@ -34,7 +34,9 @@ export class LogInComponent implements OnInit {
         this.validEmailandPassword = false;
       } else {
         if (user[0].password == this.passwordInput) {
-          this.logInEvent.emit(user[0]);
+          this.userServ.logedUser =user[0];
+          this.logInEvent.emit();
+
         } else {
           this.validEmailandPassword = false;
         }

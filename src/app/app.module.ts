@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapPostsComponent } from './map-posts/map-posts.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -34,6 +34,7 @@ import { LogInComponent } from './log-in/log-in.component';
     PostDetailsComponent,
     PostLikesComponent,
     LogInComponent,
+    routingComponents
   ],
   imports: [
     BrowserModule,

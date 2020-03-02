@@ -4,6 +4,8 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 import {PostOutput} from '../models/post';
 import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
+
 
 
 @Component({
@@ -12,7 +14,6 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit {
-  @Input() public parentData;
   user: User;
   post: PostOutput={
     userId: 0,
@@ -27,7 +28,7 @@ export class NewPostComponent implements OnInit {
   public message: string;
   uploadMassage = "";
   
-  constructor(private postServ: PostService) { }
+  constructor(private postServ: PostService, private userServ: UserService) { }
 
   preview(files) {
     if (files.length === 0)
@@ -78,7 +79,7 @@ export class NewPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.parentData;
+    this.user = this.userServ.logedUser;
     this.post.userId= this.user.userId;
   }
 

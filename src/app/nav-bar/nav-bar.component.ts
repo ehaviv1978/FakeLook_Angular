@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { User } from '../models/user';
 import { AllUsersComponent }  from '../all-users/all-users.component';
-
-
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,13 +13,14 @@ export class NavBarComponent implements OnInit {
   public userSearch: string;
   viewShow = "logIn";
 
-  constructor() { }
+  constructor(private userServ: UserService) { }
 
   @ViewChild(AllUsersComponent) allUsers: AllUsersComponent;
 
   newLogIn(event){
+    //this.user=event;
+    this.user=this.userServ.logedUser;
     this.viewShow = "sideBar";
-    this.user=event;
     console.log(this.user)
   }
 

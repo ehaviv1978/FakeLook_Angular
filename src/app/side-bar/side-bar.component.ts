@@ -1,6 +1,10 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { User } from '../models/user';
 import { Post } from '../models/post';
+import { UserService } from '../services/user.service';
+import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-side-bar',
@@ -15,11 +19,12 @@ export class SideBarComponent implements OnInit {
 
   viewShow = "map";
 
-  constructor() { }
+  constructor(private userServ: UserService,private router: Router) { }
 
-  ngOnInit() {   
-    this.user= this.parentData;
-    console.log("hello");
+  ngOnInit() {
+    this.user= this.userServ.logedUser;   
+    this.router.navigateByUrl('/map');
+    //this.user= this.parentData;
     console.log(this.user);
   }
 

@@ -1,38 +1,42 @@
-<div id="activeComponent" [ngSwitch]="viewShow">
-  <map-posts [parentData]="user" *ngSwitchCase="'map'" (clickPostEvent) = "showPost($event)"></map-posts>
+<div id="activeComponent">
+  <!-- [ngSwitch]="viewShow"-->
+  <!-- <map-posts [parentData]="user" *ngSwitchCase="'map'" (clickPostEvent) = "showPost($event)"></map-posts>
   <app-all-users *ngSwitchCase="'allUsers'"></app-all-users>
   <app-all-posts *ngSwitchCase="'allPosts'"></app-all-posts>
   <app-post-feed *ngSwitchCase ="'postFeed'" [parentData]="user" (clickPostEvent) = "showPost($event)" ></app-post-feed>
   <app-new-post *ngSwitchCase="'addPost'" [parentData]="user"></app-new-post>
-  <!-- <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture> -->
-  <app-post-details [currentPost]="currentPost" [parentData]="user" *ngSwitchCase = "'postDetails'" ></app-post-details>
+  <app-change-user-picture [parentData]="user" *ngSwitchCase="'changeProfilePicture'"></app-change-user-picture>
+  <app-post-details [currentPost]="currentPost" [parentData]="user" *ngSwitchCase = "'postDetails'" ></app-post-details> -->
+  <router-outlet></router-outlet>
 </div>
 
-  <div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper">
 
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper" style="position:fixed; top: 60px;">
-      <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='postFeed'">Post Feed</a>
-        <!-- <a href="#" class="list-group-item list-group-item-action bg-light">My Frinds</a> -->
-        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='createAccount'">Create New Account</a> -->
-        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='allPosts'">All Posts</a> -->
-        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='allUsers'">All Users</a> -->
-        <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='map'">Show Map</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='addPost'">Add Post</a>
-        <!-- <a href="#" class="list-group-item list-group-item-action bg-light" (click)="viewShow='changeProfilePicture'">Change profile picture</a> -->
-      </div>
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper" style="position:fixed; top: 60px;">
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='map'" routerLink="/map">Show Map</a>
+      <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='postFeed'"
+        routerLink="/postFeed">Post Feed</a>
+      <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='addPost'" routerLink="/newPost">Add
+        Post</a>
+      <!-- <a class="list-group-item list-group-item-action bg-light">My Frinds</a> -->
+      <!-- <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='createAccount'">Create New Account</a> -->
+      <!-- <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='allPosts'">All Posts</a> -->
+      <!--  <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='allUsers'">All Users</a> -->
+      <!-- <a class="list-group-item list-group-item-action bg-light" (click)="viewShow='changeProfilePicture'">Change profile picture</a> -->
     </div>
-    <!-- /#sidebar-wrapper -->
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <!--div class="container-fluid">
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <!--div class="container-fluid">
         <map-posts></map-posts>
       </div-->
 
-      
-    </div>
-    <!-- /#page-content-wrapper -->
 
   </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
