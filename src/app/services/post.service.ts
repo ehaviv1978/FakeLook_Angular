@@ -18,6 +18,8 @@ export class PostService {
         let myPosts = []
         Posts.map(Post => {
           Post.postLikes = { postId: Post.postId, postLikeAmount: Post.postLikeAmount, liked: Post.liked }
+          delete(Post.postLikeAmount);
+          delete(Post.liked);
           myPosts.push(Post);
         })
         return myPosts;

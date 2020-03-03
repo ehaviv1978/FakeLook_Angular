@@ -9,7 +9,6 @@ import {User} from '../models/user';
 export class UserService {
   private userUrl = 'http://localhost:8888/api/users'
   public logedUser: User;
-  //public logedUserId =0;
 
   constructor( private http: HttpClient ) { }
   getUsers():Observable<User[]>{
@@ -32,5 +31,4 @@ export class UserService {
  changeUserPicture(imgUrl,userId):Observable<User[]>{
     return this.http.post<User[]>(this.userUrl +"/picture", {"file": imgUrl ,"userId": userId});
  }
-
 }

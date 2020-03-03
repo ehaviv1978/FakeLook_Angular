@@ -15,12 +15,10 @@ export class PostFeedComponent implements OnInit {
   posts: Post[];
 
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
-  //@Output() clickPostEvent = new EventEmitter<Post>();
 
   clickOnPost(post: Post) {
     this.postServ.currentPost=post;
     this.router.navigateByUrl('/postDetails');
-    // this.clickPostEvent.emit(post);
   }
 
   getPosts() {

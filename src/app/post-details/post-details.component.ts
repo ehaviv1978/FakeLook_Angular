@@ -4,7 +4,7 @@ import { Comment } from '../models/comment';
 import { CommentService } from '../services/comment.service';
 import { User } from '../models/user';
 import { PostService } from '../services/post.service';
-
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-post-details',
@@ -12,17 +12,17 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
-  @Input() public parentData :User;
- // @Input() public currentPost: Post;
   comments: Comment[];
   tempComment:Comment;
   currentPost: Post;
+  loggedInUser:User;
 
-  constructor(private commentServ: CommentService,private postServ: PostService) {
-   }
+  constructor(private commentServ: CommentService,private postServ: PostService,
+    private userServ:UserService) { }
 
   ngOnInit() {
     this.currentPost=this.postServ.currentPost;
+    this.loggedInUser = this.userServ.logedUser;
     this.getComments();
     this.createEmptyComment();
   }
@@ -35,16 +35,17 @@ export class PostDetailsComponent implements OnInit {
 
   addComment(){
     console.log(this.tempComment);
-    this.tempComment.userId=this.parentData.userId;
+    this.tempComment.userId=this.loggedInUser.userId;
     this.tempComment.postId=this.currentPost.postId;
-    this.tempComment.firstName=this.parentData.firstName;
-    this.tempComment.lastName=this.parentData.lastName;
-    this.tempComment.picture=this.parentData.picture;
+    this.tempComment.firstName=this.loggedInUser.firstName;
+    this.tempComment.lastName=this.loggedInUser.lastName;
+    this.tempComment.picture=this.loggedInUser.picture;
     this.tempComment.timeCommented = new Date();
-    this.commentServ.createComment(this.tempComment,this.currentPost.postId)
+    this.commentServ.createComment(this.tempComment);
     this.comments.unshift(this.tempComment);
     this.createEmptyComment();
   }
+  
   createEmptyComment(){
     this.tempComment = new Comment()
   }

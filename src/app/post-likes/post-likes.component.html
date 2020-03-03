@@ -1,2 +1,12 @@
-<p>{{postLikes.postLikeAmount}}</p>
-<p>{{postLikes.liked}}</p>
+    <p>likes : {{postLikes.postLikeAmount}}</p>
+    <p *ngIf="postLikes.liked; then thenBlock else elseBlock"></p>
+    <ng-template #thenBlock>
+        <button (click) = "dislikePost()">
+             <fa-icon [icon]="faThumbsUpFull"></fa-icon>
+        </button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <button (click) = "likePost()" >
+                 <fa-icon [icon]="faThumbsUp"></fa-icon>
+        </button>
+    </ng-template>

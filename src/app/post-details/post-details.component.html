@@ -1,5 +1,6 @@
 <div class = "post-container">
   <div>
+    <app-post-likes [postLikes]= currentPost.postLikes ></app-post-likes>
     <img class="user-image" [src]="currentPost.userPic  ">
     <a class="link" href="#">{{"posted by: " + currentPost.firstName + " " + currentPost.lastName}}</a>
   </div>
