@@ -1,7 +1,5 @@
 <div id="mainView" [ngSwitch]="viewShow" style="top:60px; position:absolute; width: 100%;">
   <app-side-bar *ngSwitchCase="'sideBar'"></app-side-bar>
-  <!-- <app-all-users [parentData]="userSearch" *ngSwitchCase="'allUsers'"></app-all-users> -->
-  <app-change-user-picture *ngSwitchCase="'updateProfilePicture'"></app-change-user-picture>
   <app-log-in *ngSwitchCase="'logIn'" (createAcount)="viewShow='createAcount'"
     (logInEvent)="newLogIn()"></app-log-in>
   <app-create-account *ngSwitchCase="'createAcount'"  (userLogIn)="viewShow='logIn'"
@@ -11,7 +9,6 @@
 <div class="d-flex" id="wrapper">
   <nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-secondary border-bottom"
     style="position:fixed ; width: 100%">
-    <!--button class="btn btn-primary" id="menu-toggle">Toggle Menu</button-->
     <span class="navbar-brand mb-0 h1">FakeLook</span>
     <form *ngIf="user!=null" class="form-inline my-2 my-lg-0">
       <input [(ngModel)]="userSearch" name="search" class="form-control mr-sm-2" type="search" placeholder="Search"

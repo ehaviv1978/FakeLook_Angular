@@ -44,3 +44,8 @@ small{
   .ng-invalid:not(form)  {
     border-left: 3px solid red; /* red */
   }
+
+  a {
+    cursor: pointer;
+    color: mediumblue;
+  }
