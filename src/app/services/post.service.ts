@@ -29,6 +29,8 @@ export class PostService {
     this.postUrl = `http://localhost:8888/api/posts/${userId}`;
   }
   addPost(post): Observable<Post[]> {
+    this.postUrl = `http://localhost:8888/api/posts/`;
+
     return this.http.post<Post[]>(this.postUrl, post)
   }
 
