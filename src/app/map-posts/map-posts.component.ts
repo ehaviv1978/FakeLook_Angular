@@ -55,7 +55,6 @@ export class MapPostsComponent implements AfterViewInit {
         marker.addListener('click', () => {
           this.postServ.currentPost=post;
           this.router.navigateByUrl('/postDetails');
-          //this.clickPostEvent.emit(post);
         });
 
         this.markers.push(marker);

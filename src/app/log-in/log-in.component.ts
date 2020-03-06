@@ -29,18 +29,19 @@ export class LogInComponent implements OnInit {
   constructor(private userServ: UserService) { }
 
   onSubmit() {
-    this.userServ.userLogIn(this.emailInput).subscribe(user => {
+    this.userServ.userLogIn(this.emailInput, this.passwordInput).subscribe(user => {
       if (user[0] == undefined) {
         this.validEmailandPassword = false;
+        console.log("fail");
       } else {
-        if (user[0].password == this.passwordInput) {
+        // if (user[0].password == this.passwordInput) {
           this.userServ.logedUser =user[0];
           this.logInEvent.emit();
 
-        } else {
-          this.validEmailandPassword = false;
-        }
-      }
+        } //else {
+        //   this.validEmailandPassword = false;
+        // }
+      // }
     });
   }
 
