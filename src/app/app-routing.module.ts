@@ -12,8 +12,9 @@ const routes: Routes = [
   {path: '', redirectTo: '/map', pathMatch: 'full'},
   {path: 'map',component: MapPostsComponent},
   {path: 'postFeed', component: PostFeedComponent},
+  {path: 'post/:id', component: PostDetailsComponent},
   {path: 'newPost', component: NewPostComponent },
-  {path: 'postDetails', component:PostDetailsComponent},
+  //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
   {path: 'search', component: AllUsersComponent}
 ];

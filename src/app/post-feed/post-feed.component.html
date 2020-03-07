@@ -1,11 +1,12 @@
-<div class="container">
+<div>
         <div class="post-container" *ngFor="let post of posts">
           <div>
-            <app-post-likes [postLikes]= post.postLikes ></app-post-likes>
             <img class="user-image"[src]="post.userPic">
-            <a class="link">{{"posted by: " + post.firstName + " " + post.lastName}}</a>
+            <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{post.firstName + " " + post.lastName}}</a>
+            <div> posted at : {{  post.timePosted | date:'medium' }}</div>
           </div>
-            <img class="post-image"[src]="post.picture" (click) = "clickOnPost(post)">
-          <div> posted at : {{  post.timePosted | date:'medium' }}</div>
+          <img class="post-image"[src]="post.picture" (click) = "clickOnPost(post)">
+          <app-post-likes [postLikes]= post.postLikes ></app-post-likes>
+          <hr>
         </div>
     </div>

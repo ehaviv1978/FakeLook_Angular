@@ -1,20 +1,24 @@
   .post-image{
     width: 450px;
-    margin: 5px;
+    /* margin: 5px; */
+    margin-top: 5px;
+    margin-bottom: 5px;
     }
-      .user-image{
-    width: 50px;
-    border: 5px inset rgba(255,0,0,0.77);
-    border-radius: 40px;
-    margin: 5px;
+  .user-image{
+        width: 50px;
+        border: 3px inset rgba(96, 74, 218, 0.77);
+        border-radius: 40px;
+        margin: 5px;
   }
   .link{
     margin: 5px;
   }
   .post-container{
-    margin-bottom: 20px;
-    border: 15px double rgba(0, 9, 141, 0.3);
-    border-radius: 40px;
+    position: relative;
+    width: 100%;  
+    /* margin-bottom: 50px; */
+    /* border: 15px double rgba(0, 9, 141, 0.3);
+    border-radius: 40px; */
     background-color: whitesmoke;
     padding: 10px;
   }

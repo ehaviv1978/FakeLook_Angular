@@ -1,13 +1,12 @@
 .post-image{
-    width: 450px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: black;
-    margin: 5px;
+  width: 450px;
+  /* margin: 5px; */
+  margin-top: 5px;
+  margin-bottom: 5px;
     }
-      .user-image{
+  .user-image{
     width: 50px;
-    border: 5px inset rgba(255,0,0,0.77);
+    border: 3px inset rgba(96, 74, 218, 0.77);
     border-radius: 40px;
     margin: 5px;
   }
@@ -16,15 +15,15 @@
   }
   .post-container{
     /* margin-bottom: 50px; */
-    border: 15px double rgba(0, 9, 141, 0.3);
-    border-radius: 40px;
+    /* border: 15px double rgba(0, 9, 141, 0.3);
+    border-radius: 40px; */
     background-color: whitesmoke;
     padding: 10px;
   }
   .comment-container{
-    border: 10px double rgba(0, 9, 141, 0.3);
+    /* border: 10px double rgba(0, 9, 141, 0.3); */
     background-color: whitesmoke;
-    border-radius: 40px;
+    /* border-radius: 40px; */
     padding: 10px;
     margin: 5px;
   }
@@ -32,5 +31,10 @@
     color: gray;
   }
   #comment-input{
-    width: 900px;
+    position: relative;
+    width: 100%;  
+}
+
+  app-post-likes {
+    left: 200px;
   }

@@ -25,9 +25,6 @@ export class MapPostsComponent implements AfterViewInit {
   iconSize = 40;
   markers = [];
   constructor(private postServ: PostService, private userServ: UserService,private router: Router) { }
-
- // @Output() clickPostEvent = new EventEmitter<Post>();
-
   
   async showPosts() {
     this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(res => {
@@ -45,29 +42,26 @@ export class MapPostsComponent implements AfterViewInit {
         let infowindow = new google.maps.InfoWindow({
           content: '<div><img width="200" src="' + post.picture + '"/><br>' + post.description + '</div>'
         });
-
         marker.addListener('mouseover', () => {
           infowindow.open(this.map, marker);
         });
         marker.addListener('mouseout', () => {
           infowindow.close();
         });
-        marker.addListener('click', () => {
-          this.postServ.currentPost=post;
-          this.router.navigateByUrl('/postDetails');
+        marker.addListener('click', async () => {
+          await this.postServ.getPost(this.userServ.logedUser.userId, post.postId).subscribe(data =>{
+            this.postServ.currentPost= data[0];
+           this.router.navigate(['/post', post.postId]);
+          });   
         });
-
         this.markers.push(marker);
-
         marker.setMap(this.map);
       }
-
       var options = {
         imagePath: 'http://localhost:4200/assets/images/m'
       };
       new MarkerClusterer(this.map, this.markers, options)
-    });
-    
+    });    
   }
 
   getCurrentLocation(callback) {

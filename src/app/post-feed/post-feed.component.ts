@@ -16,9 +16,11 @@ export class PostFeedComponent implements OnInit {
 
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
 
-  clickOnPost(post: Post) {
-    this.postServ.currentPost=post;
-    this.router.navigateByUrl('/postDetails');
+  async clickOnPost(post: Post) {
+    await this.postServ.getPost(this.userServ.logedUser.userId, post.postId).subscribe(data =>{
+      this.postServ.currentPost= data[0];
+     this.router.navigate(['/post', post.postId]);
+    });   
   }
 
   getPosts() {

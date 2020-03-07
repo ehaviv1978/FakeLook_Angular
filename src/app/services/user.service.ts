@@ -19,10 +19,6 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl+"/"+searchParam)
   }
 
-  // userLogIn(logInEmail):Observable<User[]>{
-  //    return this.http.get<User[]>(this.userUrl+"/logIn/" + logInEmail)
-  // }
-
   userLogIn(logInEmail, password):Observable<User[]>{
     return this.http.post<User[]>(this.userUrl +"/logIn", {"email": logInEmail, "password": password});
  }

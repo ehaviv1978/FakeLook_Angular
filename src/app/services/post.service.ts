@@ -11,6 +11,7 @@ export class PostService {
   private postUrl;
 
   constructor(private http: HttpClient) { }
+
   getPosts(userId: number): Observable<Post[]> {
     this.setURL(userId);
     return this.http.get<Post[]>(this.postUrl)
@@ -25,9 +26,26 @@ export class PostService {
         return myPosts;
       }));
   }
+
+  getPost(userId: number, postId:number):Observable<Post[]> {
+    this.postUrl = 'http://localhost:8888/api/post';
+    return this.http.post<Post[]>(this.postUrl,{"userId": userId, "postId": postId})
+    .pipe(map((Posts: Post[]) => {
+      let post = []
+      Posts.map(Post => {
+        Post.postLikes = { postId: Post.postId, postLikeAmount: Post.postLikeAmount, liked: Post.liked }
+        delete(Post.postLikeAmount);
+        delete(Post.liked);
+        post.push(Post);
+      })
+      return post;
+    }));
+  }
+
   setURL(userId: number) {
     this.postUrl = `http://localhost:8888/api/posts/${userId}`;
   }
+
   addPost(post): Observable<Post[]> {
     this.postUrl = `http://localhost:8888/api/posts/`;
 

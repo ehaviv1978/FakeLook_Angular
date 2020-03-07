@@ -1,17 +1,19 @@
-<div class = "post-container">
+<div class="post-container">
   <div>
-    <app-post-likes [postLikes]= currentPost.postLikes ></app-post-likes>
     <img class="user-image" [src]="currentPost.userPic  ">
-    <a class="link" href="#">{{"posted by: " + currentPost.firstName + " " + currentPost.lastName}}</a>
+    <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{currentPost.firstName + " " + currentPost.lastName}}</a>
+    <div> posted at : {{  currentPost.timePosted | date:'medium' }}</div>
+    <hr>
+    <div>{{currentPost.description}}</div>
   </div>
   <img class="post-image" [src]="currentPost.picture">
-  <div>{{currentPost.description}}</div>
-  <div> posted at : {{  currentPost.timePosted | date:'medium' }}</div>
+  <app-post-likes [postLikes]=currentPost.postLikes></app-post-likes>
 </div>
 <div class="comment-container">
-  <textarea id="comment-input" [(ngModel)] = "tempComment.commentContent" required></textarea>
+  <textarea id="comment-input" [(ngModel)]="tempComment.commentContent" required></textarea>
   <div>
-    <button [disabled]="tempComment.commentContent==null || tempComment.commentContent==''" (click) = "addComment()">Comment</button>
+    <button [disabled]="tempComment.commentContent==null || tempComment.commentContent==''"
+      (click)="addComment()">Comment</button>
   </div>
 </div>
 <div class="comment-container" *ngFor="let comment of comments">
