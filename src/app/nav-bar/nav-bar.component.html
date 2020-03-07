@@ -13,7 +13,7 @@
     <form *ngIf="user!=null" class="form-inline my-2 my-lg-0">
       <input [(ngModel)]="userSearch" name="search" class="form-control mr-sm-2" type="search" placeholder="Search"
         aria-label="Search">
-      <button class="btn  btn-outline-light my-2 my-sm-0" type="submit" routerLink="/search">Search</button>
+      <button class="btn  btn-outline-light my-2 my-sm-0" type="submit" [routerLink]="['/search/',userSearch]">Search</button>
     </form>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

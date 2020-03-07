@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'newPost', component: NewPostComponent },
   //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
-  {path: 'search', component: AllUsersComponent}
+  {path: 'search/:search', component: AllUsersComponent}
 ];
 
 @NgModule({
