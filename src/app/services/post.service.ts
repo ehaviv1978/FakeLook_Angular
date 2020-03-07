@@ -52,5 +52,5 @@ export class PostService {
     return this.http.post<Post[]>(this.postUrl, post)
   }
 
-  public currentPost: Post;
+  // public currentPost: Post;
 }

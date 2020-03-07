@@ -49,10 +49,7 @@ export class MapPostsComponent implements AfterViewInit {
           infowindow.close();
         });
         marker.addListener('click', async () => {
-          await this.postServ.getPost(this.userServ.logedUser.userId, post.postId).subscribe(data =>{
-            this.postServ.currentPost= data[0];
-           this.router.navigate(['/post', post.postId]);
-          });   
+          this.router.navigate(['/post', post.postId]);
         });
         this.markers.push(marker);
         marker.setMap(this.map);
