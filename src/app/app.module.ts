@@ -18,6 +18,7 @@ import { PostFeedComponent } from './post-feed/post-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostLikesComponent } from './post-likes/post-likes.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LogInComponent } from './log-in/log-in.component';
     PostDetailsComponent,
     PostLikesComponent,
     LogInComponent,
-    routingComponents
+    routingComponents,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

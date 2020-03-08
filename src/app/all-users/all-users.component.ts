@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 
@@ -16,9 +17,10 @@ export class AllUsersComponent implements OnInit {
   imageurl: string;
   searchString: string;
 
-  constructor(private userServ: UserService, private route: ActivatedRoute) { }
+  constructor(private userServ: UserService, private route: ActivatedRoute, private router: Router) { }
 
   getUsers() {
+    console.log('hi')
     this.userServ.getUsers().subscribe(res => {
       this.users = res;
     });
@@ -33,8 +35,9 @@ export class AllUsersComponent implements OnInit {
   }
 
   async showUserDetail(user: User) {
-    this.user = user;
-    this.imageurl = user.picture;
+    this.router.navigate(['/user', user.userId]);
+    //this.user = user;
+    // this.imageurl = user.picture;
     //   const STRING_CHAR = await String.fromCharCode.apply(null, user.picture.data);
     //   let base64String = await btoa(STRING_CHAR);
     //   this.imageurl = this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;charset=utf-8;base64,' + base64String);

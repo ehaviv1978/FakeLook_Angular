@@ -16,6 +16,7 @@ export class UserService {
   }
 
   searchUsers(searchParam):Observable<User[]>{
+    console.log(searchParam)
     return this.http.get<User[]>(this.userUrl+"/"+searchParam)
   }
 
@@ -30,5 +31,9 @@ export class UserService {
  
  changeUserPicture(imgUrl,userId):Observable<User[]>{
     return this.http.post<User[]>(this.userUrl +"/picture", {"file": imgUrl ,"userId": userId});
+ }
+
+ getUserById(userId: number){
+  return this.http.get<User[]>('http://localhost:8888/api/user/'+userId);
  }
 }

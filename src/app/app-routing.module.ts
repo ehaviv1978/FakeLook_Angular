@@ -6,6 +6,7 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
 import { AllUsersComponent } from './all-users/all-users.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'newPost', component: NewPostComponent },
   //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
-  {path: 'search/:search', component: AllUsersComponent}
+  {path: 'search/:search', component: AllUsersComponent},
+   {path: 'user/:id', component: UserDetailsComponent}
 ];
 
 @NgModule({
@@ -30,5 +32,6 @@ export const routingComponents = [
   NewPostComponent,
   PostDetailsComponent,
   ChangeUserPictureComponent,
-  AllUsersComponent
+  AllUsersComponent,
+  UserDetailsComponent
 ];
