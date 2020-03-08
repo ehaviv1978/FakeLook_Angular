@@ -16,8 +16,6 @@ export class AllUsersComponent implements OnInit {
   imageurl: string;
   searchString: string;
 
-
-
   constructor(private userServ: UserService, private route: ActivatedRoute) { }
 
   getUsers() {

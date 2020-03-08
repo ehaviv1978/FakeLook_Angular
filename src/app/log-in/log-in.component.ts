@@ -12,10 +12,8 @@ import { UserService } from '../services/user.service';
 })
 export class LogInComponent implements OnInit {
 
- // @Input() public parentData;
   @Output() public logInEvent = new EventEmitter();
   @Output() public createAcount = new EventEmitter();
-
 
   emailInput = "";
   passwordInput = "";
@@ -34,14 +32,9 @@ export class LogInComponent implements OnInit {
         this.validEmailandPassword = false;
         console.log("fail");
       } else {
-        // if (user[0].password == this.passwordInput) {
-          this.userServ.logedUser =user[0];
-          this.logInEvent.emit();
-
-        } //else {
-        //   this.validEmailandPassword = false;
-        // }
-      // }
+        this.userServ.logedUser = user[0];
+        this.logInEvent.emit();
+      }
     });
   }
 

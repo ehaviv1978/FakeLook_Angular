@@ -1,8 +1,10 @@
 <div style="display: inline-flex;">
   <div class="list">
-    <span *ngFor="let user of users; index as i">
+    <span *ngFor="let user of users; index as i" (click)="showUserDetail(user)">
       <br>
-      <a id={{i}} (click)="showUserDetail(user)">{{user.firstName + " " + user.lastName +"\n"}}</a>
+      <img [src]="user.picture" style="width: 30px;" />
+      <a id={{i}} style="vertical-align: bottom;"> - {{user.firstName + " " + user.lastName +"\n"}}</a>
+      <br>
     </span>
   </div>
 

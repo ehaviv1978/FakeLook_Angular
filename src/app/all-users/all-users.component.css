@@ -24,6 +24,9 @@ color: #999;
 
 a {
   cursor: pointer;
-  text-decoration: underline;
   color: blue;
+}
+
+img{
+  cursor: pointer;
 }
