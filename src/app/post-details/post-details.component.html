@@ -1,7 +1,9 @@
 <div class="post-container">
   <div>
-    <img class="user-image" [src]="currentPost.userPic">
-    <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{currentPost.firstName + " " + currentPost.lastName}}</a>
+    <span [routerLink]="['/user/',currentPost.userId]" style="cursor: pointer;">
+      <img class="user-image"[src]="currentPost.userPic">
+      <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{currentPost.firstName + " " + currentPost.lastName}}</a>
+    </span>
     <div> posted at : {{  currentPost.timePosted | date:'medium' }}</div>
     <hr>
     <div>{{currentPost.description}}</div>
@@ -18,8 +20,10 @@
 </div>
 <div class="comment-container" *ngFor="let comment of comments">
   <div>
-    <img class="user-image" [src]="comment.picture  ">
-    <a class="link" href="#">{{comment.firstName + " " + comment.lastName }}</a>
+    <span [routerLink]="['/user/',comment.userId]" style="cursor: pointer;">
+      <img class="user-image"[src]="comment.picture">
+      <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{comment.firstName + " " + comment.lastName}}</a>
+    </span>
     <div>{{comment.commentContent}}</div>
   </div>
   <div class="date-field"> posted at : {{  comment.timeCommented | date:'medium' }}</div>
