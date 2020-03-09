@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +14,7 @@ export class NavBarComponent implements OnInit {
   public userSearch: string ="";
   viewShow = "logIn";
 
-  constructor(private userServ: UserService) { }
+  constructor(public userServ: UserService,private router: Router) { }
 
   newLogIn(){
     this.user=this.userServ.logedUser;
@@ -21,7 +23,8 @@ export class NavBarComponent implements OnInit {
 
   logOut(){
     this.viewShow="logIn";
-    this.user=null;
+    this.userServ.logedUser=null;
+    this.router.navigateByUrl('/logIn');
   }
 
   changeView(val: string) {

@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faEnvelope, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faPhone, faUserMd, faLock, faHome, faKey } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -13,11 +13,6 @@ import { UserService } from '../services/user.service';
 })
 
 export class CreateAccountComponent implements OnInit {
-
-  @Input() public parentData;
-  @Output() public logInEvent = new EventEmitter();
-  @Output() public userLogIn = new EventEmitter();
-
   user: User = {
     userId: null,
     birthDate: null,
@@ -47,17 +42,18 @@ export class CreateAccountComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private userServ: UserService) { }
+  constructor(private userServ: UserService,private router: Router) { }
 
   onSubmit() {
     this.submitted = true;
     this.userServ.createUser(this.user).subscribe(res => {
-      this.logInEvent.emit(this.user);
+      this.userServ.logedUser =this.user;
+      this.router.navigateByUrl('/map');
     });
   }
 
   user_LogIn() {
-    this.userLogIn.emit();
+    this.router.navigateByUrl('/logIn');
   }
 
   ngOnInit() {

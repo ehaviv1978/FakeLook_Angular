@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../services/user.service';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -11,10 +11,6 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent implements OnInit {
-
-  @Output() public logInEvent = new EventEmitter();
-  @Output() public createAcount = new EventEmitter();
-
   emailInput = "";
   passwordInput = "";
   validEmailandPassword = true;
@@ -24,16 +20,15 @@ export class LogInComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private userServ: UserService) { }
+  constructor(private userServ: UserService,private router: Router) { }
 
   onSubmit() {
     this.userServ.userLogIn(this.emailInput, this.passwordInput).subscribe(user => {
       if (user[0] == undefined) {
         this.validEmailandPassword = false;
-        console.log("fail");
       } else {
         this.userServ.logedUser = user[0];
-        this.logInEvent.emit();
+        this.router.navigateByUrl('/map');
       }
     });
   }
@@ -42,7 +37,7 @@ export class LogInComponent implements OnInit {
   }
 
   create_Acount() {
-    this.createAcount.emit();
+    this.router.navigateByUrl('/createAccount');
   }
 
 }

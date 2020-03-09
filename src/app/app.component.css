@@ -4,3 +4,28 @@ border-radius: 40px;
 padding: 10px;
 margin: 5px;
   }
+
+  @media (min-width: 768px) {
+  
+    #activeComponent{
+      position: absolute;
+      left: 5px;
+      right: 5px;     
+    }
+  }
+  
+  #activeComponent{
+    position: absolute;
+    left: 250px;
+    right: 5px;   
+  }
+
+  @media (max-width: 768px) {
+
+    #activeComponent{
+      position: absolute;
+      left: 5px;
+      right: 5px;     
+    }
+
+  }

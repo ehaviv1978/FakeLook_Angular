@@ -7,10 +7,14 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/map', pathMatch: 'full'},
+  {path: '', redirectTo: '/logIn', pathMatch: 'full'},
+  {path: 'logIn', component: LogInComponent},
+  {path: 'createAccount', component: CreateAccountComponent},
   {path: 'map',component: MapPostsComponent},
   {path: 'postFeed', component: PostFeedComponent},
   {path: 'post/:id', component: PostDetailsComponent},
@@ -18,7 +22,7 @@ const routes: Routes = [
   //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
   {path: 'search/:search', component: AllUsersComponent},
-   {path: 'user/:id', component: UserDetailsComponent}
+  {path: 'user/:id', component: UserDetailsComponent}
 ];
 
 @NgModule({
@@ -27,6 +31,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents = [  
+  LogInComponent,
+  CreateAccountComponent,
   MapPostsComponent, 
   PostFeedComponent,
   NewPostComponent,

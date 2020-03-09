@@ -1,8 +1,6 @@
-body {
-    overflow-x: hidden;
-  }
-  
-  #sidebar-wrapper {
+ #sidebar-wrapper {
+    position:fixed;
+    top: 60px;
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -19,11 +17,7 @@ body {
   #sidebar-wrapper .list-group {
     width: 15rem;
   }
-  
-  #page-content-wrapper {
-    min-width: 100vw;
-  }
-  
+
   #wrapper.toggled #sidebar-wrapper {
     margin-left: 0;
   }
@@ -32,36 +26,8 @@ body {
     #sidebar-wrapper {
       margin-left: 0;
     }
-
-    #activeComponent{
-      position: absolute;
-      left: 5px;
-      right: 5px;     
-    }
-  
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
   
     #wrapper.toggled #sidebar-wrapper {
       margin-left: -15rem;
     }
-  }
-
-  #activeComponent{
-    position: absolute;
-    left: 250px;
-    right: 5px;
-    
-  }
-
-  @media (max-width: 768px) {
-
-    #activeComponent{
-      position: absolute;
-      left: 5px;
-      right: 5px;     
-    }
-
   }

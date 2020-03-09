@@ -1,16 +1,8 @@
-<div id="mainView" [ngSwitch]="viewShow" style="top:60px; position:absolute; width: 100%;">
-  <app-side-bar *ngSwitchCase="'sideBar'"></app-side-bar>
-  <app-log-in *ngSwitchCase="'logIn'" (createAcount)="viewShow='createAcount'"
-    (logInEvent)="newLogIn()"></app-log-in>
-  <app-create-account *ngSwitchCase="'createAcount'"  (userLogIn)="viewShow='logIn'"
-    (logInEvent)="newLogIn()"></app-create-account>
-</div>
-
 <div class="d-flex" id="wrapper">
   <nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-secondary border-bottom"
     style="position:fixed ; width: 100%">
     <span class="navbar-brand mb-0 h1">FakeLook</span>
-    <form *ngIf="user!=null" class="form-inline my-2 my-lg-0">
+    <form *ngIf="userServ.logedUser!=null" class="form-inline my-2 my-lg-0">
       <input [(ngModel)]="userSearch" name="search" class="form-control mr-sm-2" type="search" placeholder="Search"
         aria-label="Search">
       <button class="btn  btn-outline-light my-2 my-sm-0" type="submit" [routerLink]="['/search/',userSearch]">Search</button>
@@ -22,14 +14,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item" *ngIf="user!=null">
-          <a class="nav-link" (click)="viewShow='sideBar'" style="color:deepskyblue">{{user.firstName}}
-            {{user.lastName}} <span class="sr-only">(current)</span></a>
+        <li class="nav-item" *ngIf="userServ.logedUser!=null">
+          <a class="nav-link" (click)="viewShow='sideBar'" style="color:deepskyblue">{{userServ.logedUser.firstName}}
+            {{userServ.logedUser.lastName}} <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active" *ngIf="user!=null">
+        <li class="nav-item active" *ngIf="userServ.logedUser!=null">
           <a class="nav-link" (click)="viewShow='sideBar'" routerLink="/map">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item dropdown" *ngIf="user!=null">
+        <li class="nav-item dropdown" *ngIf="userServ.logedUser!=null">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             User Options
