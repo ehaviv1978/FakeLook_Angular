@@ -13,6 +13,7 @@ export class AppComponent {
   constructor(public userServ: UserService,private router: Router) { }
   
   ngOnInit() {
+      this.userServ.logedUser=null;
       this.router.navigateByUrl('/logIn'); 
   }
 }

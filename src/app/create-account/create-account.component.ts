@@ -52,11 +52,12 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
-  user_LogIn() {
+  userLogIn() {
     this.router.navigateByUrl('/logIn');
   }
 
   ngOnInit() {
+    document.getElementById("activeComponent").style.left="5px";
   }
 
 }

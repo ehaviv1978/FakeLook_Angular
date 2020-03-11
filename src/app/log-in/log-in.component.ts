@@ -27,6 +27,7 @@ export class LogInComponent implements OnInit {
       if (user[0] == undefined) {
         this.validEmailandPassword = false;
       } else {
+        document.getElementById("activeComponent").style.left="250px";
         this.userServ.logedUser = user[0];
         this.router.navigateByUrl('/map');
       }
@@ -34,9 +35,11 @@ export class LogInComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.getElementById("activeComponent").style.left="5px";
+    this.userServ.logedUser = null;
   }
 
-  create_Acount() {
+  createAcount() {
     this.router.navigateByUrl('/createAccount');
   }
 

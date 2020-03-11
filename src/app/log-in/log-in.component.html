@@ -40,7 +40,7 @@
 					Must enter password
                 </div>
                 <div [hidden]="validEmailandPassword" class="alert alert-danger">
-					Email or password are incorredt
+					Email or password are incorrect
 				</div>
                 <div class="form-group">
                     <button id="btnLogIn" type="submit" class="btn btn-primary btn-block" [disabled]="!logInForm.form.valid"> Log in
@@ -48,7 +48,11 @@
                 </div>
             </form>
             <p class="text-center">
-                New User? <a (click)="create_Acount()">Create new account</a>       
+                <!-- New User? <a routerLink="/createAccount">Create new account</a> -->
+                New User? <a (click)="createAcount()">Create new account</a>
+                <!-- New User? <a href="/createAccount">Create new account</a> -->
+            </p>
+
         </article>
     </div>
 

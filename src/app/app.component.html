@@ -1,9 +1,6 @@
 <div style="top:60px; position:absolute; width: 100%" >
-    <app-side-bar *ngIf="userServ.logedUser!=null" ></app-side-bar>
-    <div id="activeComponent" *ngIf="userServ.logedUser==null" style="left: 0px;">
-        <router-outlet></router-outlet>
-    </div>
-    <div id="activeComponent" *ngIf="userServ.logedUser!=null">
+    <app-side-bar *ngIf="userServ.logedUser!=null"></app-side-bar>
+    <div id="activeComponent">
         <router-outlet></router-outlet>
     </div>
 </div>

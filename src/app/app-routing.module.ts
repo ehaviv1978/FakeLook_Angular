@@ -9,10 +9,12 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/logIn', pathMatch: 'full'},
+  // {path: '', component: AppComponent},
   {path: 'logIn', component: LogInComponent},
   {path: 'createAccount', component: CreateAccountComponent},
   {path: 'map',component: MapPostsComponent},
@@ -39,5 +41,6 @@ export const routingComponents = [
   PostDetailsComponent,
   ChangeUserPictureComponent,
   AllUsersComponent,
-  UserDetailsComponent
+  UserDetailsComponent,
+  AppComponent
 ];
