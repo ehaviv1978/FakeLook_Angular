@@ -14,7 +14,7 @@ export class NavBarComponent implements OnInit {
   constructor(public userServ: UserService, private router: Router) { }
 
   logOut() {
-   // this.userServ.logedUser = null;
+    this.userServ.logedUser = null;
     this.router.navigateByUrl('/logIn');
   }
 

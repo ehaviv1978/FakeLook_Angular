@@ -1,8 +1,11 @@
 <div style="top:60px; position:absolute; width: 100%" >
-    <app-side-bar *ngIf="userServ.logedUser!=null"></app-side-bar>
-    <div id="activeComponent">
-        <router-outlet></router-outlet>
+    <div id="activeComponent" *ngIf="userServ.logedUser!=null">
+        <router-outlet *ngIf="userServ.logedUser!=null"></router-outlet>
     </div>
+    <div id="activeComponent" *ngIf="userServ.logedUser==null" style="left: 5px;">
+        <router-outlet *ngIf="userServ.logedUser==null"></router-outlet>
+    </div>
+    <app-side-bar *ngIf="userServ.logedUser!=null"></app-side-bar>
 </div>
 
 <app-nav-bar></app-nav-bar>

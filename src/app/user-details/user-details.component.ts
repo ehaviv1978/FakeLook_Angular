@@ -15,11 +15,20 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(private userServ: UserService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    let userId = parseInt(this.route.snapshot.paramMap.get('id'));
+  showUser(userId){
+    userId = parseInt(this.route.snapshot.paramMap.get('id'));
     this.userServ.getUserById(userId).subscribe(data => {
       this.user = data[0];
     });
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(
+      params => {
+        const userId = params['id'];
+        this.showUser(userId);
+      }
+    );
   }
 
 }
