@@ -3,8 +3,9 @@ import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faEnvelope, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faPhone, faUserMd, faLock, faHome, faKey } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
-import { UserService } from '../services/user.service';
-import {Router} from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -42,12 +43,12 @@ export class CreateAccountComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private userServ: UserService,private router: Router) { }
+  constructor(private authServ: AuthService,private router: Router) { }
 
   onSubmit() {
     this.submitted = true;
-    this.userServ.createUser(this.user).subscribe(res => {
-      this.userServ.logedUser =this.user;
+    this.authServ.createUser(this.user).subscribe(res => {
+      // this.userServ.logedUser =this.user;
       this.router.navigateByUrl('/map');
     });
   }
