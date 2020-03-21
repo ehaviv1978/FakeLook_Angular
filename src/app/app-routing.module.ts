@@ -5,7 +5,7 @@ import { PostFeedComponent } from './post-feed/post-feed.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { ChangeUserPictureComponent } from './change-user-picture/change-user-picture.component';
-import { AllUsersComponent } from './all-users/all-users.component';
+import { SearchComponent } from './search/search.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'newPost', component: NewPostComponent },
   //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
-  {path: 'search/:search', component: AllUsersComponent},
+  {path: 'search/:search', component: SearchComponent},
   {path: 'user/:id', component: UserDetailsComponent}
 ];
 
@@ -40,7 +40,7 @@ export const routingComponents = [
   NewPostComponent,
   PostDetailsComponent,
   ChangeUserPictureComponent,
-  AllUsersComponent,
+  SearchComponent,
   UserDetailsComponent,
   AppComponent
 ];

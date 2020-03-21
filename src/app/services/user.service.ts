@@ -16,7 +16,6 @@ export class UserService {
   }
 
   searchUsers(searchParam):Observable<User[]>{
-    console.log(searchParam)
     return this.http.get<User[]>(this.userUrl+"/"+searchParam)
   }
 

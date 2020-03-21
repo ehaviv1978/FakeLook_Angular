@@ -43,14 +43,17 @@ export class PostService {
   }
 
   setURL(userId: number) {
-    this.postUrl = `http://localhost:8888/api/posts/${userId}`;
+    this.postUrl = `http://localhost:8888/api/userPosts/${userId}`;
   }
 
   addPost(post): Observable<Post[]> {
     this.postUrl = `http://localhost:8888/api/posts/`;
-
     return this.http.post<Post[]>(this.postUrl, post)
   }
 
-  // public currentPost: Post;
+  searchPosts(searchParam):Observable<Post[]>{
+    this.postUrl = `http://localhost:8888/api/posts/`;
+    return this.http.get<Post[]>(this.postUrl+searchParam)
+  }
+
 }
