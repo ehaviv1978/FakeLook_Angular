@@ -19,6 +19,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostLikesComponent } from './post-likes/post-likes.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { CommentLikesComponent } from './comment-likes/comment-likes.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     PostLikesComponent,
     LogInComponent,
     routingComponents,
-    UserDetailsComponent
+    UserDetailsComponent,
+    CommentLikesComponent
   ],
   imports: [
     BrowserModule,

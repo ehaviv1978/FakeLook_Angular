@@ -7,4 +7,6 @@ export class Comment{
     userId:number;
     postId:number;
     commentId:number;
+    commentLikeAmount:number;
+    liked:number;
 }

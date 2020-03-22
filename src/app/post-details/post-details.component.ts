@@ -6,6 +6,9 @@ import { User } from '../models/user';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { faThumbsUp  }  from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp as faThumbsUpFull } from '@fortawesome/free-solid-svg-icons'
+
 
 @Component({
   selector: 'app-post-details',
@@ -20,8 +23,10 @@ export class PostDetailsComponent implements OnInit {
 
   constructor(private commentServ: CommentService, private postServ: PostService,
     private userServ: UserService, private route: ActivatedRoute) { }
+  faThumbsUp = faThumbsUp;
+  faThumbsUpFull = faThumbsUpFull;
 
-   ngOnInit() {
+  ngOnInit() {
     let postId = parseInt(this.route.snapshot.paramMap.get('id'));
     this.postServ.getPost(this.userServ.logedUser.userId, postId).subscribe(data => {
       this.currentPost = data[0];
@@ -32,7 +37,7 @@ export class PostDetailsComponent implements OnInit {
   }
 
   getComments() {
-    this.commentServ.getComments(this.currentPost.postId).subscribe(data => {
+    this.commentServ.getComments(this.currentPost.postId, this.userServ.logedUser.userId).subscribe(data => {
       this.comments = data;
     });
   }
@@ -52,5 +57,13 @@ export class PostDetailsComponent implements OnInit {
 
   createEmptyComment() {
     this.tempComment = new Comment()
+  }
+
+  async dislikeComment(commentId){
+    this.commentServ.removeLike(this.userServ.logedUser.userId,commentId)
+  }
+  
+  async likeComment(commentId){
+    this.commentServ.addLike(this.userServ.logedUser.userId,commentId)
   }
 }

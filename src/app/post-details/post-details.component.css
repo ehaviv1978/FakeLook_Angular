@@ -38,3 +38,10 @@
   app-post-likes {
     left: 200px;
   }
+
+  .button-like {
+    color: blue;
+    font-size: 1.2em;
+    border-radius: 12px;
+    border-width: 1px;
+}
