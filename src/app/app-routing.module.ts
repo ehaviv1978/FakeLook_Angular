@@ -10,6 +10,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AppComponent } from './app.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
   //{path: 'postDetails', component:PostDetailsComponent},
   {path: 'changeUserPicture', component:ChangeUserPictureComponent},
   {path: 'search/:search', component: SearchComponent},
-  {path: 'user/:id', component: UserDetailsComponent}
+  {path: 'user/:id', component: UserDetailsComponent},
+  {path: 'changePassword', component: ChangePasswordComponent}
 ];
 
 @NgModule({
@@ -42,5 +44,6 @@ export const routingComponents = [
   ChangeUserPictureComponent,
   SearchComponent,
   UserDetailsComponent,
-  AppComponent
+  AppComponent,
+  ChangePasswordComponent
 ];

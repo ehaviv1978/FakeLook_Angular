@@ -29,7 +29,11 @@ export class UserService {
   }
  
  changeUserPicture(imgUrl,userId):Observable<User[]>{
-    return this.http.post<User[]>(this.userUrl +"/picture", {"file": imgUrl ,"userId": userId});
+   return this.http.post<User[]>(this.userUrl +"/picture", {"file": imgUrl ,"userId": userId});
+}
+
+changePassword(password):Observable<User[]>{
+  return this.http.post<User[]>(this.userUrl +"/"+ this.logedUser.userId + "/changePassword", {"password": password});
  }
 
  getUserById(userId: number){
