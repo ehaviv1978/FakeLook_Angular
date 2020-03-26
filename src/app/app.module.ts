@@ -20,6 +20,8 @@ import { PostLikesComponent } from './post-likes/post-likes.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import {ChooseLocationMapComponent} from './choose-location-map/choose-location-map.component'
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     LogInComponent,
     routingComponents,
     UserDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ChooseLocationMapComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +49,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
-    NoopAnimationsModule
-
+    NoopAnimationsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
