@@ -27,6 +27,7 @@ export class NewPostComponent implements OnInit {
   public imagePath;
   public message: string;
   uploadMassage = "";
+  isMap=false;
   
   constructor(private postServ: PostService, private userServ: UserService) { }
 
@@ -48,13 +49,13 @@ export class NewPostComponent implements OnInit {
   }
 
   async onUpload() {
-    // await this.getPosition().then(pos=>
-    //   {
-    //     this.post.latGPS = pos.lat;
-    //     this.post.longGPS = pos.lng;
-    //   });
-    this.post.latGPS = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
-    this.post.longGPS = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
+    await this.getPosition().then(pos=>
+      {
+        this.post.latGPS = pos.lat;
+        this.post.longGPS = pos.lng;
+      });
+    // this.post.latGPS = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
+    // this.post.longGPS = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
     this.postServ.addPost(this.post).subscribe(res => {
         if (res.length == 1) {
           this.uploadMassage = "New post uploaded";
@@ -92,6 +93,10 @@ export class NewPostComponent implements OnInit {
           reject(err);
         });
     });
+  }
+
+  chooseLocation(){
+    this.isMap=true;
   }
 
 }

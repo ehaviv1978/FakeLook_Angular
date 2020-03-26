@@ -1,7 +1,29 @@
-<h1>Select a location!</h1>
-<p>Click on a location on the map to select it. Drag the marker to change location.</p>
+<div style="width: 100%">
+    <h2 style="text-align:center;color: darkmagenta;">Select your post location!</h2>
+    <span>Click on a location on the map to select it. Drag the marker to change location.</span>
+    <button (click)="confirmPosition()" style="position: absolute;right: 10px;color: blue;">Submit selected position</button>
+</div>
+<br>
 
 <!--map div-->
-<!-- <div #mapContainer id="map" (mapClick)="click($event)"></div> -->
-<google-map></google-map>
-Latitudue: {{lat}}  -------  Longitude: {{long}}
+<google-map
+  height="500px"
+  width="100%"
+  [zoom]="zoom"
+  [center]="center"
+  [options]="options"
+  (mapClick)="click($event)"
+>
+  <map-marker
+    #markerElem
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"
+    (mapClick)="openInfo(markerElem, marker.info)"
+  >
+  </map-marker>
+
+  <map-info-window>{{ infoContent }}</map-info-window>
+</google-map>
+

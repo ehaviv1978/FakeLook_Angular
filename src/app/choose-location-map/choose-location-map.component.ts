@@ -1,4 +1,5 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, ViewChild } from '@angular/core';
+import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 
 @Component({
   selector: 'app-choose-location-map',
@@ -6,70 +7,76 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./choose-location-map.component.css']
 })
 export class ChooseLocationMapComponent implements OnInit {
-  // title = 'angular-gmap';
-  // map: google.maps.Map;
-  // mapOptions: google.maps.MapOptions;
-  // marker: google.maps.Marker;
-  lat: number;
-  long: number;
-  // coordinate: google.maps.LatLng;
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+  @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
 
-  constructor() { }
-
-  // getCurrentLocation(callback) {
-  //   if (navigator) {
-  //     navigator.geolocation.getCurrentPosition(pos => {
-  //       this.lat = pos.coords.latitude;
-  //       this.long = pos.coords.longitude;
-  //       let coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-  //       this.mapOptions = {
-  //         center: coordinates,
-  //         zoom: 8,
-  //         minZoom: 1.7
-  //       };
-  //       this.marker = new google.maps.Marker({
-  //         position: coordinates,
-  //         map: this.map,
-  //         animation: google.maps.Animation.DROP,
-  //         title: 'I\'m Here!',
-  //         draggable: true
-  //       });
-  //       callback();
-  //     });
-  //   }
-  // }
-
-  // ngAfterViewInit() {
-  //   this.getCurrentLocation(() => {
-  //     this.mapInitializer();
-  //   });
-  // }
-
-  // mapInitializer() {
-  //   this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
-  //   this.marker.setMap(this.map);
-    // this.map.addListener('click', function (event) {
-    //   //Get the location that the user clicked.
-    //   let coordinates = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
-
-    //   console.log(coordinates);
-    //   console.log(event.latLng);
-    //   console.log(event.latLng.lat());
-
-      
-      
-    // });
-  // }
-
-  // click(event: google.maps.MouseEvent) {
-  //   console.log(event)
-  // }
-
-  // getPosition(){
-  //   console.log('hi');
-  // }
+  zoom = 12
+  lat=0;
+  long=0;
+  center: google.maps.LatLngLiteral
+  options: google.maps.MapOptions = {
+    // zoomControl: false,
+    // scrollwheel: false,
+    disableDoubleClickZoom: true,
+    // mapTypeId: 'hybrid',
+    maxZoom: 15,
+    minZoom: 2,
+  }
+  marker:any;
+  infoContent = ''
 
   ngOnInit() {
-    
+    navigator.geolocation.getCurrentPosition(position => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      this.lat = position.coords.latitude;
+      this.long =position.coords.longitude;
+      this.addMarker();
+    })
+  }
+
+  zoomIn() {
+    if (this.zoom < this.options.maxZoom) this.zoom++
+  }
+
+  zoomOut() {
+    if (this.zoom > this.options.minZoom) this.zoom--
+  }
+
+  click(event: google.maps.MouseEvent) {
+    console.log(event.latLng.lat());
+    this.lat = event.latLng.lat();
+    this.long =event.latLng.lng();
+    this.addMarker();
+  }
+
+  // logCenter() {
+  //   console.log(JSON.stringify(this.map.getCenter()))
+  // }
+
+  addMarker() {
+    this.marker ={
+      position: {
+        lat: this.lat,
+        lng: this.long,
+      },
+      title: 'Post location ' ,
+      info: 'This is my post location ' ,
+      options: {
+        draggable:true,
+        animation: google.maps.Animation.DROP,
+      },
+    }
+  }
+
+  confirmPosition(){
+    console.log('Hi');
+  }
+
+  openInfo(marker: MapMarker, content) {
+    this.infoContent = content
+    this.info.open(marker)
   }
 }

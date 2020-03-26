@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!isMap">
 
   <div class="card bg-light">
     <article class="card-body mx-auto" style="max-width: 400px;">
@@ -26,6 +26,8 @@
               style="width: 370px;"></textarea>
           </div>
         </div>
+        <button id="btnPublish" class="btn btn-primary btn-block" (click)="chooseLocation()">Change post location</button>
+        <br>
         <div class="form-group">
           <button id="btnPublish" type="submit" class="btn btn-primary btn-block" (click)="onUpload()" [disabled]="!post.picture"> Publish post
           </button>
@@ -40,3 +42,4 @@
     </article>
   </div> <!-- card.// -->
 </div>
+<app-choose-location-map *ngIf="isMap"></app-choose-location-map>
