@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
-import {PostOutput} from '../models/post';
+import { PostOutput } from '../models/post';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
@@ -15,20 +15,21 @@ import { UserService } from '../services/user.service';
 })
 export class NewPostComponent implements OnInit {
   user: User;
-  post: PostOutput={
+  post: PostOutput = {
     userId: 0,
     latGPS: 1,
-    longGPS:1,
+    longGPS: 1,
     picture: null,
-    description:"",
+    description: "",
   };
   faCamera = faCamera;
   faFile = faFolderOpen;
   public imagePath;
   public message: string;
   uploadMassage = "";
-  isMap=false;
-  
+  isMap = false;
+  locationChanged = false;
+
   constructor(private postServ: PostService, private userServ: UserService) { }
 
   preview(files) {
@@ -49,23 +50,24 @@ export class NewPostComponent implements OnInit {
   }
 
   async onUpload() {
-    await this.getPosition().then(pos=>
-      {
+    if (!this.locationChanged) {
+      await this.getPosition().then(pos => {
         this.post.latGPS = pos.lat;
         this.post.longGPS = pos.lng;
       });
+    }
     // this.post.latGPS = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
     // this.post.longGPS = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
     this.postServ.addPost(this.post).subscribe(res => {
-        if (res.length == 1) {
-          this.uploadMassage = "New post uploaded";
-          this.imagePath = null;
-          this.post.picture = null;
-          this.message = null;
-          this.file.nativeElement.value = "";
-          this.post.description = "";
-        }
-      });
+      if (res.length == 1) {
+        this.uploadMassage = "New post uploaded";
+        this.imagePath = null;
+        this.post.picture = null;
+        this.message = null;
+        this.file.nativeElement.value = "";
+        this.post.description = "";
+      }
+    });
   }
 
   @ViewChild('file', { static: true }) file: ElementRef;
@@ -81,7 +83,7 @@ export class NewPostComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userServ.logedUser;
-    this.post.userId= this.user.userId;
+    this.post.userId = this.user.userId;
   }
 
   getPosition(): Promise<any> {
@@ -95,8 +97,8 @@ export class NewPostComponent implements OnInit {
     });
   }
 
-  chooseLocation(){
-    this.isMap=true;
+  chooseLocation() {
+    this.isMap = true;
   }
 
 }

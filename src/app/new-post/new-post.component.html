@@ -42,4 +42,5 @@
     </article>
   </div> <!-- card.// -->
 </div>
-<app-choose-location-map *ngIf="isMap"></app-choose-location-map>
+<app-choose-location-map *ngIf="isMap" (childEvent)="isMap=$event.map; post.latGPS=$event.lat; 
+post.longGPS=$event.long; locationChanged=$event.changed"></app-choose-location-map>

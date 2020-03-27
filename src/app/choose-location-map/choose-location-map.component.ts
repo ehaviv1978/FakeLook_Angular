@@ -1,4 +1,4 @@
-import { Component,OnInit, ViewChild } from '@angular/core';
+import { Component,OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 
 @Component({
@@ -9,21 +9,19 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 export class ChooseLocationMapComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
+  @Output() public childEvent = new EventEmitter();
 
-  zoom = 12
+  zoom = 12;
   lat=0;
   long=0;
   center: google.maps.LatLngLiteral
   options: google.maps.MapOptions = {
-    // zoomControl: false,
-    // scrollwheel: false,
     disableDoubleClickZoom: true,
-    // mapTypeId: 'hybrid',
     maxZoom: 15,
     minZoom: 2,
   }
   marker:any;
-  infoContent = ''
+  infoContent = '';
 
   ngOnInit() {
     navigator.geolocation.getCurrentPosition(position => {
@@ -52,10 +50,6 @@ export class ChooseLocationMapComponent implements OnInit {
     this.addMarker();
   }
 
-  // logCenter() {
-  //   console.log(JSON.stringify(this.map.getCenter()))
-  // }
-
   addMarker() {
     this.marker ={
       position: {
@@ -73,6 +67,12 @@ export class ChooseLocationMapComponent implements OnInit {
 
   confirmPosition(){
     console.log('Hi');
+    this.childEvent.emit({
+      "lat":this.lat,
+      "long":this.long,
+      "map":false,
+      "changed":true
+    })
   }
 
   openInfo(marker: MapMarker, content) {
