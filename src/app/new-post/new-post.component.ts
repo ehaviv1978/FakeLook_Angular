@@ -78,7 +78,8 @@ export class NewPostComponent implements OnInit {
     this.message = null;
     this.file.nativeElement.value = "";
     this.post.description = "";
-    this.uploadMassage = ""
+    this.uploadMassage = "";
+    this.locationChanged = false;
   }
 
   ngOnInit() {

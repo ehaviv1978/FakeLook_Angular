@@ -16,7 +16,7 @@ export class CreateAccountComponent implements OnInit {
   user: User = {
     userId: null,
     birthDate: null,
-    picture: null,
+    picture: 'http://localhost:4200/assets/images/avatar.png',
     datejoined: null,
     email: "",
     address: "",
@@ -26,7 +26,7 @@ export class CreateAccountComponent implements OnInit {
     job: "",
   };
 
-  jobs = ['Designer', 'Manager', 'Accaunting', 'Unemployed', 'Engenier', 'Doctor', 'Mode','Politician','Banking','Other','Programer'];
+  jobs = ['Designer', 'Manager', 'Accaunting', 'Unemployed', 'Engenier', 'Doctor', 'Model','Politician','Banking','Other','Programer'];
   submitted = false;
   public joblDefaultValue: string = "Choose your job";
   passwordConfirm: string;
@@ -46,9 +46,12 @@ export class CreateAccountComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.userServ.createUser(this.user).subscribe(res => {
-      this.userServ.logedUser =this.user;
-      this.router.navigateByUrl('/map');
+    this.userServ.createUser(this.user).subscribe( res => {
+      this.userServ.userLogIn(this.user.email, this.user.password).subscribe(user => {
+        this.userServ.logedUser = user[0];
+        console.log(this.userServ.logedUser);
+        this.router.navigateByUrl('/map');
+      });
     });
   }
 
