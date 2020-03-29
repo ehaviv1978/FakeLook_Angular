@@ -20,6 +20,7 @@ export class PostDetailsComponent implements OnInit {
   tempComment: Comment;
   currentPost: Post;
   loggedInUser: User;
+  tags: [];
 
   constructor(private commentServ: CommentService, private postServ: PostService,
     private userServ: UserService, private route: ActivatedRoute) { }

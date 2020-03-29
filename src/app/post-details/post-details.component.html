@@ -9,6 +9,7 @@
     <div>{{currentPost.description}}</div>
   </div>
   <img class="post-image" [src]="currentPost.picture">
+  <tag-input [(ngModel)]='tags'></tag-input>
   <app-post-likes [postLikes]=currentPost.postLikes></app-post-likes>
 </div>
 <div class="comment-container">

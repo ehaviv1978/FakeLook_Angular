@@ -49,7 +49,6 @@ export class CreateAccountComponent implements OnInit {
     this.userServ.createUser(this.user).subscribe( res => {
       this.userServ.userLogIn(this.user.email, this.user.password).subscribe(user => {
         this.userServ.logedUser = user[0];
-        console.log(this.userServ.logedUser);
         this.router.navigateByUrl('/map');
       });
     });

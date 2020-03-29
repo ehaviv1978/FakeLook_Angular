@@ -7,7 +7,6 @@ import { MapPostsComponent } from './map-posts/map-posts.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SearchComponent } from './search/search.component';
-import { FormsModule} from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -22,6 +21,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {ChooseLocationMapComponent} from './choose-location-map/choose-location-map.component'
 import { GoogleMapsModule } from '@angular/google-maps'
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,11 @@ import { GoogleMapsModule } from '@angular/google-maps'
     FormsModule,
     FontAwesomeModule,
     NoopAnimationsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    TagInputModule, 
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
