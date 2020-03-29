@@ -43,4 +43,8 @@ export class PostService {
   addPost(post): Observable<Post[]> {
     return this.http.post<Post[]>(this.postUrl, post)
   }
+
+  searchPosts(searchParam):Observable<Post[]>{
+    return this.http.get<Post[]>(this.postUrl+searchParam)
+  }
 }

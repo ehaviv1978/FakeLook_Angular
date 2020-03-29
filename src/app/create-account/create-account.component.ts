@@ -18,7 +18,7 @@ export class CreateAccountComponent implements OnInit {
   user: User = {
     userId: null,
     birthDate: null,
-    picture: null,
+    picture: 'http://localhost:4200/assets/images/avatar.png',
     datejoined: null,
     email: "",
     address: "",
@@ -28,7 +28,7 @@ export class CreateAccountComponent implements OnInit {
     job: "",
   };
 
-  jobs = ['Designer', 'Manager', 'Accaunting', 'Unemployed', 'Engenier', 'Doctor', 'Mode','Politician','Banking','Other','Programer'];
+  jobs = ['Designer', 'Manager', 'Accaunting', 'Unemployed', 'Engenier', 'Doctor', 'Model','Politician','Banking','Other','Programer'];
   submitted = false;
   public joblDefaultValue: string = "Choose your job";
   passwordConfirm: string;

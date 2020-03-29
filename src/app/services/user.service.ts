@@ -24,6 +24,10 @@ export class UserService {
   
  changeUserPicture(imgUrl,userId):Observable<User[]>{
     return this.http.post<User[]>(this.userUrl +"changePic", {"file": imgUrl ,"userId": userId});
+}
+
+changePassword(password):Observable<User[]>{
+  return this.http.post<User[]>(this.userUrl + "/changePassword", {"password": password});
  }
 
  getUserById(userId: number):Observable<User>{

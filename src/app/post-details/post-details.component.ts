@@ -6,6 +6,9 @@ import { User } from '../models/user';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { faThumbsUp  }  from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp as faThumbsUpFull } from '@fortawesome/free-solid-svg-icons'
+
 
 @Component({
   selector: 'app-post-details',
@@ -35,8 +38,13 @@ export class PostDetailsComponent implements OnInit {
       this.getComments(this.currentPost.postId);
   }
 
+<<<<<<< HEAD
   getComments(postId) {
     this.commentServ.getComments(postId).subscribe(data => {
+=======
+  getComments() {
+    this.commentServ.getComments(this.currentPost.postId, this.userServ.logedUser.userId).subscribe(data => {
+>>>>>>> f534d39049a4091adcb8a5042a5354f04e0a9130
       this.comments = data;
     });
   }
@@ -56,5 +64,13 @@ export class PostDetailsComponent implements OnInit {
 
   createEmptyComment() {
     this.tempComment = new Comment()
+  }
+
+  async dislikeComment(commentId){
+    this.commentServ.removeLike(this.userServ.logedUser.userId,commentId)
+  }
+  
+  async likeComment(commentId){
+    this.commentServ.addLike(this.userServ.logedUser.userId,commentId)
   }
 }

@@ -1,0 +1,17 @@
+  <div class="list">
+    <h4 *ngIf="users.length>0" style="margin-top: 10px; color:darkmagenta; font-style: italic; font-weight: bold;">Users:</h4>
+    <span *ngFor="let user of users; index as i" (click)="showUserDetail(user)">
+      <img [src]="user.picture" style="width: 30px;" />
+      <a id={{i}} style="vertical-align: bottom;"> - {{user.firstName + " " + user.lastName +"\n"}}</a>
+      <br>
+      <br>
+    </span>
+ 
+    <h4 *ngIf="posts.length>0" style="margin-top: 10px; color:darkmagenta; font-style: italic; font-weight: bold;">Posts:</h4>
+    <span *ngFor="let post of posts; index as i" (click)="showPostDetail(post)">
+      <img [src]="post.picture" style="width: 30px;" />
+      <a id={{i}} style="vertical-align: bottom;"> - {{post.description +"\n"}}</a>
+      <br>
+      <br>
+    </span>
+  </div>

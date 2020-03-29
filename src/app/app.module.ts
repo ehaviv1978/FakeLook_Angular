@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MapPostsComponent } from './map-posts/map-posts.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { AllUsersComponent } from './all-users/all-users.component';
+import { SearchComponent } from './search/search.component';
 import { FormsModule} from '@angular/forms';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -21,8 +21,9 @@ import { LogInComponent } from './log-in/log-in.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { AuthInterceptorService } from './services/interceptor/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import {ChooseLocationMapComponent} from './choose-location-map/choose-location-map.component'
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MapPostsComponent,
     NavBarComponent,
     SideBarComponent,
-    AllUsersComponent,
+    SearchComponent,
     AllPostsComponent,
     CreateAccountComponent,
     NewPostComponent,
@@ -40,7 +41,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     PostLikesComponent,
     LogInComponent,
     routingComponents,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ChangePasswordComponent,
+    ChooseLocationMapComponent
   ],
   imports: [
     BrowserModule,
@@ -48,8 +51,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
-    NoopAnimationsModule
-
+    NoopAnimationsModule,
+    GoogleMapsModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}  ],
   bootstrap: [AppComponent]

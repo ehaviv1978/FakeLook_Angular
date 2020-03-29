@@ -27,4 +27,18 @@
     <div>{{comment.commentContent}}</div>
   </div>
   <div class="date-field"> posted at : {{  comment.timeCommented | date:'medium' }}</div>
+  <div style="position:relative">
+    <span>likes : {{comment.commentLikeAmount}}&nbsp;|&nbsp;</span>
+    <p *ngIf="comment.liked; then thenBlock else elseBlock"></p>
+    <ng-template #thenBlock>
+        <button class="button-like" (click) = "dislikeComment(comment.commentId); comment.liked=false;comment.commentLikeAmount= comment.commentLikeAmount-1">
+             <fa-icon [icon]="faThumbsUpFull"></fa-icon>
+        </button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <button class="button-like" (click) = "likeComment(comment.commentId) ; comment.liked=true;comment.commentLikeAmount= comment.commentLikeAmount+1" >
+                 <fa-icon [icon]="faThumbsUp"></fa-icon>
+        </button>
+    </ng-template>
+</div>
 </div>
