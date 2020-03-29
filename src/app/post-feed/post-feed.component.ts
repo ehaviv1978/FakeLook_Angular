@@ -21,7 +21,7 @@ export class PostFeedComponent implements OnInit {
   }
 
   getPosts() {
-    this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(data => {
+    this.postServ.getPosts().subscribe(data => {
       this.posts = data;
       console.log(data);
     });

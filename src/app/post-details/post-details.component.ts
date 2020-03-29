@@ -19,27 +19,31 @@ export class PostDetailsComponent implements OnInit {
   loggedInUser: User;
 
   constructor(private commentServ: CommentService, private postServ: PostService,
-    private userServ: UserService, private route: ActivatedRoute) { }
+    private userServ: UserService, private route: ActivatedRoute) {
+      this.currentPost = new Post;
+      this.loggedInUser = this.userServ.logedUser;
+      let postId = parseInt(this.route.snapshot.paramMap.get('id'));
+      this.postServ.getPost(postId).subscribe(data => {
+        this.currentPost = data[0];
+        console.log(data);
+        // this.currentPost.postId= postId;
+       });
+     }
 
    ngOnInit() {
-    let postId = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.postServ.getPost(this.userServ.logedUser.userId, postId).subscribe(data => {
-      this.currentPost = data[0];
-      this.loggedInUser = this.userServ.logedUser;
-      this.getComments();
       this.createEmptyComment();
-    });
+      this.getComments(this.currentPost.postId);
   }
 
-  getComments() {
-    this.commentServ.getComments(this.currentPost.postId).subscribe(data => {
+  getComments(postId) {
+    this.commentServ.getComments(postId).subscribe(data => {
       this.comments = data;
     });
   }
 
   addComment() {
     console.log(this.tempComment);
-    this.tempComment.userId = this.loggedInUser.userId;
+    // this.tempComment.userId = this.loggedInUser.userId;
     this.tempComment.postId = this.currentPost.postId;
     this.tempComment.firstName = this.loggedInUser.firstName;
     this.tempComment.lastName = this.loggedInUser.lastName;

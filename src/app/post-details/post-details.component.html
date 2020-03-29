@@ -9,7 +9,7 @@
     <div>{{currentPost.description}}</div>
   </div>
   <img class="post-image" [src]="currentPost.picture">
-  <app-post-likes [postLikes]=currentPost.postLikes></app-post-likes>
+  <app-post-likes *ngIf='currentPost.postLikes' [postLikes]=currentPost.postLikes></app-post-likes>
 </div>
 <div class="comment-container">
   <textarea id="comment-input" [(ngModel)]="tempComment.commentContent" required></textarea>

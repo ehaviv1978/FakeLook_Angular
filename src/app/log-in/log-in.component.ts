@@ -21,19 +21,22 @@ export class LogInComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private authServ: AuthService,private router: Router) { }
+  constructor(private authServ: AuthService,private router: Router,private userServ:UserService) { }
 
   onSubmit() {
     this.authServ.userLogIn(this.emailInput, this.passwordInput).subscribe(authResponse => {
       console.log(authResponse);
       if (authResponse.auth) {
+         localStorage.setItem("authToken",authResponse.authToken);
+         this.userServ.getUserById(authResponse.userId).subscribe(data =>{
+           this.userServ.logedUser = data[0]
+          });
         this.router.navigateByUrl('/map');
       }
         // document.getElementById("activeComponent").style.left="250px";
         // this.userServ.logedUser = user[0];
     }, (err) =>{
       if (err.status === 401){
-
         this.validEmailandPassword = false;
       }
     });

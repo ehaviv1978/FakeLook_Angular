@@ -19,6 +19,10 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostLikesComponent } from './post-likes/post-likes.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { AuthInterceptorService } from './services/interceptor/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -47,7 +51,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     NoopAnimationsModule
 
   ],
-  providers: [],
+  providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

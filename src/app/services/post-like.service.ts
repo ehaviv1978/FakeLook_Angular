@@ -10,15 +10,16 @@ export class PostLikeService {
 
   private likeUrl;
   constructor( private http: HttpClient ,private userServ:UserService) { }
+  
   addLike(postLikes:PostLikes){
-    this.setURL(postLikes.postId,this.userServ.logedUser.userId);
+    this.setURL(postLikes.postId);
     this.http.post<PostLikes>(this.likeUrl,postLikes).subscribe();
   } 
    removeLike(postLikes:PostLikes){
-    this.setURL(postLikes.postId,this.userServ.logedUser.userId);
+    this.setURL(postLikes.postId);
     this.http.delete<PostLikes>(this.likeUrl).subscribe();
   }
-  setURL(postId:number,userId:number){
-    this.likeUrl = `http://localhost:8888/api/posts/${postId}/${userId}`
+  setURL(postId:number){
+    this.likeUrl = `http://localhost:8888/api/posts/${postId}/likes`
   }
 }

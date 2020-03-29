@@ -8,12 +8,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PostService {
-  private postUrl;
+  private postUrl = 'http://localhost:8888/api/posts/';
 
   constructor(private http: HttpClient) { }
 
-  getPosts(userId: number): Observable<Post[]> {
-    this.setURL(userId);
+  getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postUrl)
       .pipe(map((Posts: Post[]) => {
         let myPosts = []
@@ -27,9 +26,8 @@ export class PostService {
       }));
   }
 
-  getPost(userId: number, postId:number):Observable<Post[]> {
-    this.postUrl = 'http://localhost:8888/api/post';
-    return this.http.post<Post[]>(this.postUrl,{"userId": userId, "postId": postId})
+  getPost(postId:number):Observable<Post[]> {
+    return this.http.get<Post[]>(this.postUrl+postId)
     .pipe(map((Posts: Post[]) => {
       let post = []
       Posts.map(Post => {
@@ -42,15 +40,7 @@ export class PostService {
     }));
   }
 
-  setURL(userId: number) {
-    this.postUrl = `http://localhost:8888/api/posts/${userId}`;
-  }
-
   addPost(post): Observable<Post[]> {
-    this.postUrl = `http://localhost:8888/api/posts/`;
-
     return this.http.post<Post[]>(this.postUrl, post)
   }
-
-  // public currentPost: Post;
 }

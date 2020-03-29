@@ -27,7 +27,7 @@ export class MapPostsComponent implements AfterViewInit {
   constructor(private postServ: PostService, private userServ: UserService,private router: Router) { }
   
   async showPosts() {
-    this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(res => {
+    this.postServ.getPosts().subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({
@@ -98,6 +98,6 @@ export class MapPostsComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.user = this.userServ.logedUser;
+  this.user = this.userServ.logedUser;
   }
 }

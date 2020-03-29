@@ -4,6 +4,7 @@ import { faUser, faEnvelope, faCalendar } from '@fortawesome/free-regular-svg-ic
 import { faPhone, faUserMd, faLock, faHome, faKey } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service'
 
 import { Router } from '@angular/router';
 
@@ -43,13 +44,18 @@ export class CreateAccountComponent implements OnInit {
   faFacebook = faFacebook;
   faKey = faKey;
 
-  constructor(private authServ: AuthService,private router: Router) { }
+  constructor(private authServ: AuthService,private router: Router,private userServ:UserService) { }
 
   onSubmit() {
     this.submitted = true;
-    this.authServ.createUser(this.user).subscribe(res => {
-      // this.userServ.logedUser =this.user;
-      this.router.navigateByUrl('/map');
+    this.authServ.createUser(this.user).subscribe(authResponse => {
+      if (authResponse.auth) {
+        localStorage.setItem("authToken",authResponse.authToken);
+        this.userServ.getUserById(authResponse.userId).subscribe(data =>{
+          this.userServ.logedUser = data[0]
+         });
+       this.router.navigateByUrl('/map');
+     }
     });
   }
 
