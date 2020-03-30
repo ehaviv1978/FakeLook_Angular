@@ -9,7 +9,7 @@
     <div>{{currentPost.description}}</div>
   </div>
   <img class="post-image" [src]="currentPost.picture">
-  <tag-input [(ngModel)]='tags'></tag-input>
+  <tag-input [disable]="currentPost.userId!=loggedInUser.userId" [(ngModel)]='currentPost.postTags'></tag-input>
   <app-post-likes [postLikes]=currentPost.postLikes></app-post-likes>
 </div>
 <div class="comment-container">
@@ -28,6 +28,7 @@
     <div>{{comment.commentContent}}</div>
   </div>
   <div class="date-field"> posted at : {{  comment.timeCommented | date:'medium' }}</div>
+  <tag-input [disable]="comment.userId!=loggedInUser.userId"[(ngModel)]='comment.postTags'></tag-input>
   <div style="position:relative">
     <span>likes : {{comment.commentLikeAmount}}&nbsp;|&nbsp;</span>
     <p *ngIf="comment.liked; then thenBlock else elseBlock"></p>

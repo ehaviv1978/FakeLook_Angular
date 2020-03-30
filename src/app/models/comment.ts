@@ -9,4 +9,5 @@ export class Comment{
     commentId:number;
     commentLikeAmount:number;
     liked:number;
+    commentTags:[];
 }

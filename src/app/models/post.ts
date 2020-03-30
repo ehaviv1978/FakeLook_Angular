@@ -11,6 +11,7 @@ export class Post{
     userPic:string;
     postLikes:PostLikes;
     userId: number;
+    postTags:[];
     
     postLikeAmount:number;
     liked:boolean;
