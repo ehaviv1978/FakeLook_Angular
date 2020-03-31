@@ -29,6 +29,7 @@ export class PostDetailsComponent implements OnInit {
   ngOnInit() {
     let postId = parseInt(this.route.snapshot.paramMap.get('id'));
     this.postServ.getPost(this.userServ.logedUser.userId, postId).subscribe(data => {
+      console.log(data[0]);
       this.currentPost = data[0];
       this.loggedInUser = this.userServ.logedUser;
       this.getComments();
@@ -65,5 +66,35 @@ export class PostDetailsComponent implements OnInit {
   
   async likeComment(commentId){
     this.commentServ.addLike(this.userServ.logedUser.userId,commentId)
+  }
+
+  addPostTag(event){
+    this.postServ.addPostTag(this.currentPost.postId,event.value).subscribe(data => {
+     console.log(data);
+    });
+  }
+
+  removePostTag(event){
+    if (event.value!=undefined){
+      event=event.value
+    }
+    this.postServ.removePostTag(this.currentPost.postId,event).subscribe(data => {
+      console.log(data);
+     });
+  }
+
+  addCommentTag(commentId,event){
+    this.commentServ.addCommentTag(commentId,event.value).subscribe(data => {
+     console.log(data);
+    });
+  }
+
+  removeCommentTag(commentId,event){
+    if (event.value!=undefined){
+      event=event.value
+    }
+    this.commentServ.removeCommentTag(commentId,event).subscribe(data => {
+      console.log(data);
+     });
   }
 }

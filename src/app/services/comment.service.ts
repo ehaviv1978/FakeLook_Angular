@@ -33,4 +33,14 @@ export class CommentService {
     console.log("remove" + userId + commentId)
     return this.http.delete(`http://localhost:8888/api/comments/${commentId}/${userId}`).subscribe();
   }
+
+  addCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
+    this.commentUrl = `http://localhost:8888/api/commentTagAdd/${commentId}`;
+    return this.http.post<Comment[]>(this.commentUrl, {"tagContent":tagContent})
+  }
+
+  removeCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
+    this.commentUrl = `http://localhost:8888/api/commentTagRemove/${commentId}`;
+    return this.http.post<Comment[]>(this.commentUrl, {"tagContent":tagContent})
+  }
 }

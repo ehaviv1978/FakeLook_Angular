@@ -56,4 +56,14 @@ export class PostService {
     return this.http.get<Post[]>(this.postUrl+searchParam)
   }
 
+  addPostTag(postId:number,tagContent:string): Observable<Post[]> {
+    this.postUrl = `http://localhost:8888/api/postTagAdd/${postId}`;
+    return this.http.post<Post[]>(this.postUrl, {"tagContent":tagContent})
+  }
+
+  removePostTag(postId:number,tagContent:string): Observable<Post[]> {
+    this.postUrl = `http://localhost:8888/api/postTagRemove/${postId}`;
+    return this.http.post<Post[]>(this.postUrl, {"tagContent":tagContent})
+  }
+
 }
