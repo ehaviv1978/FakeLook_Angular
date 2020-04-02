@@ -35,16 +35,7 @@ export class ChooseLocationMapComponent implements OnInit {
     })
   }
 
-  zoomIn() {
-    if (this.zoom < this.options.maxZoom) this.zoom++
-  }
-
-  zoomOut() {
-    if (this.zoom > this.options.minZoom) this.zoom--
-  }
-
   click(event: google.maps.MouseEvent) {
-    console.log(event.latLng.lat());
     this.lat = event.latLng.lat();
     this.long =event.latLng.lng();
     this.addMarker();
@@ -66,7 +57,6 @@ export class ChooseLocationMapComponent implements OnInit {
   }
 
   confirmPosition(){
-    console.log('Hi');
     this.childEvent.emit({
       "lat":this.lat,
       "long":this.long,

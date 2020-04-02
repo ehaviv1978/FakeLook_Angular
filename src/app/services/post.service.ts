@@ -66,4 +66,9 @@ export class PostService {
     return this.http.post<Post[]>(this.postUrl, {"tagContent":tagContent})
   }
 
+  getMapPosts(minLat:number,maxLat:number,minLong:number,maxLong:number): Observable<Post[]> {
+    this.postUrl = `http://localhost:8888/api/posts/getMapPosts/${minLat}/${maxLat}/${minLong}/${maxLong}`;
+    return this.http.get<Post[]>(this.postUrl)
+  }
+
 }

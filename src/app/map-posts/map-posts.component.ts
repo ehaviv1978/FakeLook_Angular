@@ -1,10 +1,10 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 import { User } from '../models/user';
-import  MarkerClusterer from "@google/markerclusterer"
+import MarkerClusterer from "@google/markerclusterer"
 import { UserService } from '../services/user.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,16 +24,27 @@ export class MapPostsComponent implements AfterViewInit {
   imageurl: string;
   iconSize = 40;
   markers = [];
-  constructor(private postServ: PostService, private userServ: UserService,private router: Router) { }
-  
-  async showPosts() {
-    this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(res => {
+  markerClaster: MarkerClusterer;
+  minLat = 0;
+  maxLat = 0;
+  minLong = 0;
+  maxLong = 0;
+  constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
+
+  getMapBounds() {
+    this.minLat = this.map.getBounds().toJSON().south
+    this.maxLat = this.map.getBounds().toJSON().north
+    this.minLong = this.map.getBounds().toJSON().west
+    this.maxLong = this.map.getBounds().toJSON().east
+  }
+
+  async getMarkers() {
+    await this.getMapBounds();
+    this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong).subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(post.lat, post.long),
-          map: this.map,
-         // animation: google.maps.Animation.BOUNCE,
           icon: {
             url: post.userPic,
             scaledSize: new google.maps.Size(this.iconSize, this.iconSize)
@@ -52,13 +63,16 @@ export class MapPostsComponent implements AfterViewInit {
           this.router.navigate(['/post', post.postId]);
         });
         this.markers.push(marker);
-        marker.setMap(this.map);
       }
-      var options = {
-        imagePath: 'http://localhost:4200/assets/images/m'
-      };
-      new MarkerClusterer(this.map, this.markers, options)
-    });    
+      this.showPosts();
+    });
+  }
+
+  showPosts() {
+    var options = {
+      imagePath: 'http://localhost:4200/assets/images/m'
+    };
+    this.markerClaster = new MarkerClusterer(this.map, this.markers, options)
   }
 
   getCurrentLocation(callback) {
@@ -68,7 +82,7 @@ export class MapPostsComponent implements AfterViewInit {
         this.mapOptions = {
           center: coordinates,
           zoom: 8,
-          minZoom:1.7
+          minZoom: 1
         };
         this.marker = new google.maps.Marker({
           position: coordinates,
@@ -93,7 +107,19 @@ export class MapPostsComponent implements AfterViewInit {
 
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
+    this.map.addListener('idle', () => {
+      this.mapZom();
+    });
     this.marker.setMap(this.map);
+    this.getMarkers();
+  }
+
+  mapZom() {
+    if (this.markers.length > 0) {
+      this.markers = []
+      this.markerClaster.clearMarkers();
+    }
+    this.getMarkers();
     this.showPosts();
   }
 
