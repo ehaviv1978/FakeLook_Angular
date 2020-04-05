@@ -1,4 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule  } from '@angular/platform-browser';
+import {MatSliderModule} from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule,routingComponents } from './app-routing.module';
@@ -22,8 +24,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import {ChooseLocationMapComponent} from './choose-location-map/choose-location-map.component'
 import { GoogleMapsModule } from '@angular/google-maps'
 import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GestureConfig } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -54,11 +58,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NoopAnimationsModule,
     GoogleMapsModule,
     TagInputModule, 
-    BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HammerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: GestureConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

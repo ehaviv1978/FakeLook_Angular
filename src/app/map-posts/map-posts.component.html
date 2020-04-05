@@ -1,1 +1,37 @@
-<div #mapContainer id="map"></div>
+<div>
+    <div class="table-filter">
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="filter-icon">
+                    <fa-icon [icon]="faFilter" style="color: rgb(107, 0, 98);"></fa-icon>
+                </span>
+                <div class="filter-group">
+                    <label>From date</label>
+                    <input type="date" class="form-control" [(ngModel)]="minDate">
+                </div>
+                <div class="filter-group">
+                    <label>To date</label>
+                    <input type="date" class="form-control" [(ngModel)]="maxDate">
+                </div>
+                <div class="filter-group">
+                    <label>Posted by</label>
+                    <select class="form-control" [(ngModel)]="userId">
+                        <option value="0">All users</option>
+                        <option *ngFor="let user of users" [value]="user.userId">{{user.firstName}} {{user.lastName}}</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tag</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label>Post radius by km</label>
+                    <mat-slider [(ngModel)]="range" min="1" max="22000" step="1" thumbLabel="1" style="width: 600px;"></mat-slider>
+                </div>
+                <button type="button" class="btn btn-primary" style="float: right; margin-top: 5px; margin-right: 10px;"
+                (click)="newFilter()">Filter</button>
+            </div>
+        </div>
+    </div>
+    <div #mapContainer id="map"></div>
+</div>

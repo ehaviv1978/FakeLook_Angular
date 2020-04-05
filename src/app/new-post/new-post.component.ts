@@ -56,8 +56,6 @@ export class NewPostComponent implements OnInit {
         this.post.longGPS = pos.lng;
       });
     }
-    // this.post.latGPS = Math.random() * 89 * (Math.round(Math.random()) * 2 - 1);
-    // this.post.longGPS = Math.random() * 179 * (Math.round(Math.random()) * 2 - 1);
     this.postServ.addPost(this.post).subscribe(res => {
       if (res.length == 1) {
         this.uploadMassage = "New post uploaded";
@@ -66,6 +64,9 @@ export class NewPostComponent implements OnInit {
         this.message = null;
         this.file.nativeElement.value = "";
         this.post.description = "";
+      }
+      else{
+        this.uploadMassage = "Upload fail, try again";
       }
     });
   }

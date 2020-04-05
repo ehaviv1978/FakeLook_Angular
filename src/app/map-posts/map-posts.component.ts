@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import MarkerClusterer from "@google/markerclusterer"
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'map-posts',
@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./map-posts.component.css']
 })
 export class MapPostsComponent implements AfterViewInit {
+  faFilter=faFilter;
   user: User;
+  users: User[];
   title = 'angular-gmap';
   @ViewChild('mapContainer', { static: true }) gmap: ElementRef;
   map: google.maps.Map;
@@ -29,6 +31,13 @@ export class MapPostsComponent implements AfterViewInit {
   maxLat = 0;
   minLong = 0;
   maxLong = 0;
+  minDate = new Date(2000, 11, 24);
+  maxDate = new Date();
+  userId=0;
+  latGps=0;
+  longGps=0;
+  range =10000;
+
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
 
   getMapBounds() {
@@ -40,7 +49,8 @@ export class MapPostsComponent implements AfterViewInit {
 
   async getMarkers() {
     await this.getMapBounds();
-    this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong).subscribe(res => {
+    this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong,this.userId,this.minDate,
+    this.maxDate,this.range,'hi',this.latGps,this.longGps).subscribe(res => {
       this.posts = res;
       for (let post of this.posts) {
         let marker = new google.maps.Marker({
@@ -78,6 +88,8 @@ export class MapPostsComponent implements AfterViewInit {
   getCurrentLocation(callback) {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
+        this.latGps=pos.coords.latitude;
+        this.longGps=pos.coords.longitude;
         let coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.mapOptions = {
           center: coordinates,
@@ -108,22 +120,26 @@ export class MapPostsComponent implements AfterViewInit {
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
     this.map.addListener('idle', () => {
-      this.mapZom();
+      this.newFilter();
     });
     this.marker.setMap(this.map);
     this.getMarkers();
   }
 
-  mapZom() {
+  newFilter() {
+    console.log(this.userId)
     if (this.markers.length > 0) {
       this.markers = []
       this.markerClaster.clearMarkers();
     }
     this.getMarkers();
-    this.showPosts();
+    //this.showPosts();
   }
 
   ngOnInit() {
     this.user = this.userServ.logedUser;
+    this.userServ.getUsers().subscribe(res => {
+      this.users = res;
+    });
   }
 }
