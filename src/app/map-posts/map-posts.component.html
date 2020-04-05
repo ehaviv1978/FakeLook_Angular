@@ -26,7 +26,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Post radius by km</label>
-                    <mat-slider [(ngModel)]="range" min="1" max="22000" step="1" thumbLabel="1" style="width: 600px;"></mat-slider>
+                    <mat-slider (input)="changeCircle()" (change)="changeCircle()"[(ngModel)]="range" min="1" max="22000" step="1" thumbLabel="1" style="width: 600px;"></mat-slider>
                 </div>
                 <button type="button" class="btn btn-primary" style="float: right; margin-top: 5px; margin-right: 10px;"
                 (click)="newFilter()">Filter</button>

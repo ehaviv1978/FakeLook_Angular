@@ -6,6 +6,7 @@ import MarkerClusterer from "@google/markerclusterer"
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'map-posts',
@@ -13,7 +14,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./map-posts.component.css']
 })
 export class MapPostsComponent implements AfterViewInit {
-  faFilter=faFilter;
+  faFilter = faFilter;
   user: User;
   users: User[];
   title = 'angular-gmap';
@@ -33,10 +34,11 @@ export class MapPostsComponent implements AfterViewInit {
   maxLong = 0;
   minDate = new Date(2000, 11, 24);
   maxDate = new Date();
-  userId=0;
-  latGps=0;
-  longGps=0;
-  range =10000;
+  userId = 0;
+  latGps = 0;
+  longGps = 0;
+  range = 200;
+  circle = new google.maps.Circle();
 
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
 
@@ -49,33 +51,33 @@ export class MapPostsComponent implements AfterViewInit {
 
   async getMarkers() {
     await this.getMapBounds();
-    this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong,this.userId,this.minDate,
-    this.maxDate,this.range,'hi',this.latGps,this.longGps).subscribe(res => {
-      this.posts = res;
-      for (let post of this.posts) {
-        let marker = new google.maps.Marker({
-          position: new google.maps.LatLng(post.lat, post.long),
-          icon: {
-            url: post.userPic,
-            scaledSize: new google.maps.Size(this.iconSize, this.iconSize)
-          }
-        });
-        let infowindow = new google.maps.InfoWindow({
-          content: '<div><img width="200" src="' + post.picture + '"/><br>' + post.description + '</div>'
-        });
-        marker.addListener('mouseover', () => {
-          infowindow.open(this.map, marker);
-        });
-        marker.addListener('mouseout', () => {
-          infowindow.close();
-        });
-        marker.addListener('click', async () => {
-          this.router.navigate(['/post', post.postId]);
-        });
-        this.markers.push(marker);
-      }
-      this.showPosts();
-    });
+    this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong, this.userId, this.minDate,
+      this.maxDate, this.range, 'hi', this.latGps, this.longGps).subscribe(res => {
+        this.posts = res;
+        for (let post of this.posts) {
+          let marker = new google.maps.Marker({
+            position: new google.maps.LatLng(post.lat, post.long),
+            icon: {
+              url: post.userPic,
+              scaledSize: new google.maps.Size(this.iconSize, this.iconSize)
+            }
+          });
+          let infowindow = new google.maps.InfoWindow({
+            content: '<div><img width="200" src="' + post.picture + '"/><br>' + post.description + '</div>'
+          });
+          marker.addListener('mouseover', () => {
+            infowindow.open(this.map, marker);
+          });
+          marker.addListener('mouseout', () => {
+            infowindow.close();
+          });
+          marker.addListener('click', async () => {
+            this.router.navigate(['/post', post.postId]);
+          });
+          this.markers.push(marker);
+        }
+        this.showPosts();
+      });
   }
 
   showPosts() {
@@ -88,12 +90,12 @@ export class MapPostsComponent implements AfterViewInit {
   getCurrentLocation(callback) {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
-        this.latGps=pos.coords.latitude;
-        this.longGps=pos.coords.longitude;
+        this.latGps = pos.coords.latitude;
+        this.longGps = pos.coords.longitude;
         let coordinates = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.mapOptions = {
           center: coordinates,
-          zoom: 8,
+          zoom: 6,
           minZoom: 1
         };
         this.marker = new google.maps.Marker({
@@ -124,16 +126,37 @@ export class MapPostsComponent implements AfterViewInit {
     });
     this.marker.setMap(this.map);
     this.getMarkers();
+    this.drowCircle();
+    this.circle.setEditable(false);
+    this.circle.setDraggable(false);
   }
 
-  newFilter() {
-    console.log(this.userId)
+  drowCircle() {
+    this.circle = new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.1,
+      map: this.map,
+      center: this.map.getCenter(),
+      radius: this.range * 1000 * 1.9,
+    });
+  }
+
+  changeCircle() {
+    this.latGps =this.map.getCenter().lat()
+    this.longGps =this.map.getCenter().lng()
+    this.circle.setCenter(this.map.getCenter());
+    this.circle.setRadius(this.range * 1000);
+  }
+
+  async newFilter() {
     if (this.markers.length > 0) {
       this.markers = []
       this.markerClaster.clearMarkers();
     }
     this.getMarkers();
-    //this.showPosts();
   }
 
   ngOnInit() {
