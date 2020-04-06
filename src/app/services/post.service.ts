@@ -68,7 +68,9 @@ export class PostService {
 
   getMapPosts(minLat:number,maxLat:number,minLong:number,maxLong:number,userId:number,
     minDate: Date, maxDate: Date, range: number, tag: string, latGps: number, longGps: number): Observable<Post[]> {
-      console.log(latGps,longGps,range)
+      if (tag ==''){
+        tag='~~~~'
+      }
     this.postUrl = `http://localhost:8888/api/posts/getMapPosts/${minLat}/${maxLat}/${minLong}/
     ${maxLong}/${userId}/${minDate}/${maxDate}/${range}/${tag}/${latGps}/${longGps}`;
     return this.http.get<Post[]>(this.postUrl)

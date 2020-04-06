@@ -39,6 +39,7 @@ export class MapPostsComponent implements AfterViewInit {
   longGps = 0;
   range = 200;
   circle = new google.maps.Circle();
+  tag ="";
 
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
 
@@ -52,7 +53,7 @@ export class MapPostsComponent implements AfterViewInit {
   async getMarkers() {
     await this.getMapBounds();
     this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong, this.userId, this.minDate,
-      this.maxDate, this.range, 'hi', this.latGps, this.longGps).subscribe(res => {
+      this.maxDate, this.range, this.tag, this.latGps, this.longGps).subscribe(res => {
         this.posts = res;
         for (let post of this.posts) {
           let marker = new google.maps.Marker({
@@ -137,7 +138,7 @@ export class MapPostsComponent implements AfterViewInit {
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#FF0000',
-      fillOpacity: 0.1,
+      fillOpacity: 0.05,
       map: this.map,
       center: this.map.getCenter(),
       radius: this.range * 1000 * 1.9,
