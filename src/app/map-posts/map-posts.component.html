@@ -22,16 +22,13 @@
                 </div>
                 <div class="filter-group">
                     <label>Tag</label>
-                    <input [(ngModel)]="tag" type="text" class="form-control">
+                    <input [(ngModel)]="tag" type="text" class="form-control" style="width: 150px;">
                 </div>
-                <div class="filter-group">
-                    <label>Post radius by km</label>
-                    <mat-slider (input)="changeCircle()" (change)="changeCircle()"[(ngModel)]="range" min="1" max="20000" step="1" thumbLabel="1" style="width: 600px;"></mat-slider>
-                </div>
-                <button type="button" class="btn btn-primary" style="float: right; margin-top: 5px; margin-right: 10px;"
+                <button type="button" class="btn btn-primary" style="float: right"
                 (click)="newFilter()">Filter</button>
             </div>
         </div>
     </div>
+    <span style="color: blue;">Search radius: {{range.toFixed(2)}} km | Total posts found: {{markers.length}}</span>
     <div #mapContainer id="map"></div>
 </div>

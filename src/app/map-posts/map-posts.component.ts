@@ -37,7 +37,7 @@ export class MapPostsComponent implements AfterViewInit {
   userId = 0;
   latGps = 0;
   longGps = 0;
-  range = 200;
+  range = 500;
   circle = new google.maps.Circle();
   tag ="";
 
@@ -125,11 +125,23 @@ export class MapPostsComponent implements AfterViewInit {
     this.map.addListener('idle', () => {
       this.newFilter();
     });
+    this.map.addListener('click', (event) => {
+      this.mapClick(event);
+    });
     this.marker.setMap(this.map);
     this.getMarkers();
     this.drowCircle();
-    this.circle.setEditable(false);
-    this.circle.setDraggable(false);
+    this.circle.setDraggable(true);
+    this.circle.setEditable(true);
+    this.circle.addListener('dragend', () => {
+      this.latGps = this.circle.getCenter().lat();
+      this.longGps =this.circle.getCenter().lng();
+      this.newFilter();
+    });
+    this.circle.addListener('radius_changed', () => {
+      this.range=this.circle.getRadius()/1000;
+      this.newFilter();
+    });
   }
 
   drowCircle() {
@@ -141,15 +153,19 @@ export class MapPostsComponent implements AfterViewInit {
       fillOpacity: 0.05,
       map: this.map,
       center: this.map.getCenter(),
-      radius: this.range * 1000 * 1.9,
+      radius: this.range * 1000,
     });
   }
 
   changeCircle() {
-    this.latGps =this.map.getCenter().lat()
-    this.longGps =this.map.getCenter().lng()
-    this.circle.setCenter(this.map.getCenter());
     this.circle.setRadius(this.range * 1000);
+  }
+
+  mapClick(event: google.maps.MouseEvent) {
+    this.latGps = event.latLng.lat();
+    this.longGps =event.latLng.lng();
+    this.circle.setCenter(event.latLng)
+    this.newFilter();
   }
 
   async newFilter() {
