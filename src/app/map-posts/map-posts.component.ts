@@ -28,10 +28,10 @@ export class MapPostsComponent implements AfterViewInit {
   iconSize = 40;
   markers = [];
   markerClaster: MarkerClusterer;
-  minLat = 0;
-  maxLat = 0;
-  minLong = 0;
-  maxLong = 0;
+  minLat = -91;
+  maxLat = 91;
+  minLong = -180;
+  maxLong = 180;
   minDate = new Date(2000, 11, 24);
   maxDate = new Date();
   userId = 0;
@@ -43,15 +43,15 @@ export class MapPostsComponent implements AfterViewInit {
 
   constructor(private postServ: PostService, private userServ: UserService, private router: Router) { }
 
-  getMapBounds() {
-    this.minLat = this.map.getBounds().toJSON().south
-    this.maxLat = this.map.getBounds().toJSON().north
-    this.minLong = this.map.getBounds().toJSON().west
-    this.maxLong = this.map.getBounds().toJSON().east
-  }
+  // getMapBounds() {
+  //   this.minLat = this.map.getBounds().toJSON().south
+  //   this.maxLat = this.map.getBounds().toJSON().north
+  //   this.minLong = this.map.getBounds().toJSON().west
+  //   this.maxLong = this.map.getBounds().toJSON().east
+  // }
 
   async getMarkers() {
-    await this.getMapBounds();
+    // await this.getMapBounds();
     this.postServ.getMapPosts(this.minLat, this.maxLat, this.minLong, this.maxLong, this.userId, this.minDate,
       this.maxDate, this.range, this.tag, this.latGps, this.longGps).subscribe(res => {
         this.posts = res;
@@ -122,9 +122,9 @@ export class MapPostsComponent implements AfterViewInit {
 
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
-    this.map.addListener('idle', () => {
-      this.newFilter();
-    });
+    // this.map.addListener('idle', () => {
+    //   this.newFilter();
+    // });
     this.map.addListener('click', (event) => {
       this.mapClick(event);
     });
