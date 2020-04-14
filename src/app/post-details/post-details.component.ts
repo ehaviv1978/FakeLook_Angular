@@ -28,23 +28,20 @@ export class PostDetailsComponent implements OnInit {
       let postId = parseInt(this.route.snapshot.paramMap.get('id'));
       this.postServ.getPost(postId).subscribe(data => {
         this.currentPost = data[0];
-        console.log(data);
-        // this.currentPost.postId= postId;
+        this.getComments(postId)
        });
      }
+    faThumbsUp = faThumbsUp;
+    faThumbsUpFull = faThumbsUpFull;
 
    ngOnInit() {
       this.createEmptyComment();
-      this.getComments(this.currentPost.postId);
+      // console.log(this.currentPost.postId);
+      // this.getComments(this.currentPost.postId);
   }
 
-<<<<<<< HEAD
   getComments(postId) {
     this.commentServ.getComments(postId).subscribe(data => {
-=======
-  getComments() {
-    this.commentServ.getComments(this.currentPost.postId, this.userServ.logedUser.userId).subscribe(data => {
->>>>>>> f534d39049a4091adcb8a5042a5354f04e0a9130
       this.comments = data;
     });
   }
@@ -67,10 +64,10 @@ export class PostDetailsComponent implements OnInit {
   }
 
   async dislikeComment(commentId){
-    this.commentServ.removeLike(this.userServ.logedUser.userId,commentId)
+    this.commentServ.removeLike(commentId)
   }
   
   async likeComment(commentId){
-    this.commentServ.addLike(this.userServ.logedUser.userId,commentId)
+    this.commentServ.addLike(commentId)
   }
 }

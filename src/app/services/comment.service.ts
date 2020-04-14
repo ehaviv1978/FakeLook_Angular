@@ -25,7 +25,7 @@ export class CommentService {
     this.commentUrl = `http://localhost:8888/api/posts/${postId}/comments`;
   }
   setCommentLikeURL(commentId: number) {
-    this.commentLikeUrl = `http://localhost:8888/api/posts/${commentId}/likes`;
+    this.commentLikeUrl = `http://localhost:8888/api/posts/comments/${commentId}/likes`;
   }
 
   addLike(commentId) {

@@ -27,6 +27,7 @@ export class PostService {
   }
 
   getPost(postId:number):Observable<Post[]> {
+    console.log(this.postUrl+postId);
     return this.http.get<Post[]>(this.postUrl+postId)
     .pipe(map((Posts: Post[]) => {
       let post = []
@@ -45,6 +46,6 @@ export class PostService {
   }
 
   searchPosts(searchParam):Observable<Post[]>{
-    return this.http.get<Post[]>(this.postUrl+searchParam)
+    return this.http.get<Post[]>(this.postUrl+"search/"+searchParam)
   }
 }
