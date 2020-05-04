@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PostService {
-  private postUrl;
+//  private postUrl = 'http://host.docker.internal:8888/api/posts/';
+  private postUrl = 'http://localhost:8888/api/posts';
 
   constructor(private http: HttpClient) { }
 
   getPosts(userId: number): Observable<Post[]> {
-    this.setURL(userId);
-    return this.http.get<Post[]>(this.postUrl)
+    return this.http.get<Post[]>(this.postUrl + "/" + userId)
       .pipe(map((Posts: Post[]) => {
         let myPosts = []
         Posts.map(Post => {
@@ -28,8 +28,7 @@ export class PostService {
   }
 
   getPost(userId: number, postId:number):Observable<Post[]> {
-    this.postUrl = 'http://localhost:8888/api/post';
-    return this.http.post<Post[]>(this.postUrl,{"userId": userId, "postId": postId})
+    return this.http.get<Post[]>(this.postUrl + "/" + userId +"/" + postId)
     .pipe(map((Posts: Post[]) => {
       let post = []
       Posts.map(Post => {
@@ -42,28 +41,20 @@ export class PostService {
     }));
   }
 
-  setURL(userId: number) {
-    this.postUrl = `http://localhost:8888/api/userPosts/${userId}`;
-  }
-
   addPost(post): Observable<Post[]> {
-    this.postUrl = `http://localhost:8888/api/posts/`;
     return this.http.post<Post[]>(this.postUrl, post)
   }
 
   searchPosts(searchParam):Observable<Post[]>{
-    this.postUrl = `http://localhost:8888/api/posts/`;
-    return this.http.get<Post[]>(this.postUrl+searchParam)
+    return this.http.get<Post[]>(this.postUrl + "Search/" +searchParam)
   }
 
   addPostTag(postId:number,tagContent:string): Observable<Post[]> {
-    this.postUrl = `http://localhost:8888/api/postTagAdd/${postId}`;
-    return this.http.post<Post[]>(this.postUrl, {"tagContent":tagContent})
+    return this.http.post<Post[]>(this.postUrl + "/addTag/" + postId, {"tagContent":tagContent})
   }
 
   removePostTag(postId:number,tagContent:string): Observable<Post[]> {
-    this.postUrl = `http://localhost:8888/api/postTagRemove/${postId}`;
-    return this.http.post<Post[]>(this.postUrl, {"tagContent":tagContent})
+    return this.http.post<Post[]>(this.postUrl + "/removeTag/" + postId, {"tagContent":tagContent})
   }
 
   getMapPosts(minLat:number,maxLat:number,minLong:number,maxLong:number,userId:number,
@@ -71,9 +62,8 @@ export class PostService {
       if (tag ==''){
         tag='~~~~'
       }
-    this.postUrl = `http://localhost:8888/api/posts/getMapPosts/${minLat}/${maxLat}/${minLong}/
+    let tempUrl = this.postUrl +`/getMapPosts/${minLat}/${maxLat}/${minLong}/
     ${maxLong}/${userId}/${minDate}/${maxDate}/${range}/${tag}/${latGps}/${longGps}`;
-    return this.http.get<Post[]>(this.postUrl)
+    return this.http.get<Post[]>(tempUrl)
   }
-
 }

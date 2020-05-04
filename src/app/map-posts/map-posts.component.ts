@@ -83,7 +83,7 @@ export class MapPostsComponent implements AfterViewInit {
 
   showPosts() {
     var options = {
-      imagePath: 'http://localhost:4200/assets/images/m'
+      imagePath: '../assets/images/m'
     };
     this.markerClaster = new MarkerClusterer(this.map, this.markers, options)
   }

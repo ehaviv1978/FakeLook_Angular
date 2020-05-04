@@ -7,40 +7,32 @@ import { Comment } from '../models/comment';
   providedIn: 'root'
 })
 export class CommentService {
-  private commentUrl;
+  //  private commentUrl ="http://host.docker.internal:8888/api/comments";
+  private commentUrl ="http://localhost:8888/api/comments";
 
   constructor(private http: HttpClient) { }
 
   getComments(postId: number, userId: number): Observable<Comment[]> {
-    this.setURL(postId);
-    console.log(this.commentUrl + "/" + userId);
-    return this.http.get<Comment[]>(this.commentUrl + "/" + userId);
-  }
-  createComment(comment: Comment) {
-    this.setURL(comment.postId);
-    this.http.post<Comment>(this.commentUrl, comment).subscribe();
-  }
-  setURL(postId: number) {
-    this.commentUrl = `http://localhost:8888/api/posts/${postId}/comments`;
+    return this.http.get<Comment[]>(this.commentUrl + "/getPostComments/"+ postId + "/" + userId);
   }
 
+  createComment(comment: Comment) {
+    this.http.post<Comment>(this.commentUrl + "/addComment/" + comment.postId, comment).subscribe();
+  }
+ 
   addLike(userId, commentId) {
-    console.log("add" + userId + commentId)
-    return this.http.get(`http://localhost:8888/api/comments/${commentId}/${userId}`).subscribe();
+    return this.http.get(this.commentUrl + `/${commentId}/${userId}`).subscribe();
   }
 
   removeLike(userId, commentId) {
-    console.log("remove" + userId + commentId)
-    return this.http.delete(`http://localhost:8888/api/comments/${commentId}/${userId}`).subscribe();
+    return this.http.delete(this.commentUrl + `/${commentId}/${userId}`).subscribe();
   }
 
   addCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
-    this.commentUrl = `http://localhost:8888/api/commentTagAdd/${commentId}`;
-    return this.http.post<Comment[]>(this.commentUrl, {"tagContent":tagContent})
+    return this.http.post<Comment[]>(this.commentUrl + `TagAdd/${commentId}`, {"tagContent":tagContent})
   }
 
   removeCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
-    this.commentUrl = `http://localhost:8888/api/commentTagRemove/${commentId}`;
-    return this.http.post<Comment[]>(this.commentUrl, {"tagContent":tagContent})
+    return this.http.post<Comment[]>(this.commentUrl + `TagRemove/${commentId}`, {"tagContent":tagContent})
   }
 }

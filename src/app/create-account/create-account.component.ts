@@ -16,7 +16,7 @@ export class CreateAccountComponent implements OnInit {
   user: User = {
     userId: null,
     birthDate: null,
-    picture: 'http://localhost:4200/assets/images/avatar.png',
+    picture: '../assets/images/avatar.png',
     datejoined: null,
     email: "",
     address: "",

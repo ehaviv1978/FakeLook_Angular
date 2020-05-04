@@ -8,17 +8,16 @@ import { UserService } from './user.service';
 })
 export class PostLikeService {
 
-  private likeUrl;
+  //private postUrl = "http://host.docker.internal:8888/api/posts/";
+  private postUrl = "http://localhost:8888/api/posts/";
+
   constructor( private http: HttpClient ,private userServ:UserService) { }
   addLike(postLikes:PostLikes){
-    this.setURL(postLikes.postId,this.userServ.logedUser.userId);
-    this.http.post<PostLikes>(this.likeUrl,postLikes).subscribe();
+    this.http.post<PostLikes>(this.postUrl + postLikes.postId + "/" + 
+    this.userServ.logedUser.userId,postLikes).subscribe();
   } 
    removeLike(postLikes:PostLikes){
-    this.setURL(postLikes.postId,this.userServ.logedUser.userId);
-    this.http.delete<PostLikes>(this.likeUrl).subscribe();
-  }
-  setURL(postId:number,userId:number){
-    this.likeUrl = `http://localhost:8888/api/posts/${postId}/${userId}`
+    this.http.delete<PostLikes>(this.postUrl + postLikes.postId + "/" + 
+    this.userServ.logedUser.userId).subscribe();
   }
 }

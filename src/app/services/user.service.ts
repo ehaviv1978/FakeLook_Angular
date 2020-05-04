@@ -7,6 +7,7 @@ import {User} from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
+  //private userUrl = 'http://host.docker.internal:8888/api/users'
   private userUrl = 'http://localhost:8888/api/users'
   public logedUser: User;
 
@@ -16,7 +17,7 @@ export class UserService {
   }
 
   searchUsers(searchParam):Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl+"/"+searchParam)
+    return this.http.get<User[]>(this.userUrl+"/search/"+searchParam)
   }
 
   userLogIn(logInEmail, password):Observable<User[]>{
@@ -37,6 +38,6 @@ changePassword(password):Observable<User[]>{
  }
 
  getUserById(userId: number){
-  return this.http.get<User[]>('http://localhost:8888/api/user/'+userId);
+  return this.http.get<User[]>(this.userUrl +"/"+userId);
  }
 }
