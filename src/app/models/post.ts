@@ -23,4 +23,5 @@ export class PostOutput{
     picture:string;
     latGPS:number;
     longGPS:number;
+    timePosted:number;
 }

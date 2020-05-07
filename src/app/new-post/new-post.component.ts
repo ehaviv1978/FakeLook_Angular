@@ -21,6 +21,7 @@ export class NewPostComponent implements OnInit {
     longGPS: 1,
     picture: null,
     description: "",
+    timePosted: Date.now()
   };
   faCamera = faCamera;
   faFile = faFolderOpen;

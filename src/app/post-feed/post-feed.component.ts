@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
-import { PostLikes } from '../models/postLikes';
 import { UserService } from '../services/user.service';
 import {Router} from '@angular/router';
 
@@ -23,7 +22,6 @@ export class PostFeedComponent implements OnInit {
   getPosts() {
     this.postServ.getPosts(this.userServ.logedUser.userId).subscribe(data => {
       this.posts = data;
-      console.log(data);
     });
   }
 

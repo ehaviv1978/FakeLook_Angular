@@ -33,7 +33,7 @@ export class MapPostsComponent implements AfterViewInit {
   minLong = -180;
   maxLong = 180;
   minDate = new Date(2000, 11, 24);
-  maxDate = new Date();
+  maxDate = new Date(3000, 12,12);
   userId = 0;
   latGps = 0;
   longGps = 0;

@@ -9,12 +9,12 @@ import { map } from 'rxjs/operators';
 })
 export class PostService {
 //  private postUrl = 'http://host.docker.internal:8888/api/posts/';
-  private postUrl = 'http://localhost:8888/api/posts';
+  private postUrl = 'http://localhost:8888/api/posts/';
 
   constructor(private http: HttpClient) { }
 
   getPosts(userId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postUrl + "/" + userId)
+    return this.http.get<Post[]>(this.postUrl + userId)
       .pipe(map((Posts: Post[]) => {
         let myPosts = []
         Posts.map(Post => {
@@ -23,12 +23,13 @@ export class PostService {
           delete(Post.liked);
           myPosts.push(Post);
         })
+        console.log(myPosts[0].timePosted);
         return myPosts;
       }));
   }
 
   getPost(userId: number, postId:number):Observable<Post[]> {
-    return this.http.get<Post[]>(this.postUrl + "/" + userId +"/" + postId)
+    return this.http.get<Post[]>(this.postUrl + userId +"/" + postId)
     .pipe(map((Posts: Post[]) => {
       let post = []
       Posts.map(Post => {
@@ -46,23 +47,24 @@ export class PostService {
   }
 
   searchPosts(searchParam):Observable<Post[]>{
-    return this.http.get<Post[]>(this.postUrl + "Search/" +searchParam)
+    return this.http.get<Post[]>(this.postUrl + "search/posts/" +searchParam)
   }
 
   addPostTag(postId:number,tagContent:string): Observable<Post[]> {
-    return this.http.post<Post[]>(this.postUrl + "/addTag/" + postId, {"tagContent":tagContent})
+    return this.http.post<Post[]>(this.postUrl + "tag/add/" + postId, {"tagContent":tagContent})
   }
 
   removePostTag(postId:number,tagContent:string): Observable<Post[]> {
-    return this.http.post<Post[]>(this.postUrl + "/removeTag/" + postId, {"tagContent":tagContent})
+    return this.http.post<Post[]>(this.postUrl + "tag/remove/" + postId, {"tagContent":tagContent})
   }
 
   getMapPosts(minLat:number,maxLat:number,minLong:number,maxLong:number,userId:number,
     minDate: Date, maxDate: Date, range: number, tag: string, latGps: number, longGps: number): Observable<Post[]> {
+      console.log(userId);
       if (tag ==''){
         tag='~~~~'
       }
-    let tempUrl = this.postUrl +`/getMapPosts/${minLat}/${maxLat}/${minLong}/
+    let tempUrl = this.postUrl +`getMapPosts/${minLat}/${maxLat}/${minLong}/
     ${maxLong}/${userId}/${minDate}/${maxDate}/${range}/${tag}/${latGps}/${longGps}`;
     return this.http.get<Post[]>(tempUrl)
   }

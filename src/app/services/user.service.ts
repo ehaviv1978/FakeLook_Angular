@@ -34,7 +34,7 @@ export class UserService {
 }
 
 changePassword(password):Observable<User[]>{
-  return this.http.post<User[]>(this.userUrl +"/"+ this.logedUser.userId + "/changePassword", {"password": password});
+  return this.http.post<User[]>(this.userUrl +"/changePassword/"+ this.logedUser.userId, {"password": password});
  }
 
  getUserById(userId: number){

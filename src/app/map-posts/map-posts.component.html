@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
-    <span style="color: blue;">Search radius: {{range.toFixed(2)}} km | Total posts found: {{markers.length}}</span>
+    <span style="color: blue;">Search: Center GPS latitude: {{latGps.toFixed(4)}} | 
+            Center GPS longitude: {{longGps.toFixed(4)}} | Radius: {{range.toFixed(2)}} km || Total posts found: {{markers.length}}</span>
     <div #mapContainer id="map"></div>
 </div>

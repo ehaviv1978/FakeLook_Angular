@@ -1,14 +1,15 @@
 <div>
-        <div class="post-container" *ngFor="let post of posts">
-          <div>
-            <span [routerLink]="['/user/',post.userId]" style="cursor: pointer;">
-              <img class="user-image"[src]="post.userPic">
-              <a style="font-size: large; color: blue;font-weight: bold;"class="link">{{post.firstName + " " + post.lastName}}</a>
-            </span>
-            <div> posted at : {{  post.timePosted | date:'medium' }}</div>
-          </div>
-          <img class="post-image"[src]="post.picture" (click) = "clickOnPost(post)">
-          <app-post-likes [postLikes]= post.postLikes ></app-post-likes>
-          <hr>
-        </div>
+  <div class="post-container" *ngFor="let post of posts">
+    <div>
+      <span [routerLink]="['/user/',post.userId]" style="cursor: pointer;">
+        <img class="user-image" [src]="post.userPic">
+        <a style="font-size: large; color: blue;font-weight: bold;"
+          class="link">{{post.firstName + " " + post.lastName}}</a>
+      </span>
+      <div> posted at : {{  post.timePosted | date:'medium' }}</div>
     </div>
+    <img class="post-image" [src]="post.picture" (click)="clickOnPost(post)">
+    <app-post-likes [postLikes]=post.postLikes></app-post-likes>
+    <hr>
+  </div>
+</div>
