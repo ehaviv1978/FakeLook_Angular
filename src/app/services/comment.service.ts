@@ -7,7 +7,7 @@ import { Comment } from '../models/comment';
   providedIn: 'root'
 })
 export class CommentService {
-  //  private commentUrl ="http://host.docker.internal:8888/api/comments";
+  //private commentUrl ="http://host.docker.internal:8888/api/comments";
   private commentUrl ="http://localhost:8888/api/comments";
 
   constructor(private http: HttpClient) { }

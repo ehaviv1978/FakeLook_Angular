@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PostService {
-//  private postUrl = 'http://host.docker.internal:8888/api/posts/';
+  //private postUrl = 'http://host.docker.internal:8888/api/posts/';
   private postUrl = 'http://localhost:8888/api/posts/';
 
   constructor(private http: HttpClient) { }

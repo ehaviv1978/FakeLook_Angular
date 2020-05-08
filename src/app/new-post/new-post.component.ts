@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { PostOutput } from '../models/post';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
 
@@ -21,7 +22,7 @@ export class NewPostComponent implements OnInit {
     longGPS: 1,
     picture: null,
     description: "",
-    timePosted: Date.now()
+    timePosted:  new Date()
   };
   faCamera = faCamera;
   faFile = faFolderOpen;
@@ -51,6 +52,7 @@ export class NewPostComponent implements OnInit {
   }
 
   async onUpload() {
+    //this.post.timePosted = Date.
     if (!this.locationChanged) {
       await this.getPosition().then(pos => {
         this.post.latGPS = pos.lat;
@@ -58,7 +60,7 @@ export class NewPostComponent implements OnInit {
       });
     }
     this.postServ.addPost(this.post).subscribe(res => {
-      if (res.length == 1) {
+      if (res.length > 0) {
         this.uploadMassage = "New post uploaded";
         this.imagePath = null;
         this.post.picture = null;
