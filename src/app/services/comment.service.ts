@@ -21,18 +21,18 @@ export class CommentService {
   }
  
   addLike(userId, commentId) {
-    return this.http.get(this.commentUrl + `/${commentId}/${userId}`).subscribe();
+    return this.http.get(this.commentUrl + `/addLike/${commentId}/${userId}`).subscribe();
   }
 
   removeLike(userId, commentId) {
-    return this.http.delete(this.commentUrl + `/${commentId}/${userId}`).subscribe();
+    return this.http.delete(this.commentUrl + `/removeLike/${commentId}/${userId}`).subscribe();
   }
 
   addCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
-    return this.http.post<Comment[]>(this.commentUrl + `TagAdd/${commentId}`, {"tagContent":tagContent})
+    return this.http.post<Comment[]>(this.commentUrl + `/tag/add/${commentId}`, {"tagContent":tagContent})
   }
 
   removeCommentTag(commentId:number,tagContent:string): Observable<Comment[]> {
-    return this.http.post<Comment[]>(this.commentUrl + `TagRemove/${commentId}`, {"tagContent":tagContent})
+    return this.http.post<Comment[]>(this.commentUrl + `/tag/remove/${commentId}`, {"tagContent":tagContent})
   }
 }
